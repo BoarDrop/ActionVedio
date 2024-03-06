@@ -67,141 +67,141 @@ function PhotoCaptureScreen(): React.JSX.Element {
   // 如果设备上没有可用的相机，则显示一条消息
   if (device == null) return <Text>No back camera device found</Text>;
 
-// 根据showCamera的状态显示相机界面或照片预览界面
-return (
-  <View style={styles.container}>
-    {showCamera ? (
-      // 相机视图
-      <>
-        <Camera
-          ref={camera}
-          style={StyleSheet.absoluteFill}
-          device={device}
-          isActive={showCamera}
-          photo={true}
-        />
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.camButton}
-            onPress={() => capturePhoto()}
+  // 根据showCamera的状态显示相机界面或照片预览界面
+  return (
+    <View style={styles.container}>
+      {showCamera ? (
+        // 相机视图
+        <>
+          <Camera
+            ref={camera}
+            style={StyleSheet.absoluteFill}
+            device={device}
+            isActive={showCamera}
+            photo={true}
           />
-        </View>
-      </>
-    ) : (
-      // 照片预览视图
-      <>
-        {imageSource !== '' ? (
-          <Image
-            style={styles.image}
-            source={{
-              uri: `file://'${imageSource}`,
-            }}
-          />
-        ) : null}
 
-        <View style={styles.backButton}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.2)',
-              padding: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-              borderWidth: 2,
-              borderColor: '#fff',
-              width: 100,
-            }}
-            onPress={() => setShowCamera(true)}>
-            <Text style={{color: 'red', fontWeight: '500'}}>Back</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.buttons}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.camButton}
+              onPress={() => capturePhoto()}
+            />
+          </View>
+        </>
+      ) : (
+        // 照片预览视图
+        <>
+          {imageSource !== '' ? (
+            <Image
+              style={styles.image}
+              source={{
+                uri: `file://'${imageSource}`,
+              }}
+            />
+          ) : null}
+
+          <View style={styles.backButton}>
             <TouchableOpacity
               style={{
-                backgroundColor: '#fff',
+                backgroundColor: 'rgba(0,0,0,0.2)',
                 padding: 10,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 10,
                 borderWidth: 2,
-                borderColor: '#77c3ec',
+                borderColor: '#fff',
+                width: 100,
               }}
               onPress={() => setShowCamera(true)}>
-              <Text style={{color: '#77c3ec', fontWeight: '500'}}>
-                Retake
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#77c3ec',
-                padding: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 10,
-                borderWidth: 2,
-                borderColor: 'white',
-              }}
-              onPress={() => setShowCamera(true)}>
-              <Text style={{color: 'white', fontWeight: '500'}}>
-                Use Photo
-              </Text>
+              <Text style={{ color: 'red', fontWeight: '500' }}>Back</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </>
-    )}
-  </View>
-);
+          <View style={styles.buttonContainer}>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#fff',
+                  padding: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: '#77c3ec',
+                }}
+                onPress={() => setShowCamera(true)}>
+                <Text style={{ color: '#77c3ec', fontWeight: '500' }}>
+                  Retake
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#77c3ec',
+                  padding: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: 'white',
+                }}
+                onPress={() => setShowCamera(true)}>
+                <Text style={{ color: 'white', fontWeight: '500' }}>
+                  Use Photo
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </>
+      )}
+    </View>
+  );
 }
 
 // 定义组件使用的样式
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-},
-button: {
-  backgroundColor: 'gray',
-},
-backButton: {
-  backgroundColor: 'rgba(0,0,0,0.0)',
-  position: 'absolute',
-  justifyContent: 'center',
-  width: '100%',
-  top: 0,
-  padding: 20,
-},
-buttonContainer: {
-  backgroundColor: 'rgba(0,0,0,0.2)',
-  position: 'absolute',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  bottom: 0,
-  padding: 20,
-},
-buttons: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  width: '100%',
-},
-camButton: {
-  height: 80,
-  width: 80,
-  borderRadius: 40,
-  backgroundColor: '#B2BEB5',
-  alignSelf: 'center',
-  borderWidth: 4,
-  borderColor: 'white',
-},
-image: {
-  width: '100%',
-  height: '100%',
-  aspectRatio: 9 / 16,
-},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: 'gray',
+  },
+  backButton: {
+    backgroundColor: 'rgba(0,0,0,0.0)',
+    position: 'absolute',
+    justifyContent: 'center',
+    width: '100%',
+    top: 0,
+    padding: 20,
+  },
+  buttonContainer: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    bottom: 0,
+    padding: 20,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  camButton: {
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    backgroundColor: '#B2BEB5',
+    alignSelf: 'center',
+    borderWidth: 4,
+    borderColor: 'white',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    aspectRatio: 9 / 16,
+  },
 });
 
 // 导出App组件

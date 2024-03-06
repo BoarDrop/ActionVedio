@@ -1,6 +1,6 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, Button} from 'react-native';
-import {Camera, useCameraDevice, CameraPermissionStatus} from 'react-native-vision-camera';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text, Button } from 'react-native';
+import { Camera, useCameraDevice, CameraPermissionStatus } from 'react-native-vision-camera';
 import Video from 'react-native-video';
 function VideoCaptureScreen() {
   const camera = useRef(null);
@@ -13,17 +13,17 @@ function VideoCaptureScreen() {
 
   useEffect(() => {
     async function getPermission() {
-        const cameraPermission = await Camera.requestCameraPermission();
-        const microphonePermission = await Camera.requestMicrophonePermission();
-        console.log("获取用户权限");
-        console.log(`Camera permission status: ${cameraPermission}`);
-        console.log(`Microphone permission status: ${microphonePermission}`);
-        if ( cameraPermission === 'denied') {
-            console.log('Camera permission denied');
-        }       
-        if ( microphonePermission === 'denied') {
-            console.log('Microphone permission denied');
-        }
+      const cameraPermission = await Camera.requestCameraPermission();
+      const microphonePermission = await Camera.requestMicrophonePermission();
+      console.log("获取用户权限");
+      console.log(`Camera permission status: ${cameraPermission}`);
+      console.log(`Microphone permission status: ${microphonePermission}`);
+      if (cameraPermission === 'denied') {
+        console.log('Camera permission denied');
+      }
+      if (microphonePermission === 'denied') {
+        console.log('Microphone permission denied');
+      }
     }
     getPermission();
   }, []);
@@ -33,17 +33,17 @@ function VideoCaptureScreen() {
     setShowCamera(true);
     // console.log(camera.current);
     if (camera.current && !isRecording) {
-        console.log("开始录制视频");
-        const video = await (camera.current as Camera).startRecording({       // 开始录制视频
+      console.log("开始录制视频");
+      const video = await (camera.current as Camera).startRecording({       // 开始录制视频
         onRecordingFinished: (video) => {                                   // 当录制完成时
           setVideoSource(video.path);
           setIsRecording(false);
           console.log(video.path);
         },
         onRecordingError: (error) => {                                 // 当录制发生错误时
-            console.error(error);
-            setIsRecording(false);
-            setShowCamera(false);                               // 更新录制状态,停止开摄像头
+          console.error(error);
+          setIsRecording(false);
+          setShowCamera(false);                               // 更新录制状态,停止开摄像头
         },
       });
       setIsRecording(true);                                      // 更新录制状态
@@ -52,9 +52,9 @@ function VideoCaptureScreen() {
 
   const stopRecording = () => {
     if (camera.current && isRecording) {
-        (camera.current as Camera).stopRecording();
-        setIsRecording(false);
-        setShowCamera(false);                               // 更新录制状态,停止开摄像头
+      (camera.current as Camera).stopRecording();
+      setIsRecording(false);
+      setShowCamera(false);                               // 更新录制状态,停止开摄像头
     }
   };
 
@@ -64,15 +64,15 @@ function VideoCaptureScreen() {
 
   return (
     <View style={styles.container}>
-        <Camera
-          ref={camera}
-          style={StyleSheet.absoluteFill}
-          device={device}
-          isActive={showCamera}     // 是否激活相机
-          audio={true}              // 开启音频录制
-          video={true}              // 开启视频录制
-        />
-      
+      <Camera
+        ref={camera}
+        style={StyleSheet.absoluteFill}
+        device={device}
+        isActive={showCamera}     // 是否激活相机
+        audio={true}              // 开启音频录制
+        video={true}              // 开启视频录制
+      />
+
 
       {/* UI to start/stop recording */}
       {/* 简化布局来测试按钮功能 */}
@@ -83,10 +83,10 @@ function VideoCaptureScreen() {
       {/* 根据需要决定是否显示视频 */}
       {videoSource ? (
         <View style={styles.videoContainer}>
-          <Video source={{uri: videoSource}} style={styles.video} controls resizeMode="contain" />
+          <Video source={{ uri: videoSource }} style={styles.video} controls resizeMode="contain" />
         </View>
       ) : null}
-      </View>
+    </View>
   );
 }
 
