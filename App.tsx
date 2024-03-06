@@ -3,7 +3,7 @@ import {Button, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PhotoCaptureScreen from './src/PhotoCaptureScreen';    // 导入PhotoCaptureScreen组件
-import VideoCaptureScreen from './src/VideoCaptureScreen';    // 导入VideoCaptureScreen组件
+import VideoCaptureScreen from './src/components/VideoCaptureScreen';    // 导入VideoCaptureScreen组件
 import {useNavigation} from '@react-navigation/native';
 
 type RootStackParamList = {
@@ -16,6 +16,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function HomeScreen({navigation}: {navigation: any}) {
   return (
+    
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Button
         title="拍摄照片"
