@@ -12,7 +12,11 @@ function AppNavigator() {
   return (
     <>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />
         <Stack.Screen name="VideoCapture" component={VideoCaptureScreen} />
       </Stack.Navigator>
