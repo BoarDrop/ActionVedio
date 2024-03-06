@@ -9,6 +9,12 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your Microphone.</string>
 
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your PhotoLibrary.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your PhotoLibrary.</string>
+
+
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
