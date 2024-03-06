@@ -1838,6 +1838,11 @@
     metro-config "^0.80.3"
     metro-runtime "^0.80.3"
 
+"@react-native/normalize-color@*":
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/@react-native/normalize-color/-/normalize-color-2.1.0.tgz"
+  integrity sha512-Z1jQI2NpdFJCVgpY+8Dq/Bt3d+YUi1928Q+/CZm/oh66fzM0RUl54vvuXlPJKybH4pdCZey1eDTPaLHkMPNgWA==
+
 "@react-native/normalize-colors@0.73.2", "@react-native/normalize-colors@^0.73.0":
   version "0.73.2"
   resolved "https://registry.npmmirror.com/@react-native/normalize-colors/-/normalize-colors-0.73.2.tgz"
@@ -1858,7 +1863,7 @@
 
 "@react-navigation/core@^6.4.13":
   version "6.4.13"
-  resolved "https://registry.npmmirror.com/@react-navigation/core/-/core-6.4.13.tgz#27cf33d963f59aeeb36f27514a9744ab818097b3"
+  resolved "https://registry.npmmirror.com/@react-navigation/core/-/core-6.4.13.tgz"
   integrity sha512-RBUpNG11SEYfvvWefJPxz8Xu/feWuPxln7ddRSY92aKs7u6fj/Z694Jun76Gmmw/RIHW6xcu3PH2v3Wm8nbumg==
   dependencies:
     "@react-navigation/routers" "^6.1.9"
@@ -1870,12 +1875,12 @@
 
 "@react-navigation/elements@^1.3.26":
   version "1.3.26"
-  resolved "https://registry.npmmirror.com/@react-navigation/elements/-/elements-1.3.26.tgz#f66afb21d01d1ff05a578991cfb81d19ae5f031d"
+  resolved "https://registry.npmmirror.com/@react-navigation/elements/-/elements-1.3.26.tgz"
   integrity sha512-9rSY7MD6etU3M3j/OYUvtg4eBqABlkS39iJwwQheE89pSa9QyvXbJSsz/bUBEjFWwsOYxTVzj27bc7ulrDVWgw==
 
 "@react-navigation/native-stack@^6.9.22":
   version "6.9.22"
-  resolved "https://registry.npmmirror.com/@react-navigation/native-stack/-/native-stack-6.9.22.tgz#232c57259306abc53b77834b215a1e9a311e73d5"
+  resolved "https://registry.npmmirror.com/@react-navigation/native-stack/-/native-stack-6.9.22.tgz"
   integrity sha512-1GGztUWXY+lbsIYkGV3HCYBF7qIOHnx663csgXArzunk8CcWNsUYwM7k1/Ql8e2LyvJtdjE3OS4fjLh+d72/YA==
   dependencies:
     "@react-navigation/elements" "^1.3.26"
@@ -1883,7 +1888,7 @@
 
 "@react-navigation/native@^6.1.14":
   version "6.1.14"
-  resolved "https://registry.npmmirror.com/@react-navigation/native/-/native-6.1.14.tgz#882eb2048dba655971dd48f1a2f25836d246912e"
+  resolved "https://registry.npmmirror.com/@react-navigation/native/-/native-6.1.14.tgz"
   integrity sha512-nCrVi4cHXx6VnXV8fj+lLb8zjLt1LZkpxudhfV/i1KstgaoGzh9FgFDIvbWONGE8f403FIsYUnZxKHvN7asp1w==
   dependencies:
     "@react-navigation/core" "^6.4.13"
@@ -1893,7 +1898,7 @@
 
 "@react-navigation/routers@^6.1.9":
   version "6.1.9"
-  resolved "https://registry.npmmirror.com/@react-navigation/routers/-/routers-6.1.9.tgz#73f5481a15a38e36592a0afa13c3c064b9f90bed"
+  resolved "https://registry.npmmirror.com/@react-navigation/routers/-/routers-6.1.9.tgz"
   integrity sha512-lTM8gSFHSfkJvQkxacGM6VJtBt61ip2XO54aNfswD+KMw6eeZ4oehl7m0me3CR9hnDE4+60iAZR8sAhvCiI3NA==
   dependencies:
     nanoid "^3.1.23"
@@ -2010,9 +2015,17 @@
   resolved "https://registry.npmmirror.com/@types/prop-types/-/prop-types-15.7.11.tgz"
   integrity sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==
 
+"@types/react-native-video@^5.0.19":
+  version "5.0.19"
+  resolved "https://registry.npmmirror.com/@types/react-native-video/-/react-native-video-5.0.19.tgz"
+  integrity sha512-6I7ypy/p94GqdIJUbgnbksxH551HiEYrrU6rKd0EWvyU4wHESFVS+8kad5V5NP96q8tw62Xod9Yv3hAMK0EQ4A==
+  dependencies:
+    "@types/react" "*"
+    react-native "*"
+
 "@types/react-navigation@^3.4.0":
   version "3.4.0"
-  resolved "https://registry.npmmirror.com/@types/react-navigation/-/react-navigation-3.4.0.tgz#d610d13c9162312079a8ca102660143f07432cbf"
+  resolved "https://registry.npmmirror.com/@types/react-navigation/-/react-navigation-3.4.0.tgz"
   integrity sha512-Y7F5zU8BTBK8tEOvUqgvwvPZ7+9vnc2UI1vHwJ/9ZJG98TntNv04GWa6lrn4MA4149pqw6cyNw/V49Yd2osAFQ==
   dependencies:
     react-navigation "*"
@@ -2884,7 +2897,7 @@ decamelize@^1.2.0:
 
 decode-uri-component@^0.2.2:
   version "0.2.2"
-  resolved "https://registry.npmmirror.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  resolved "https://registry.npmmirror.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz"
   integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 dedent@^1.0.0:
@@ -2936,6 +2949,15 @@ depd@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/depd/-/depd-2.0.0.tgz"
   integrity sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
+
+deprecated-react-native-prop-types@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-2.3.0.tgz"
+  integrity sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA==
+  dependencies:
+    "@react-native/normalize-color" "*"
+    invariant "*"
+    prop-types "*"
 
 deprecated-react-native-prop-types@^5.0.0:
   version "5.0.0"
@@ -2991,6 +3013,11 @@ electron-to-chromium@^1.4.668:
   version "1.4.690"
   resolved "https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.690.tgz"
   integrity sha512-+2OAGjUx68xElQhydpcbqH50hE8Vs2K6TkAeLhICYfndb67CVH0UsZaijmRUE3rHlIxU1u0jxwhgVe6fK3YANA==
+
+eme-encryption-scheme-polyfill@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.npmmirror.com/eme-encryption-scheme-polyfill/-/eme-encryption-scheme-polyfill-2.1.1.tgz"
+  integrity sha512-njD17wcUrbqCj0ArpLu5zWXtaiupHb/2fIUQGdInf83GlI+Q6mmqaPGLdrke4savKAu15J/z1Tg/ivDgl14g0g==
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -3462,7 +3489,7 @@ fill-range@^7.0.1:
 
 filter-obj@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmmirror.com/filter-obj/-/filter-obj-1.1.0.tgz#9b311112bc6c6127a16e016c6c5d7f19e0805c5b"
+  resolved "https://registry.npmmirror.com/filter-obj/-/filter-obj-1.1.0.tgz"
   integrity sha512-8rXg1ZnX7xzy2NGDVkBVaAy+lSlPNwad13BtgSlLuxfIslyt5Vg64U7tFcCt4WS1R0hvtnQybT/IyCkGZ3DpXQ==
 
 finalhandler@1.1.2:
@@ -3870,7 +3897,7 @@ internal-slot@^1.0.5, internal-slot@^1.0.7:
     hasown "^2.0.0"
     side-channel "^1.0.4"
 
-invariant@^2.2.4:
+invariant@*, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmmirror.com/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -4669,6 +4696,11 @@ jsonfile@^4.0.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmmirror.com/keymirror/-/keymirror-0.1.1.tgz"
+  integrity sha512-vIkZAFWoDijgQT/Nvl2AHCMmnegN2ehgTPYuyy2hWQkQSntI0S7ESYqdLkoSe1HyEBFHHkCgSIvVdSEiWwKvCg==
+
 keyv@^4.5.3:
   version "4.5.4"
   resolved "https://registry.npmmirror.com/keyv/-/keyv-4.5.4.tgz"
@@ -5094,7 +5126,7 @@ ms@2.1.3:
 
 nanoid@^3.1.23:
   version "3.3.7"
-  resolved "https://registry.npmmirror.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
+  resolved "https://registry.npmmirror.com/nanoid/-/nanoid-3.3.7.tgz"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
 
 natural-compare-lite@^1.4.0:
@@ -5508,7 +5540,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@*, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmmirror.com/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5529,7 +5561,7 @@ pure-rand@^6.0.0:
 
 query-string@^7.1.3:
   version "7.1.3"
-  resolved "https://registry.npmmirror.com/query-string/-/query-string-7.1.3.tgz#a1cf90e994abb113a325804a972d98276fe02328"
+  resolved "https://registry.npmmirror.com/query-string/-/query-string-7.1.3.tgz"
   integrity sha512-hh2WYhq4fi8+b+/2Kg9CEge4fDPvHS534aOOvOZeQ3+Vf2mCFsaFBYj0i+iXcAq6I9Vzp5fjMFBlONvayDC1qg==
   dependencies:
     decode-uri-component "^0.2.2"
@@ -5564,7 +5596,7 @@ react-devtools-core@^4.27.7:
 
 react-freeze@^1.0.0:
   version "1.0.4"
-  resolved "https://registry.npmmirror.com/react-freeze/-/react-freeze-1.0.4.tgz#cbbea2762b0368b05cbe407ddc9d518c57c6f3ad"
+  resolved "https://registry.npmmirror.com/react-freeze/-/react-freeze-1.0.4.tgz"
   integrity sha512-r4F0Sec0BLxWicc7HEyo2x3/2icUTrRmDjaaRyzzn+7aDyFZliszMDOgLVwSnQnYENOlL1o569Ze2HZefk8clA==
 
 "react-is@^16.12.0 || ^17.0.0 || ^18.0.0", react-is@^18.0.0, react-is@^18.2.0:
@@ -5584,23 +5616,33 @@ react-is@^17.0.1:
 
 react-native-safe-area-context@^4.9.0:
   version "4.9.0"
-  resolved "https://registry.npmmirror.com/react-native-safe-area-context/-/react-native-safe-area-context-4.9.0.tgz#21a570ca3594cb4259ba65f93befaa60d91bcbd0"
+  resolved "https://registry.npmmirror.com/react-native-safe-area-context/-/react-native-safe-area-context-4.9.0.tgz"
   integrity sha512-/OJD9Pb8IURyvn+1tWTszWPJqsbZ4hyHBU9P0xhOmk7h5owSuqL0zkfagU0pg7Vh0G2NKQkaPpUKUMMCUMDh/w==
 
 react-native-screens@^3.29.0:
   version "3.29.0"
-  resolved "https://registry.npmmirror.com/react-native-screens/-/react-native-screens-3.29.0.tgz#1dee0326defbc1d4ef4e68287abb32a8e6b76b29"
+  resolved "https://registry.npmmirror.com/react-native-screens/-/react-native-screens-3.29.0.tgz"
   integrity sha512-yB1GoAMamFAcYf4ku94uBPn0/ani9QG7NdI98beJ5cet2YFESYYzuEIuU+kt+CNRcO8qqKeugxlfgAa3HyTqlg==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-video@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npmmirror.com/react-native-video/-/react-native-video-5.2.1.tgz"
+  integrity sha512-aJlr9MeTuQ0LpZ4n+EC9RvhoKeiPbLtI2Rxy8u7zo/wzGevbRpWHSBj9xZ5YDBXnAVXzuqyNIkGhdw7bfdIBZw==
+  dependencies:
+    deprecated-react-native-prop-types "^2.2.0"
+    keymirror "^0.1.1"
+    prop-types "^15.7.2"
+    shaka-player "^2.5.9"
 
 react-native-vision-camera@^3.9.1:
   version "3.9.1"
   resolved "https://registry.npmmirror.com/react-native-vision-camera/-/react-native-vision-camera-3.9.1.tgz"
   integrity sha512-Pi9ikguJlN1ydVZOyRaMfUij1raUY93rVuPM92BsGnXEfxSLbvRYXW4ll1DRtVtjS0kZq4IW7Oavg8syRPc/xQ==
 
-react-native@0.73.5:
+react-native@*, react-native@0.73.5:
   version "0.73.5"
   resolved "https://registry.npmmirror.com/react-native/-/react-native-0.73.5.tgz"
   integrity sha512-iHgDArmF4CrhL0qTj+Rn+CBN5pZWUL9lUGl8ub+V9Hwu/vnzQQh8rTMVSwVd2sV6N76KjpE5a4TfIAHkpIHhKg==
@@ -5646,7 +5688,7 @@ react-native@0.73.5:
 
 react-navigation@*:
   version "5.0.0"
-  resolved "https://registry.npmmirror.com/react-navigation/-/react-navigation-5.0.0.tgz#a7dd98a6148ba997834ebcf5a5073bdb3d4f4eb3"
+  resolved "https://registry.npmmirror.com/react-navigation/-/react-navigation-5.0.0.tgz"
   integrity sha512-ACTzjc4L1ik7rJ092ZhIELBJ/pnoLgRIqWHSKcYcaBASxyjJCgBEDIV5s585HBj55tw25YwNdlj3+d4B4MYWDg==
 
 react-refresh@^0.14.0:
@@ -6001,6 +6043,13 @@ setprototypeof@1.2.0:
   resolved "https://registry.npmmirror.com/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
+shaka-player@^2.5.9:
+  version "2.5.23"
+  resolved "https://registry.npmmirror.com/shaka-player/-/shaka-player-2.5.23.tgz"
+  integrity sha512-3MC9k0OXJGw8AZ4n/ZNCZS2yDxx+3as5KgH6Tx4Q5TRboTBBCu6dYPI5vp1DxKeyU12MBN1Zcbs7AKzXv2EnCg==
+  dependencies:
+    eme-encryption-scheme-polyfill "^2.0.1"
+
 shallow-clone@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmmirror.com/shallow-clone/-/shallow-clone-3.0.1.tgz"
@@ -6092,7 +6141,7 @@ source-map@^0.7.3:
 
 split-on-first@^1.0.0:
   version "1.1.0"
-  resolved "https://registry.npmmirror.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"
+  resolved "https://registry.npmmirror.com/split-on-first/-/split-on-first-1.1.0.tgz"
   integrity sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==
 
 sprintf-js@~1.0.2:
@@ -6131,7 +6180,7 @@ statuses@~1.5.0:
 
 strict-uri-encode@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmmirror.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
+  resolved "https://registry.npmmirror.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz"
   integrity sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==
 
 string-length@^4.0.1:
@@ -6511,7 +6560,7 @@ uri-js@^4.2.2:
 
 use-latest-callback@^0.1.7:
   version "0.1.9"
-  resolved "https://registry.npmmirror.com/use-latest-callback/-/use-latest-callback-0.1.9.tgz#10191dc54257e65a8e52322127643a8940271e2a"
+  resolved "https://registry.npmmirror.com/use-latest-callback/-/use-latest-callback-0.1.9.tgz"
   integrity sha512-CL/29uS74AwreI/f2oz2hLTW7ZqVeV5+gxFeGudzQrgkCytrHw33G4KbnQOrRlAEzzAFXi7dDLMC9zhWcVpzmw==
 
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
@@ -6552,7 +6601,7 @@ walker@^1.0.7, walker@^1.0.8:
 
 warn-once@^0.1.0:
   version "0.1.1"
-  resolved "https://registry.npmmirror.com/warn-once/-/warn-once-0.1.1.tgz#952088f4fb56896e73fd4e6a3767272a3fccce43"
+  resolved "https://registry.npmmirror.com/warn-once/-/warn-once-0.1.1.tgz"
   integrity sha512-VkQZJbO8zVImzYFteBXvBOZEl1qL175WH8VmZcxF2fZAoudNhNDvHi+doCaAEdU2l2vtcIwa2zn0QK5+I1HQ3Q==
 
 wcwidth@^1.0.1:
