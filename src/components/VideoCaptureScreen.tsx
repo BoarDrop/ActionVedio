@@ -1,9 +1,16 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text, Button, Alert} from 'react-native';
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
-import usePermission from '../hooks/usePermission';       
 import RNFS from 'react-native-fs';
 import CameraRoll from '@react-native-community/cameraroll';
+import axios from 'axios';      // 引入axios库,用于发送http请求
+
+
+import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
+import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
+
+
+
 function VideoCaptureScreen() {
   const camera = useRef(null);
   // 使用useCameraDevices钩子获取设备上的相机设备列表，这里主要关注后置相机
@@ -12,8 +19,10 @@ function VideoCaptureScreen() {
   const [showCamera, setShowCamera] = useState(true);              // 是否显示相机视图
   const [isRecording, setIsRecording] = useState(false);            // 是否正在录制
   const [videoSource, setVideoSource] = useState('');               // 视频源路径
-  const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
 
+  const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
+  const { getUploadCredentials } = useFileUpload();                     // 使用useFileUpload钩子
+  
   // 组件创立后获取用户权限
   useEffect(() => {
     getCameraPermission();                                        // 获取相机权限
@@ -41,6 +50,7 @@ function VideoCaptureScreen() {
     }
   };
 
+  // 定义一个stopRecording函数来停止录制视频
   const stopRecording = () => {
     if (camera.current && isRecording) {
         (camera.current as Camera).stopRecording();
@@ -68,6 +78,12 @@ function VideoCaptureScreen() {
       // 这里更新你的应用状态或UI，如必要
       setVideoSource(destinationPath);
       saveVideoToCameraRoll(destinationPath);  // 保存视频到相册
+      const uploadCredentials = await getUploadCredentials();  // 获取上传凭证
+      if (uploadCredentials) {
+        console.log('上传凭证', uploadCredentials);
+        // 上传视频到OSS
+        // uploadVideoToOSS(destinationPath, uploadCredentials);
+      }
     } catch (error) {
       console.error('Failed to save video', error);
     }
