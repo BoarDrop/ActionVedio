@@ -54,10 +54,17 @@ function Home({navigation}) {
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>
             <View style={styles.video_box}>
+              {/* <TouchableOpacity onPress={() => navigation.navigate('Score')}>
+                <View style={styles.row_box}>
+                  <Video />
+                  <Video />
+                </View>
+              </TouchableOpacity> */}
               <View style={styles.row_box}>
                 <Video />
                 <Video />
               </View>
+
               <View style={styles.row_box}>
                 <Video />
                 <Video />

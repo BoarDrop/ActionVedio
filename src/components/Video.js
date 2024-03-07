@@ -1,15 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Address from '../statics/images/address.svg';
+import {useNavigation} from '@react-navigation/native';
 
 const Video = () => {
+  const navigation = useNavigation();
   return (
     <>
       <View style={styles.container}>
         <View style={styles.photo}>
-          <Image
-            source={require('../statics/images/people.png')}
-            style={styles.people}></Image>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => navigation.navigate('Score')}>
+            <Image
+              source={require('../statics/images/people.png')}
+              style={styles.people}></Image>
+          </TouchableOpacity>
+
           <View style={styles.address}>
             <Address width={20} height={20} />
             <Text style={styles.phnom}>phnom penh</Text>
