@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import Skate from '../statics/images/skate.svg';
 import {LineChart} from 'react-native-chart-kit';
 import Play from '../components/Play';
+import Blue from '../statics/images/BluePoint.svg';
+import Green from '../statics/images/GreenPoint.svg';
 
 // 图表数据
 const data = {
@@ -27,7 +29,7 @@ const data = {
     },
   ],
   // 图例
-  legend: ['Fly Height(max)', 'Skate Speed(max)'], // 可选
+  //legend: ['Fly Height(max)', 'Skate Speed(max)'], // 可选
 };
 
 // 图表配置
@@ -74,6 +76,26 @@ const Score = () => {
                   chartConfig={chartConfig}
                   bezier
                 />
+              </View>
+              <View style={styles.max}>
+                <View style={styles.max_one}>
+                  <Blue width={10} height={10} top={3.5} />
+                  <View>
+                    <Text style={styles.point_max}>Fly Height(max)</Text>
+                    <Text style={styles.point_cm}>50 cm</Text>
+                  </View>
+                </View>
+                <View style={styles.max_two}>
+                  <Green width={10} height={10} top={3.5} />
+                  <View>
+                    <Text style={styles.point_max}>Skate Speed(max)</Text>
+                    <Text style={styles.point_cm}>10 km/h</Text>
+                  </View>
+                </View>
+                <View style={styles.max_three}>
+                  <Text style={styles.point_max}>Air Time</Text>
+                  <Text style={styles.point_cm}>40 sec</Text>
+                </View>
               </View>
             </View>
           </View>
@@ -194,8 +216,46 @@ const styles = StyleSheet.create({
   },
   curve: {
     width: 320,
-    height: 200,
+    height: 160,
     //backgroundColor: 'pink',
+  },
+  max: {
+    width: 320,
+    height: 60,
+    //backgroundColor: 'white',
+    top: -3,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  max_one: {
+    width: 110,
+    height: 40,
+    //backgroundColor: '#8641F4',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+  },
+  point_max: {
+    color: '#B3B3B3',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  point_cm: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  max_two: {
+    width: 120,
+    height: 40,
+    //backgroundColor: '#429D3C',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+  },
+  max_three: {
+    width: 50,
+    height: 40,
+    //backgroundColor: '#2E6F74',
   },
   four: {
     width: 320,
