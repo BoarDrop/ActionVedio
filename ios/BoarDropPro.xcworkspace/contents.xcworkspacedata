@@ -7,4 +7,7 @@
    <FileRef
       location = "group:/Users/yuzou/Desktop/ReactNativePro/ActionVedio/ios/Pods/Pods.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

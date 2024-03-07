@@ -1,14 +1,9 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, Button, Alert} from 'react-native';
-import {Camera, useCameraDevice, CameraPermissionStatus} from 'react-native-vision-camera';
-import RNFS from 'react-native-fs';                               // 引入react-native-fs库，将视频数据先保存在本地
-import CameraRoll from '@react-native-community/cameraroll';      // 引入react-native-cameraroll库，将视频保存到相册
+import { Alert } from 'react-native';
+import { Camera } from 'react-native-vision-camera';
 import { Platform } from 'react-native';
 import { request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 
 const usePermission = () => {
-  const [isRecording, setIsRecording] = useState(false);
-
   // 获取用户权限
   async function getCameraPermission() {
     const cameraPermission = await Camera.requestCameraPermission();

@@ -1,17 +1,18 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text, Button, Alert} from 'react-native';
-import {Camera, useCameraDevice, CameraPermissionStatus} from 'react-native-vision-camera';
-import Video from 'react-native-video';
-import useVideoRecorder from '../hooks/useVideoRecorder';  // 引入自定义的useVideoRecorder钩子
+import {Camera, useCameraDevice} from 'react-native-vision-camera';
+import usePermission from '../hooks/usePermission';       
+import RNFS from 'react-native-fs';
+import CameraRoll from '@react-native-community/cameraroll';
 function VideoCaptureScreen() {
   const camera = useRef(null);
   // 使用useCameraDevices钩子获取设备上的相机设备列表，这里主要关注后置相机
   const device = useCameraDevice('back')
 
-  const [showCamera, setShowCamera] = useState(false);              // 是否显示相机视图
+  const [showCamera, setShowCamera] = useState(true);              // 是否显示相机视图
   const [isRecording, setIsRecording] = useState(false);            // 是否正在录制
   const [videoSource, setVideoSource] = useState('');               // 视频源路径
-  const {  } = useVideoRecorder();                     // 使用useVideoRecorder钩子
+  const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
 
   // 组件创立后获取用户权限
   useEffect(() => {
@@ -21,7 +22,6 @@ function VideoCaptureScreen() {
 
   // 定义一个异步函数startRecording来开始录制视频，并更新视频源路径和录制状态
   const startRecording = async () => {
-    setShowCamera(true);
     // console.log(camera.current);
     if (camera.current && !isRecording) {
         console.log("开始录制视频");
@@ -35,7 +35,6 @@ function VideoCaptureScreen() {
         onRecordingError: (error) => {                                 // 当录制发生错误时
             console.error(error);
             setIsRecording(false);
-            setShowCamera(false);                               // 更新录制状态,停止开摄像头
         },
       });
       setIsRecording(true);                                      // 更新录制状态
@@ -46,34 +45,33 @@ function VideoCaptureScreen() {
     if (camera.current && isRecording) {
         (camera.current as Camera).stopRecording();
         setIsRecording(false);
-        setShowCamera(false);                                   // 更新录制状态,停止开摄像头
     }
   };
 
-    // 定义一个异步函数moveVideoFile来移动视频文件到应用程序的MyVideos文件夹
-    const moveVideoFile = async (sourcePath: string) => {
-      const folderPath = `${RNFS.DocumentDirectoryPath}/MyVideos`;
-      const fileName = `${new Date().toISOString()}.mov`;
-      const destinationPath = `${folderPath}/${fileName}`;
-      
-      // 检查MyVideos文件夹是否存在
-      const folderExists = await RNFS.exists(folderPath);
-      if (!folderExists) {
-        // 如果文件夹不存在，则创建它
-        await RNFS.mkdir(folderPath);
-      }
+  // 定义一个异步函数moveVideoFile来移动视频文件到应用程序的MyVideos文件夹
+  const moveVideoFile = async (sourcePath: string) => {
+    const folderPath = `${RNFS.DocumentDirectoryPath}/MyVideos`;
+    const fileName = `${new Date().toISOString()}.mov`;
+    const destinationPath = `${folderPath}/${fileName}`;
     
-      // 然后尝试移动文件
-      try {
-        await RNFS.moveFile(sourcePath, destinationPath);
-        console.log(`Video saved to ${destinationPath}`);
-        // 这里更新你的应用状态或UI，如必要
-        setVideoSource(destinationPath);
-        saveVideoToCameraRoll(destinationPath);  // 保存视频到相册
-      } catch (error) {
-        console.error('Failed to save video', error);
-      }
-    };
+    // 检查MyVideos文件夹是否存在
+    const folderExists = await RNFS.exists(folderPath);
+    if (!folderExists) {
+      // 如果文件夹不存在，则创建它
+      await RNFS.mkdir(folderPath);
+    }
+  
+    // 然后尝试移动文件
+    try {
+      await RNFS.moveFile(sourcePath, destinationPath);
+      console.log(`Video saved to ${destinationPath}`);
+      // 这里更新你的应用状态或UI，如必要
+      setVideoSource(destinationPath);
+      saveVideoToCameraRoll(destinationPath);  // 保存视频到相册
+    } catch (error) {
+      console.error('Failed to save video', error);
+    }
+  };
 
   // 定义一个异步函数saveVideoToCameraRoll来保存视频到相册
   const saveVideoToCameraRoll = async (sourcePath: string) => {
