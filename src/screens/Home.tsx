@@ -79,9 +79,9 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       <View style={styles.button_box}>
         <TouchableOpacity
           style={styles.shot}
-          onPress={() => navigation.navigate('PhotoCapture')}
+          onPress={() => navigation.navigate('Shot')}
         />
-        <Camera width={30} height={30} />
+        {/* <Camera width={30} height={30} /> */}
       </View>
     </>
   );

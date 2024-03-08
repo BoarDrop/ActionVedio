@@ -32,8 +32,8 @@ const Play: React.FC<PlayProps> = ({ source }) => {
             style={styles.playIcon}
             source={
               paused
-                ? require('../statics/images/x.png')
-                : require('../statics/images/y.png')
+                ? require('../statics/images/play.png')
+                : require('../statics/images/stop.png')
             }
           />
         </TouchableOpacity>
@@ -68,12 +68,16 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
   },
   playButton: {
     // 根据你的播放按钮样式调整
+
   },
   playIcon: {
     // 根据你的播放图标尺寸调整
+    width: 50,
+    height: 50,
   },
   controls: {
     position: 'absolute',

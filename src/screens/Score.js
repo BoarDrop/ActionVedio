@@ -362,3 +362,356 @@ const styles = StyleSheet.create({
 });
 
 export default Score;
+
+// import React from 'react';
+// import { View, Text, StyleSheet, ScrollView, Image, ImageSourcePropType } from 'react-native';
+// import { LineChart} from 'react-native-chart-kit';
+// import Play from '../components/Play';
+// import Skate from '../statics/images/skate.svg';
+// import Blue from '../statics/images/BluePoint.svg';
+// import Green from '../statics/images/GreenPoint.svg';
+
+// // 图表数据
+// interface ChartData {
+//   labels: string[];
+//   datasets: {
+//     data: number[];
+//     color: (opacity?: number) => string;
+//     strokeWidth?: number;
+//   }[];
+// }
+
+// const data: ChartData = {
+//   labels: ['00', '10', '20', '30', '40'],
+//   datasets: [
+//     {
+//       data: [20, 45, 28, 80, 99],
+//       color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
+//       strokeWidth: 2,
+//     },
+//     {
+//       data: [30, 79, 47, 76, 100],
+//       color: (opacity = 1) => `rgba(34, 128, 176, ${opacity})`,
+//       strokeWidth: 2,
+//     },
+//   ],
+// };
+
+// // 图表配置
+// const chartConfig = {
+//   backgroundGradientFrom: 'black',
+//   backgroundGradientTo: 'black',
+//   color: (opacity = 1) => `rgba(179, 179, 179, ${opacity})`,
+//   labelColor: (opacity = 1) => `rgba(179, 179, 179, ${opacity})`,
+//   strokeWidth: 2,
+//   barPercentage: 0.5,
+//   formatXLabel: (label: string) => parseInt(label),
+//   formatYLabel: (label: string) => parseInt(label),
+// };
+
+// //函数组件
+// const Score: React.FC = () => {
+//   return (
+//     <ScrollView>
+//       <View style={styles.container}>
+//         <View style={styles.one}>
+//           <Text style={styles.skateboard}>Skateboard</Text>
+//           <Text style={styles.aenean}>
+//             Aenean aliquet lectus vestibulum gravida sed vulputate vitae.
+//           </Text>
+//         </View>
+//         <View style={styles.two}>
+//           <Play />
+//         </View>
+//         <View style={styles.three}>
+//           <View style={styles.three_top}>
+//             <Text style={styles.today}>Yesterday, January 21</Text>
+//             <Text style={styles.fraction}>Score: 90</Text>
+//           </View>
+//           <View style={styles.chart}>
+//             <Text style={styles.activity}>Activity Data</Text>
+//             <View style={styles.curve}>
+//               <LineChart
+//                 data={data}
+//                 width={350}
+//                 height={160}
+//                 chartConfig={chartConfig}
+//                 bezier
+//               />
+//             </View>
+//             <View style={styles.max}>
+//               <View style={styles.max_one}>
+//                 <Blue width={10} height={10} top={3.5} />
+//                 <View>
+//                   <Text style={styles.point_max}>Fly Height(max)</Text>
+//                   <Text style={styles.point_cm}>50 cm</Text>
+//                 </View>
+//               </View>
+//               <View style={styles.max_two}>
+//                 <Green width={10} height={10} top={3.5} />
+//                 <View>
+//                   <Text style={styles.point_max}>Skate Speed(max)</Text>
+//                   <Text style={styles.point_cm}>10 km/h</Text>
+//                 </View>
+//               </View>
+//               <View style={styles.max_three}>
+//                 <Text style={styles.point_max}>Air Time</Text>
+//                 <Text style={styles.point_cm}>40 sec</Text>
+//               </View>
+//             </View>
+//           </View>
+//         </View>
+//         <View style={styles.four}>
+//           <View style={styles.action_box}>
+//             <Text style={styles.action}>Detected action</Text>
+//           </View>
+//           <View style={styles.trick_box}>
+//             <View style={styles.left}>
+//               <View style={styles.yellow}>
+//                 <Skate width={30} height={30} />
+//               </View>
+//             </View>
+//             <View style={styles.right}>
+//               <View style={styles.right_top}>
+//                 <Text style={styles.tricks}>Tricks: 6</Text>
+//                 <Text style={styles.longest}>
+//                   Longest number of consecutive tricks landed in a line
+//                 </Text>
+//               </View>
+//               <View style={styles.right_down}>
+//                 <View style={styles.right_center}>
+//                   <View style={styles.right_one}>
+//                     <Image
+//                       style={{ width: 30, height: 30 }}
+//                       source={require('../statics/images/x.png')}></Image>
+//                   </View>
+//                   <Text style={styles.number}>2 tricks</Text>
+//                   <Text style={styles.regular}>X - Regular</Text>
+//                 </View>
+//                 <View style={styles.right_center}>
+//                   <View style={styles.right_two}>
+//                     <Image
+//                       style={{ width: 30, height: 30 }}
+//                       source={require('../statics/images/y.png')}></Image>
+//                   </View>
+//                   <Text style={styles.number}>1 tricks</Text>
+//                   <Text style={styles.regular}>Y - Regular</Text>
+//                 </View>
+//                 <View style={styles.right_center}>
+//                   <View style={styles.right_three}>
+//                     <Image
+//                       style={{ width: 30, height: 30 }}
+//                       source={require('../statics/images/z.png')}></Image>
+//                   </View>
+//                   <Text style={styles.number}>3 tricks</Text>
+//                   <Text style={styles.regular}>Z - Regular</Text>
+//                 </View>
+//               </View>
+//             </View>
+//           </View>
+//         </View>
+//       </View>
+//     </ScrollView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     backgroundColor: 'black',
+//     height: 900,
+//   },
+//   one: {
+//     width: 320,
+//     height: 100,
+//   },
+//   skateboard: {
+//     color: 'white',
+//     fontSize: 32,
+//     fontWeight: '700',
+//     marginTop: 10,
+//   },
+//   aenean: {
+//     color: '#B3B3B3',
+//     fontSize: 18,
+//     fontWeight: '400',
+//   },
+//   two: {
+//     width: 320,
+//     height: 190,
+//     backgroundColor: '#B3B3B3',
+//     marginTop: 20,
+//     alignItems: 'center',
+//   },
+//   three: {
+//     width: 320,
+//     height: 320,
+//     marginTop: 20,
+//   },
+//   three_top: {
+//     width: 320,
+//     height: 70,
+//   },
+//   today: {
+//     color: '#B3B3B3',
+//     fontSize: 14,
+//     fontWeight: '700',
+//   },
+//   fraction: {
+//     color: 'white',
+//     fontSize: 24,
+//     fontWeight: '700',
+//   },
+//   chart: {
+//     width: 320,
+//     height: 250,
+//     justifyContent: 'space-between',
+//   },
+//   activity: {
+//     color: 'white',
+//     fontSize: 14,
+//     fontWeight: '700',
+//   },
+//   curve: {
+//     width: 320,
+//     height: 160,
+//   },
+//   max: {
+//     width: 320,
+//     height: 60,
+//     top: -3,
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     flexDirection: 'row',
+//   },
+//   max_one: {
+//     width: 110,
+//     height: 40,
+//     justifyContent: 'space-around',
+//     flexDirection: 'row',
+//   },
+//   point_max: {
+//     color: '#B3B3B3',
+//     fontSize: 12,
+//     fontWeight: '700',
+//   },
+//   point_cm: {
+//     color: 'white',
+//     fontSize: 12,
+//     fontWeight: '700',
+//   },
+//   max_two: {
+//     width: 120,
+//     height: 40,
+//     justifyContent: 'space-around',
+//     flexDirection: 'row',
+//   },
+//   max_three: {
+//     width: 50,
+//     height: 40,
+//   },
+//   four: {
+//     width: 320,
+//     height: 190,
+//     marginTop: 25,
+//     justifyContent: 'space-between',
+//   },
+//   action_box: {
+//     width: 320,
+//     height: 25,
+//     borderBottomWidth: 1,
+//     borderBottomColor: '#3A3A3A',
+//   },
+//   action: {
+//     color: '#B3B3B3',
+//     fontSize: 14,
+//     fontWeight: '700',
+//   },
+//   trick_box: {
+//     width: 320,
+//     height: 150,
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//   },
+//   left: {
+//     width: 55,
+//     height: 150,
+//   },
+//   yellow: {
+//     width: 50,
+//     height: 50,
+//     backgroundColor: '#FB9820',
+//     borderRadius: 10,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   right: {
+//     width: 245,
+//     height: 150,
+//     justifyContent: 'space-between',
+//     flexDirection: 'column',
+//   },
+//   right_top: {
+//     width: 245,
+//     height: 45,
+//   },
+//   right_down: {
+//     width: 245,
+//     height: 105,
+//     justifyContent: 'space-around',
+//     alignItems: 'center',
+//     flexDirection: 'row',
+//   },
+//   tricks: {
+//     color: 'white',
+//     fontSize: 18,
+//     fontWeight: '700',
+//   },
+//   longest: {
+//     color: '#B3B3B3',
+//     fontSize: 10,
+//     fontWeight: '400',
+//   },
+//   right_center: {
+//     width: 70,
+//     height: 85,
+//     alignItems: 'center',
+//   },
+//   right_one: {
+//     width: 55,
+//     height: 55,
+//     backgroundColor: '#5144C6',
+//     borderRadius: 10,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   right_two: {
+//     width: 55,
+//     height: 55,
+//     backgroundColor: '#429D3C',
+//     borderRadius: 10,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   right_three: {
+//     width: 55,
+//     height: 55,
+//     backgroundColor: '#2E6F74',
+//     borderRadius: 10,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   number: {
+//     color: 'white',
+//     fontSize: 12,
+//     fontWeight: '700',
+//   },
+//   regular: {
+//     color: 'white',
+//     fontSize: 12,
+//     fontWeight: '700',
+//   },
+// });
+
+// export default Score;

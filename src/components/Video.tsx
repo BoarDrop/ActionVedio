@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // TypeScript 不直接支持 gap 属性在 React Native StyleSheet 中，可能需要其他方法实现或移除
     marginTop: 10,
     marginLeft: 25,
   },
