@@ -4,7 +4,6 @@ import PhotoCaptureScreen from '../PhotoCaptureScreen'; // 导入PhotoCaptureScr
 import VideoCaptureScreen from '../components/VideoCaptureScreen'; // 导入VideoCaptureScreen
 import HomeScreen from '../screens/Home'; // 导入HomeScreen
 import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
-import ShotScreen from '../screens/Shot' // 导入ShotScreen
 
 // 创建一个类型，用于定义StackNavigator的屏幕参数
 export type RootStackParamList = {
@@ -29,11 +28,6 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="Score"
           component={ScoreScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Shot"
-          component={ShotScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />

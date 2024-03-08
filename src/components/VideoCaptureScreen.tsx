@@ -3,9 +3,8 @@ import {View, StyleSheet, TouchableOpacity, Text, Button, Alert} from 'react-nat
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import RNFS from 'react-native-fs';
 import CameraRoll from '@react-native-community/cameraroll';
-import axios from 'axios';      // 引入axios库,用于发送http请求
-
-
+import Red from '../statics/images/RedButton.svg';
+import LoadingScreen from './LoadingScreen';
 import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
 import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
 
@@ -19,6 +18,7 @@ function VideoCaptureScreen() {
   const [showCamera, setShowCamera] = useState(true);              // 是否显示相机视图
   const [isRecording, setIsRecording] = useState(false);            // 是否正在录制
   const [videoSource, setVideoSource] = useState('');               // 视频源路径
+  const [loading, setLoading] = useState(false);                     // 是否正在加载
 
   const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
   const { getUploadCredentials, uploadFile } = useFileUpload();                     // 使用useFileUpload钩子
@@ -36,6 +36,7 @@ function VideoCaptureScreen() {
         console.log("开始录制视频");
         const video = await (camera.current as Camera).startRecording({       // 开始录制视频
         onRecordingFinished: (video) => {                                     // 当录制完成时
+          !loading && setLoading(true);                                       // 更新加载状态
           const sourcePath = video.path;
           moveVideoFile(sourcePath);                                          // 移动视频文件
           setIsRecording(false);
@@ -82,7 +83,20 @@ function VideoCaptureScreen() {
       if (uploadCredentials) {
         console.log('上传凭证', uploadCredentials);
         // 上传视频到OSS
-        uploadFile(destinationPath, fileName, uploadCredentials);
+        await uploadFile(destinationPath, fileName, uploadCredentials);
+        setLoading(false);  // 更新加载状态
+        // Alert弹窗提醒用户可以回到主页查看视频数据
+        Alert.alert(
+          '视频上传成功',
+          '您可以回到主页查看视频数据',
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('OK Pressed'),
+            },
+          ],
+          {cancelable: false},
+        );
       }
     } catch (error) {
       console.error('Failed to save video', error);
@@ -110,6 +124,7 @@ function VideoCaptureScreen() {
 
   return (
     <View style={styles.container}>
+        {/* 相机视图 */}
         <Camera
           ref={camera}
           style={StyleSheet.absoluteFill}
@@ -118,20 +133,25 @@ function VideoCaptureScreen() {
           audio={true}              // 开启音频录制
           video={true}              // 开启视频录制
         />
+
+        {/* 加载视图*/}
+        {loading && <LoadingScreen />}
       
-
-      {/* UI to start/stop recording */}
-      {/* 简化布局来测试按钮功能 */}
-      <TouchableOpacity style={styles.button} onPress={isRecording ? stopRecording : startRecording}>
-          <Text style={styles.buttonText}>{isRecording ? 'Stop Recording' : 'Start Recording'}</Text>
-      </TouchableOpacity>
-
-      {/* 根据需要决定是否显示视频
-      {videoSource ? (
-        <View style={styles.videoContainer}>
-          <Video source={{uri: videoSource}} style={styles.video} controls resizeMode="contain" />
+        {/* UI to start/stop recording */}
+        <View style={styles.grey}>
+          <View>
+            <Text style={styles.time}>00:00</Text>
+          </View>
+          <TouchableOpacity onPress={isRecording ? stopRecording : startRecording}>
+            {/* 没有录制的时候，按钮是圆形⭕️，开始录制⏺️的时候，按钮缩小 */}
+            <View style={styles.red}>
+                {
+                  isRecording ? <Red width={50} height={50} /> : <Red width={70} height={70} />
+                }
+            </View>
+          </TouchableOpacity>
         </View>
-      ) : null} */}
+
       </View> 
   );
 }
@@ -139,16 +159,23 @@ function VideoCaptureScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+  },
+  grey: {
+    width: '100%',
+    height: 170,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // 50% 透明度的黑色
   },
-  button: {
-    padding: 10,
-    backgroundColor: 'blue',
-    borderRadius: 5,
+  time: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: 'white',
   },
-  buttonText: {
-    color: '#fff',
+  red: {
+    top: -8,
   },
   videoContainer: {
     flex: 1,

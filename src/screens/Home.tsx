@@ -14,7 +14,8 @@ import Video from '../components/Video';
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import { NavigationProp } from '@react-navigation/native';
-
+import ScanAndConnect from '../components/ScanAndConnect/ScanAndConnect';
+import useBLE from '../hooks/useBLE';
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
   navigation: NavigationProp<any>;
@@ -23,6 +24,9 @@ interface HomeProps {
 const { width } = Dimensions.get('window');
 
 const Home: React.FC<HomeProps> = ({ navigation }) => {
+  const { quaternion, height, connectToDevice, connectedDevice } = useBLE();      // 四元数和高度
+
+
   return (
     <>
       <ScrollView>
@@ -58,7 +62,25 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
               Capture and analyze every skateboard move in real-time with a
               system that syncs high-definition video with onboard sensor data.
             </Text>
-          </View>
+          </View> 
+
+          {
+          !connectedDevice ? (
+            <ScanAndConnect connectToDevice={connectToDevice} />
+          ) : (
+            // 如果有设备连接则展示设备连接后的组件
+           
+              <TouchableOpacity
+              onPress={() => {console.log('Connect Device')}}
+            >
+              <View style={styles.connectDeviceButton}>
+                <Text>Connect Device</Text>
+              </View>
+            </TouchableOpacity>  
+          
+          )
+        }   
+
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>
             <View style={styles.video_box}>
@@ -66,7 +88,6 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                 <Video />
                 <Video />
               </View>
-
               <View style={styles.row_box}>
                 <Video />
                 <Video />
@@ -78,7 +99,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       <View style={styles.button_box}>
         <TouchableOpacity
           style={styles.shot}
-          onPress={() => navigation.navigate('Shot')}
+          onPress={() => navigation.navigate('VideoCapture')}
         >
           <Camera width={30} height={30} />
         </TouchableOpacity>
@@ -89,6 +110,28 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  connectDeviceButton: {
+    color: '#000',
+    fontFamily: 'Inter',
+    fontSize: 24,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: undefined, // React Native中通常不需要设置lineHeight为'normal'，你可以移除这一行或者设置具体的数值
+
+    width: 331,
+    height: 42,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // gap属性在React Native中没有直接对应，如果需要间隔，通常是通过在子元素间添加额外的视图或空间来实现
+    flexShrink: 0,
+
+    borderRadius: 5,
+    backgroundColor: '#FFF',
+
+    marginTop: 20,
+    marginBottom: 20,
+  },
   container: {
     flex: 1,
     alignItems: 'center',

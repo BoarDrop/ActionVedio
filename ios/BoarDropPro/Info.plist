@@ -14,7 +14,9 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your PhotoLibrary.</string>
 
-
+	<!-- 添加蓝牙权限 -->
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your Bluetooth.</string>
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
