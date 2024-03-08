@@ -11,13 +11,9 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Video from '../components/Video';
-// 注意：需要为 SVG 图片添加类型定义
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import { NavigationProp } from '@react-navigation/native';
-
-// 如果您使用 TypeScript 3.7+，可以使用导入类型
-// import type { NavigationProp } from '@react-navigation/native';
 
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
@@ -53,7 +49,10 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                   REAL-TIME SHOOTING SYNCHRONIZED DATA
                 </Text>
               </View>
-              <Stars width={30} height={30} />
+              <View style={{ top: 15 }}>
+                <Stars width={30} height={30} />
+              </View>
+
             </View>
             <Text style={styles.capture}>
               Capture and analyze every skateboard move in real-time with a
@@ -80,8 +79,10 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         <TouchableOpacity
           style={styles.shot}
           onPress={() => navigation.navigate('Shot')}
-        />
-        {/* <Camera width={30} height={30} /> */}
+        >
+          <Camera width={30} height={30} />
+        </TouchableOpacity>
+
       </View>
     </>
   );
@@ -167,8 +168,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 30,
     bottom: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   shot: {
     width: 60,
@@ -176,6 +175,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: '#4527A0',
     borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

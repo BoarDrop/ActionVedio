@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Red from '../statics/images/RedButton.svg';
 
-//函数组件
-const Score = () => {
+// TypeScript版本的函数组件
+const Score: React.FC = () => {
   return (
     <>
       <View style={styles.container}>

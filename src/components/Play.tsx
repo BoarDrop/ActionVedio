@@ -1,51 +1,23 @@
+// Score界面下的播放组件
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import Video from 'react-native-video';
-
-interface PlayProps {
-  source: { uri: string }; // 假设source是这种形式，根据实际情况调整
-}
+import Details from '../statics/images/details.svg';
 
 // 函数组件
-const Play: React.FC<PlayProps> = ({ source }) => {
-  const videoRef = useRef<Video>(null);
-  const [paused, setPaused] = useState<boolean>(true);
+const Play: React.FC = () => {
 
   return (
     <View style={styles.container}>
       <Video
-        ref={videoRef}
-        source={{
-          uri: 'https://prod-streaming-video-msn-com.akamaized.net/45101561-a78f-4a5d-88f9-0efc175a1ae6/481ec582-3cae-4b68-8e2d-5833bcd2a593.mp4',
-        }} // Can be a URL or a local file.
+        source={require('../statics/video/sea.mp4')}
         style={styles.video}
-        paused={paused} // 控制视频播放和暂停
-      // ...其他你需要的Video属性
+        controls={true} // 是否显示控件（播放/暂停等）
+        resizeMode="cover" // 视频铺满容器
+        repeat={true} // 是否重复播放
       />
-
-      <View style={styles.overlay}>
-        {/* 播放按钮 */}
-        <TouchableOpacity
-          style={styles.playButton}
-          onPress={() => setPaused(!paused)}>
-          <Image
-            style={styles.playIcon}
-            source={
-              paused
-                ? require('../statics/images/play.png')
-                : require('../statics/images/stop.png')
-            }
-          />
-        </TouchableOpacity>
-
-        {/* 自定义其他覆盖控件 */}
-        <View style={styles.controls}>
-          {/* 这里放置控件，如播放进度条等 */}
-          <Text style={styles.watermark}>Made at Theorem with love</Text>
-          {/* 假设水印文本是一个Image，则可以替换为：
-            <Image source={require('./path-to-watermark.png')} style={styles.watermark} />
-            */}
-        </View>
+      <View style={styles.top}>
+        <View style={styles.word}><Text style={styles.made}>Made at Theorem with love</Text></View>
       </View>
     </View>
   );
@@ -53,44 +25,36 @@ const Play: React.FC<PlayProps> = ({ source }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // 设置尺寸以适应视频的宽高比
+    backgroundColor: 'pink',
+    width: '100%',
+    borderRadius: 5,
   },
   video: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    width: '100%', // 你的视频宽度
+    height: '100%', // 你的视频高度
+    resizeMode: 'cover', // 覆盖整个容器
+    borderRadius: 5,
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
+  top: {
+    width: '100%',
+    height: 50,
+    //backgroundColor: 'pink',
     alignItems: 'center',
     position: 'absolute',
+    top: 0,
+    bottom: 0,
+    flexDirection: 'row',
   },
-  playButton: {
-    // 根据你的播放按钮样式调整
-
-  },
-  playIcon: {
-    // 根据你的播放图标尺寸调整
-    width: 50,
-    height: 50,
-  },
-  controls: {
-    position: 'absolute',
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-  watermark: {
+  made: {
     color: 'white',
-    fontSize: 12,
-    textShadowColor: 'black',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 1,
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  word: {
+    left: 25,
   },
 });
 

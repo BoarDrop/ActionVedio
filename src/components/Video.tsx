@@ -1,3 +1,4 @@
+// Home界面的视频组件
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Address from '../statics/images/address.svg';
