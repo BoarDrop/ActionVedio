@@ -21,7 +21,7 @@ function VideoCaptureScreen() {
   const [videoSource, setVideoSource] = useState('');               // 视频源路径
 
   const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
-  const { getUploadCredentials } = useFileUpload();                     // 使用useFileUpload钩子
+  const { getUploadCredentials, uploadFile } = useFileUpload();                     // 使用useFileUpload钩子
   
   // 组件创立后获取用户权限
   useEffect(() => {
@@ -82,7 +82,7 @@ function VideoCaptureScreen() {
       if (uploadCredentials) {
         console.log('上传凭证', uploadCredentials);
         // 上传视频到OSS
-        // uploadVideoToOSS(destinationPath, uploadCredentials);
+        uploadFile(destinationPath, fileName, uploadCredentials);
       }
     } catch (error) {
       console.error('Failed to save video', error);

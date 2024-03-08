@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PhotoCaptureScreen from '../PhotoCaptureScreen'; // 导入PhotoCaptureScreen
 import HomeScreen from '../screens/Home'; // 导入HomeScreen
 import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
-
+import VideoCaptureScreen from '../components/VideoCaptureScreen';    // 导入VideoCaptureScreen
 const Stack = createNativeStackNavigator();
 
 function AppNavigator() {
@@ -21,7 +21,7 @@ function AppNavigator() {
           component={ScoreScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />
+        <Stack.Screen name="VideoCapture" component={VideoCaptureScreen} />
       </Stack.Navigator>
     </>
   );

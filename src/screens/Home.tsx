@@ -85,7 +85,7 @@ function Home({navigation} : any) {
         <TouchableOpacity
           style={styles.shot}
           onPress={() =>
-            navigation.navigate('PhotoCapture')
+            navigation.navigate('VideoCapture')
           }></TouchableOpacity>
         <Camera width={30} height={30} top={15} left={15} />
       </View>
