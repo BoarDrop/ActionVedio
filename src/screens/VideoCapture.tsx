@@ -4,13 +4,11 @@ import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import RNFS from 'react-native-fs';
 import CameraRoll from '@react-native-community/cameraroll';
 import Red from '../statics/images/RedButton.svg';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../components/LoadingScreen';
 import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
 import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
-
-
-
-function VideoCaptureScreen() {
+import BLEDataDisplay from '../components/BLEDataDisplay/BLEDataDisplay';
+function VideoCapture() {
   const camera = useRef(null);
   // 使用useCameraDevices钩子获取设备上的相机设备列表，这里主要关注后置相机
   const device = useCameraDevice('back')
@@ -136,6 +134,9 @@ function VideoCaptureScreen() {
 
         {/* 加载视图*/}
         {loading && <LoadingScreen />}
+
+        {/* 蓝牙数据展示 */}
+        <BLEDataDisplay />
       
         {/* UI to start/stop recording */}
         <View style={styles.grey}>
@@ -189,4 +190,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VideoCaptureScreen;
+export default VideoCapture;

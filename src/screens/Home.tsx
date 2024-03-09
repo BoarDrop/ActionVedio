@@ -15,20 +15,16 @@ import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import { NavigationProp } from '@react-navigation/native';
 import ScanAndConnect from '../components/ScanAndConnect/ScanAndConnect';
-import useBLE from '../hooks/useBLE';
-// 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
-interface HomeProps {
-  navigation: NavigationProp<any>;
-}
-
+import { useContext } from 'react';
+import { ParamListBase } from '@react-navigation/routers';    // 导入ParamListBase类型，用于定义路由参数
+import bleContext from '../contexts/BLEContext';    // 导入bleContext上下文
 const { width } = Dimensions.get('window');
 
-const Home: React.FC<HomeProps> = ({ navigation }) => {
-  const { quaternion, height, connectToDevice, connectedDevice } = useBLE();      // 四元数和高度
 
-
+const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigation }) => {
+  const bleData = useContext(bleContext);
   return (
-    <>
+    <>    
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.top_image}>
@@ -65,21 +61,20 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
           </View> 
 
           {
-          !connectedDevice ? (
-            <ScanAndConnect connectToDevice={connectToDevice} />
-          ) : (
-            // 如果有设备连接则展示设备连接后的组件
-           
-              <TouchableOpacity
-              onPress={() => {console.log('Connect Device')}}
-            >
-              <View style={styles.connectDeviceButton}>
-                <Text>Connect Device</Text>
-              </View>
-            </TouchableOpacity>  
-          
-          )
-        }   
+            !bleData ? (
+              <Text>Loading or Bluetooth not available...</Text>
+            ) : !bleData.connectedDevice ? (
+              // 确保bleData非null时才渲染ScanAndConnect组件
+              <ScanAndConnect connectToDevice={bleData.connectToDevice} />
+            ) : (
+              // 如果有设备连接则展示设备连接后的组件
+              <TouchableOpacity onPress={() => {console.log('Connect Device')}}>
+                <View style={styles.connectDeviceButton}>
+                  <Text>Device Connected</Text>
+                </View>
+              </TouchableOpacity>
+            )
+        }  
 
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>

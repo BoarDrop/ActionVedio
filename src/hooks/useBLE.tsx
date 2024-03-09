@@ -4,7 +4,7 @@ import { PermissionsAndroid, Platform } from "react-native";
 import { BleManager, Device } from "react-native-ble-plx";
 import base64 from 'react-native-base64';
 import useParseImu from "./useParse_imu";
-
+import BluetoothLowEnergyApi from "../interfaces/BluetoothLowEnergyApi";
 // 导入 NativeModules，它是一个 JavaScript 对象，它的属性是原生模块的名称，它的值是原生模块的实例
 import { NativeModules } from 'react-native';
 const { IMUParser } = NativeModules;
@@ -19,25 +19,7 @@ type IMUData = {
 // 禁用 ESLint 的 no-bitwise 规则（这段代码中并没有用到位操作，可能是为了其他地方的代码）
 /* eslint-disable no-bitwise */
 
-// 定义 BluetoothLowEnergyApi 接口，它有两个方法：
-// 1. requestPermissions，请求权限并返回一个 Promise，resolve 的值是一个布尔值
-// 在 Android 上，打开蓝牙需要请求权限，然后启用蓝牙适配器。在 iOS 上，打开蓝牙不需要请求权限，只需要启用蓝牙适配器即可。
-// 2. scanForPeripherals，扫描外围设备（但这个方法在提供的代码中还没有实现）
-interface BluetoothLowEnergyApi {
-    requestPermissions(): Promise<boolean>;  // 请求权限
-    scanForPeripherals(): void;  // 扫描外围设备
-    Open_BleState(): Promise<boolean>;  // 检测蓝牙是否打开
-    disconnectDevice(): Promise<boolean>;  // 断开蓝牙
-    allDevices: Device[];  // 所有设备
-    connectToDevice: (device: Device) => Promise<void>;  // 连接设备
-    connectedDevice: Device | null;  // 已连接的设备
-    // 旋转角度
-    // RA: { RotationAngle_X: number, RotationAngle_Y: number, RotationAngle_Z: number };
-    // 旋转四元数
-    quaternion: { Quaternion_X: number, Quaternion_Y: number, Quaternion_Z: number, Quaternion_W: number };
-    // 高度
-    height: number | null;
-}
+
 
 // 定义 useBLE 函数，它返回 BluetoothLowEnergyApi 接口的实例
 function useBLE(): BluetoothLowEnergyApi {
@@ -352,10 +334,26 @@ function useBLE(): BluetoothLowEnergyApi {
                     serviceUUID,
                     characteristicUUID,
                     base64EncodedCommand
-                ).catch((error) => {
+                ).then(() => {
+                    console.log("保持连接的命令发送成功");
+                }).catch((error) => {
+                    console.log("error", error);
+                });
+
+                // 请求主动上报数据，向设备写入特征：发送指令0x19
+                const RequestDataCommandArray = Array.from(new Uint8Array([0x19]));
+                const RequestDatabase64EncodedCommandArray = base64.encode(String.fromCharCode.apply(null, RequestDataCommandArray));
+                console.log("base64编码的请求主动上报数据的命令：", RequestDatabase64EncodedCommandArray);
+                await deviceConnection.writeCharacteristicWithoutResponseForService(
+                    serviceUUID,
+                    characteristicUUID,
+                    RequestDatabase64EncodedCommandArray
+                ).then(() => {
+                    console.log("请求主动上报数据的命令发送成功");
+                }).catch((error) => {
                     console.log("error", error);
                 })
-
+                
                 const isConnected = await device.isConnected(); // 检查设备是否已连接
 
                 if (isConnected) {

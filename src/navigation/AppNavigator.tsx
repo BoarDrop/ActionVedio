@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PhotoCaptureScreen from '../PhotoCaptureScreen'; // 导入PhotoCaptureScreen
-import VideoCaptureScreen from '../components/VideoCaptureScreen'; // 导入VideoCaptureScreen
+import VideoCaptureScreen from '../screens/VideoCapture'; // 导入VideoCaptureScreen
 import HomeScreen from '../screens/Home'; // 导入HomeScreen
 import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
 
