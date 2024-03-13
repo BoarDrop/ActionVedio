@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   bottom_one: {
     width: '100%',
     height: 5,
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
     top: 10,
   },
   bottom_two: {

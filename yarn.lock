@@ -1679,6 +1679,11 @@
     "prompts" "^2.4.2"
     "semver" "^7.5.2"
 
+"@react-native-google-signin/google-signin@^11.0.0":
+  "integrity" "sha512-J8BFFGr5HcEWE2gRaVSJ0rQN8ztxYIr2wdWMG4PS1vhQZJqUzmRr6vpu12O1GppItq8ai7AA0rl/ja7hSytSXA=="
+  "resolved" "https://registry.npmmirror.com/@react-native-google-signin/google-signin/-/google-signin-11.0.0.tgz"
+  "version" "11.0.0"
+
 "@react-native/assets-registry@0.73.1":
   "integrity" "sha512-2FgAbU7uKM5SbbW9QptPPZx8N9Ke2L7bsHb+EhAanZjFZunA9PaYtyjUQ1s7HD+zDVqOQIvjkpXSv7Kejd2tqg=="
   "resolved" "https://registry.npmmirror.com/@react-native/assets-registry/-/assets-registry-0.73.1.tgz"
