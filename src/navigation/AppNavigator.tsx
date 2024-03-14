@@ -4,7 +4,7 @@ import PhotoCaptureScreen from '../PhotoCaptureScreen'; // 导入PhotoCaptureScr
 import VideoCaptureScreen from '../screens/VideoCapture'; // 导入VideoCaptureScreen
 import HomeScreen from '../screens/Home'; // 导入HomeScreen
 import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
-// import ThreeDPlaybackScreen from '../screens/ThreeDPlayback'; // 导入ThreeDPlaybackScreen
+import Model3DScreen from '../screens/Model3DScreen'; // 导入ThreeDPlaybackScreen
 // 创建一个类型，用于定义StackNavigator的屏幕参数
 export type RootStackParamList = {
   Home: undefined;
@@ -12,7 +12,7 @@ export type RootStackParamList = {
   Shot: undefined;
   PhotoCapture: undefined;
   VideoCapture: undefined;
-  ThreeDPlayback: undefined;
+  Model3DScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const AppNavigator: React.FC = () => {
   return (
     <>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Model3DScreen">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -33,7 +33,7 @@ const AppNavigator: React.FC = () => {
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />
         <Stack.Screen name="VideoCapture" component={VideoCaptureScreen} />
-        {/* <Stack.Screen name="ThreeDPlayback" component={ThreeDPlaybackScreen} /> */}
+        <Stack.Screen name="Model3DScreen" component={Model3DScreen} />
       </Stack.Navigator>
     </>
   );
