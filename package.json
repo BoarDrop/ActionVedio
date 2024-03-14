@@ -30,7 +30,8 @@
     "react-native-screens": "^3.29.0",
     "react-native-svg": "^15.1.0",
     "react-native-video": "^5.2.1",
-    "react-native-vision-camera": "^3.9.1"
+    "react-native-vision-camera": "^3.9.1",
+    "three": "^0.162.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -44,6 +45,7 @@
     "@types/react-native-base64": "^0.2.2",
     "@types/react-native-video": "^5.0.19",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/three": "^0.162.0",
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",

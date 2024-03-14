@@ -7,23 +7,49 @@ import bleContext from '../../contexts/BLEContext';    // 导入bleContext上下
 import BluetoothLowEnergyApi from '../../interfaces/BluetoothLowEnergyApi';    // 导入BluetoothLowEnergyApi接口
 import useInterval from '../../hooks/useInterval';    // 导入useInterval自定义钩子
 
+import VideoData from '../../interfaces/bleData/VideoData';    // 导入VideoData接口
+import DataItem from '../../interfaces/bleData/DataItem';    // 导入DataItem接口
+
+import { forwardRef, useImperativeHandle } from 'react';
+
 // 定义一个名为BLEDataDisplay的函数组件
-function BLEDataDisplay() {
+const BLEDataDisplay = forwardRef((props, ref) => {
     const bleData = useContext(bleContext); // 从bleContext中获取bleManager和connectedPeripheral
-    const [bleDataArray, setBLEDataArray] = useState<BluetoothLowEnergyApi[]>([]); // 用于存储蓝牙数据的数组
+    const [bleDataArray, setBLEDataArray] = useState<DataItem[]>([]); // 用于存储蓝牙数据的数组
     const [show, setShow] = useState(true); // 是否显示组件
     const [realHigh, setRealHigh] = useState<number | null>(null); // 允许null和number类型
 
     // 使用useInterval钩子，每隔1秒获取一次蓝牙数据,将其存入数组中
     useInterval(() => {
-        if (bleData) {              
-            console.log(bleData);
-            setBLEDataArray([...bleDataArray, bleData]);
-
-            // 获取实时高度
-            setRealHigh(bleData.height);
-        }
+      if (bleData && bleData.height !== null) {
+        // 假设每次接收到的蓝牙数据都是一个新的视频数据的data中的一部分
+        const Distance = 0; // 假设滑行距离为0
+        // console.log(bleData);
+        const newDataItem: DataItem = {
+          node: bleDataArray.length + 1,
+          high: bleData.height,
+          distance: Distance,
+        };
+        // 将转换后的视频数据添加到数组中
+        setBLEDataArray([...bleDataArray, newDataItem]);
+        // 获取实时高度
+        setRealHigh(bleData.height);
+      };
     }, 1000);
+
+    // 使用useImperativeHandle钩子，暴露一个名为getBLEDataAsync的方法
+    useImperativeHandle(ref, () => ({
+      getBLEDataAsync: async () => {
+        // 组合成VideoData对象
+        const videoData: VideoData = {
+          videoId: 0,
+          airTime: 0,
+          sk8Flipping: false,
+          data: bleDataArray,
+        };
+        return videoData; // 返回获取到的数据
+      }
+    }));
 
     return (
         <View style={styles.container}>
@@ -41,7 +67,8 @@ function BLEDataDisplay() {
         </TouchableOpacity>
         </View>
     );
-}
+  }
+);
 
 // 创建样式表
 const styles = StyleSheet.create({

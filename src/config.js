@@ -1,7 +1,8 @@
 // config.js
 
 let API_URL;
-
+let TOKEN;
+TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJVc2VySWQiOjQsImV4cCI6MTcxMDQzODcwNiwiTmFtZSI6ImJvc3MifQ.uogNI0RIwtZhRqseBmzzjQxWEBZQnGXRWUIJMg4rsRQ';
 if (process.env.NODE_ENV === 'development') {
   // 开发环境
   API_URL = 'https://www.BoarDrop.com.cn/boardrop';
@@ -14,5 +15,5 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const config = {
-  API_URL,
+  API_URL, TOKEN
 };

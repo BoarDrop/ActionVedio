@@ -8,6 +8,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
 import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
 import BLEDataDisplay from '../components/BLEDataDisplay/BLEDataDisplay';
+import useServices from '../hooks/useServices';             // 引入useServices钩子
+import BLEDataDisplayMethods from '../interfaces/bleData/BLEDataDisplayMethods';    // 导入BLEDataDisplayMethods接口
+
 function VideoCapture() {
   const camera = useRef(null);
   // 使用useCameraDevices钩子获取设备上的相机设备列表，这里主要关注后置相机
@@ -17,10 +20,12 @@ function VideoCapture() {
   const [isRecording, setIsRecording] = useState(false);            // 是否正在录制
   const [videoSource, setVideoSource] = useState('');               // 视频源路径
   const [loading, setLoading] = useState(false);                     // 是否正在加载
+  // 当前视频id
+  const [videoId, setVideoId] = useState(0);
 
   const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
   const { getUploadCredentials, uploadFile } = useFileUpload();                     // 使用useFileUpload钩子
-  
+  const { addAnalysis } = useServices();                     // 使用useServices钩子
   // 组件创立后获取用户权限
   useEffect(() => {
     getCameraPermission();                                        // 获取相机权限
@@ -81,20 +86,10 @@ function VideoCapture() {
       if (uploadCredentials) {
         console.log('上传凭证', uploadCredentials);
         // 上传视频到OSS
-        await uploadFile(destinationPath, fileName, uploadCredentials);
-        setLoading(false);  // 更新加载状态
-        // Alert弹窗提醒用户可以回到主页查看视频数据
-        Alert.alert(
-          '视频上传成功',
-          '您可以回到主页查看视频数据',
-          [
-            {
-              text: 'OK',
-              onPress: () => console.log('OK Pressed'),
-            },
-          ],
-          {cancelable: false},
-        );
+        const video_id =  await uploadFile(destinationPath, fileName, uploadCredentials);
+        setVideoId(video_id);  // 更新视频id
+        console.log('上传视频到OSS成功，视频id:', videoId);
+        await handleBLEData();  // 获取蓝牙数据
       }
     } catch (error) {
       console.error('Failed to save video', error);
@@ -115,6 +110,21 @@ function VideoCapture() {
     }
   };
 
+  // Assuming BLEDataDisplayMethods is the correct interface that includes getBLEDataAsync method
+  const bleDataDisplayRef = useRef<BLEDataDisplayMethods | null>(null);
+  // 从子组件获取蓝牙数据
+  const handleBLEData = async () => {
+    if (bleDataDisplayRef.current) {
+      const bleData = await bleDataDisplayRef.current.getBLEDataAsync();
+      // 修改bleData中的videoId: videoId,
+      bleData.videoId = videoId;
+      console.log('从子组件获取的蓝牙数据:', bleData);
+      // 在这里处理获取到的蓝牙数据
+      // 调用API发送蓝牙数据
+      const response = await addAnalysis(bleData);
+      console.log('发送蓝牙数据结果:', response);
+    }
+  };
 
   if (!device) {
     return <Text>No camera device found</Text>;
@@ -136,7 +146,8 @@ function VideoCapture() {
         {loading && <LoadingScreen />}
 
         {/* 蓝牙数据展示 */}
-        <BLEDataDisplay />
+        {/* <BLEDataDisplay onBLEDataUpdate={handleBLEData}/> */}
+        <BLEDataDisplay ref={bleDataDisplayRef}/>
       
         {/* UI to start/stop recording */}
         <View style={styles.grey}>

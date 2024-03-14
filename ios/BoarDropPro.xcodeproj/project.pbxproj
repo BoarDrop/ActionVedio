@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* BoarDropProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BoarDropProTests.m */; };
+		0EF9759AA8BA079BB4A5A402 /* libPods-BoarDropPro-BoarDropProTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B31253431A052E3078F43F9 /* libPods-BoarDropPro-BoarDropProTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		25D586C8CEF818A742074440 /* libPods-BoarDropPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDE8B0A801897638FE66C90 /* libPods-BoarDropPro.a */; };
+		7F4A2971CC5E21BBE9EDAD82 /* libPods-BoarDropPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4364B3A77846D95984D0B9 /* libPods-BoarDropPro.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		DD7A99CCCF9ED2634F2C2B77 /* libPods-BoarDropPro-BoarDropProTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF61F254B675867C4C10EE21 /* libPods-BoarDropPro-BoarDropProTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,19 +30,19 @@
 		00E356EE1AD99517003FC87E /* BoarDropProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoarDropProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BoarDropProTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoarDropProTests.m; sourceTree = "<group>"; };
+		0EF4BCF43E06BE5580779B55 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro-BoarDropProTests.release.xcconfig"; path = "Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BoarDropPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoarDropPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BoarDropPro/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = BoarDropPro/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BoarDropPro/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BoarDropPro/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BoarDropPro/main.m; sourceTree = "<group>"; };
-		42AE56B93C996FB3D41F28AF /* Pods-BoarDropPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro.release.xcconfig"; path = "Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro.release.xcconfig"; sourceTree = "<group>"; };
-		46A1E791B9F0B18A3F137AB6 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro-BoarDropProTests.release.xcconfig"; path = "Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests.release.xcconfig"; sourceTree = "<group>"; };
-		4EDE8B0A801897638FE66C90 /* libPods-BoarDropPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoarDropPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F4364B3A77846D95984D0B9 /* libPods-BoarDropPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoarDropPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B31253431A052E3078F43F9 /* libPods-BoarDropPro-BoarDropProTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoarDropPro-BoarDropProTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FF5CEE45CEE930515DF54C6 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro-BoarDropProTests.debug.xcconfig"; path = "Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BoarDropPro/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		92ABBDE99EE6EAB96C36DEAD /* Pods-BoarDropPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro.debug.xcconfig"; path = "Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro.debug.xcconfig"; sourceTree = "<group>"; };
-		AF61F254B675867C4C10EE21 /* libPods-BoarDropPro-BoarDropProTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoarDropPro-BoarDropProTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B146438D17CF9AD275D56D75 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro-BoarDropProTests.debug.xcconfig"; path = "Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CFAE4C56AC7EA793B6070BEF /* Pods-BoarDropPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro.release.xcconfig"; path = "Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro.release.xcconfig"; sourceTree = "<group>"; };
+		DA72D7B89CD62F19280DB739 /* Pods-BoarDropPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoarDropPro.debug.xcconfig"; path = "Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD7A99CCCF9ED2634F2C2B77 /* libPods-BoarDropPro-BoarDropProTests.a in Frameworks */,
+				0EF9759AA8BA079BB4A5A402 /* libPods-BoarDropPro-BoarDropProTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D586C8CEF818A742074440 /* libPods-BoarDropPro.a in Frameworks */,
+				7F4A2971CC5E21BBE9EDAD82 /* libPods-BoarDropPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				4EDE8B0A801897638FE66C90 /* libPods-BoarDropPro.a */,
-				AF61F254B675867C4C10EE21 /* libPods-BoarDropPro-BoarDropProTests.a */,
+				4F4364B3A77846D95984D0B9 /* libPods-BoarDropPro.a */,
+				6B31253431A052E3078F43F9 /* libPods-BoarDropPro-BoarDropProTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				92ABBDE99EE6EAB96C36DEAD /* Pods-BoarDropPro.debug.xcconfig */,
-				42AE56B93C996FB3D41F28AF /* Pods-BoarDropPro.release.xcconfig */,
-				B146438D17CF9AD275D56D75 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */,
-				46A1E791B9F0B18A3F137AB6 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */,
+				DA72D7B89CD62F19280DB739 /* Pods-BoarDropPro.debug.xcconfig */,
+				CFAE4C56AC7EA793B6070BEF /* Pods-BoarDropPro.release.xcconfig */,
+				6FF5CEE45CEE930515DF54C6 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */,
+				0EF4BCF43E06BE5580779B55 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "BoarDropProTests" */;
 			buildPhases = (
-				A9022B65DEAA2B371F61D412 /* [CP] Check Pods Manifest.lock */,
+				0043170EAE0BE4B9CDF3AB5C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				6018A02C1A0020C3D9B6F7B1 /* [CP] Embed Pods Frameworks */,
-				6928F227A6C96B225C650672 /* [CP] Copy Pods Resources */,
+				55FADB76C42A26AEA6C231BC /* [CP] Embed Pods Frameworks */,
+				D8A5780072102D024C6FBF3E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,13 +176,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "BoarDropPro" */;
 			buildPhases = (
-				7F28BE7DA067C8389E7B8388 /* [CP] Check Pods Manifest.lock */,
+				791A35760D64D94BA9099DF9 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				822BE724943DD80F06519671 /* [CP] Embed Pods Frameworks */,
-				70AEE75BC2C28181CB467BD0 /* [CP] Copy Pods Resources */,
+				90259F6569F8995DE4A0187A /* [CP] Embed Pods Frameworks */,
+				6E3CB95FF3F891370DCAA752 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -249,6 +249,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0043170EAE0BE4B9CDF3AB5C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BoarDropPro-BoarDropProTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,7 +287,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		6018A02C1A0020C3D9B6F7B1 /* [CP] Embed Pods Frameworks */ = {
+		55FADB76C42A26AEA6C231BC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -282,24 +304,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6928F227A6C96B225C650672 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		70AEE75BC2C28181CB467BD0 /* [CP] Copy Pods Resources */ = {
+		6E3CB95FF3F891370DCAA752 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -316,7 +321,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F28BE7DA067C8389E7B8388 /* [CP] Check Pods Manifest.lock */ = {
+		791A35760D64D94BA9099DF9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -338,7 +343,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		822BE724943DD80F06519671 /* [CP] Embed Pods Frameworks */ = {
+		90259F6569F8995DE4A0187A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -355,26 +360,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro/Pods-BoarDropPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A9022B65DEAA2B371F61D412 /* [CP] Check Pods Manifest.lock */ = {
+		D8A5780072102D024C6FBF3E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BoarDropPro-BoarDropProTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoarDropPro-BoarDropProTests/Pods-BoarDropPro-BoarDropProTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -410,7 +410,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B146438D17CF9AD275D56D75 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */;
+			baseConfigurationReference = 6FF5CEE45CEE930515DF54C6 /* Pods-BoarDropPro-BoarDropProTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -437,7 +437,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46A1E791B9F0B18A3F137AB6 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */;
+			baseConfigurationReference = 0EF4BCF43E06BE5580779B55 /* Pods-BoarDropPro-BoarDropProTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -461,7 +461,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92ABBDE99EE6EAB96C36DEAD /* Pods-BoarDropPro.debug.xcconfig */;
+			baseConfigurationReference = DA72D7B89CD62F19280DB739 /* Pods-BoarDropPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -489,7 +489,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42AE56B93C996FB3D41F28AF /* Pods-BoarDropPro.release.xcconfig */;
+			baseConfigurationReference = CFAE4C56AC7EA793B6070BEF /* Pods-BoarDropPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
