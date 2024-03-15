@@ -13,16 +13,16 @@ import LinearGradient from 'react-native-linear-gradient';
 import Video from '../components/Video';
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
-import { NavigationProp } from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
 
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
   navigation: NavigationProp<any>;
 }
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-const Home: React.FC<HomeProps> = ({ navigation }) => {
+const Home: React.FC<HomeProps> = ({navigation}) => {
   return (
     <>
       <ScrollView>
@@ -44,15 +44,14 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
               style={styles.gradientTop}
             />
             <View style={styles.star_box}>
-              <View style={{ width: 240 }}>
+              <View style={{width: 240}}>
                 <Text style={styles.real_time}>
                   REAL-TIME SHOOTING SYNCHRONIZED DATA
                 </Text>
               </View>
-              <View style={{ top: 15 }}>
+              <View style={{top: 15}}>
                 <Stars width={30} height={30} />
               </View>
-
             </View>
             <Text style={styles.capture}>
               Capture and analyze every skateboard move in real-time with a
@@ -78,11 +77,9 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       <View style={styles.button_box}>
         <TouchableOpacity
           style={styles.shot}
-          onPress={() => navigation.navigate('Shot')}
-        >
+          onPress={() => navigation.navigate('Shot')}>
           <Camera width={30} height={30} />
         </TouchableOpacity>
-
       </View>
     </>
   );

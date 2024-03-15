@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Red from '../statics/images/RedButton.svg';
 
 // TypeScript版本的函数组件

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PhotoCaptureScreen from '../PhotoCaptureScreen'; // 导入PhotoCaptureScreen
 import VideoCaptureScreen from '../VideoCaptureScreen'; // 导入VideoCaptureScreen
 import HomeScreen from '../screens/Home'; // 导入HomeScreen
@@ -26,28 +26,28 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Score"
           component={ScoreScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Shot"
           component={ShotScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />
         <Stack.Screen name="VideoCapture" component={VideoCaptureScreen} />
       </Stack.Navigator>
     </>
   );
-}
+};
 
 export default AppNavigator;

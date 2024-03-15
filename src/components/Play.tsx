@@ -1,6 +1,6 @@
 // Score界面下的播放组件
-import React, { useRef, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Video from 'react-native-video';
 import Click from '../statics/images/click.svg';
 import Begin from '../statics/images/ico-play.svg';
@@ -11,7 +11,6 @@ import Full from '../statics/images/ico-fullscreen.svg';
 
 // 函数组件
 const Play: React.FC = () => {
-
   // const [isMaskVisible, setIsMaskVisible] = useState(false);
 
   // const toggleMask = () => {
@@ -63,7 +62,6 @@ const Play: React.FC = () => {
           </View>
         </View>
       </View> */}
-
     </View>
   );
 };
@@ -166,11 +164,6 @@ const styles = StyleSheet.create({
 });
 
 export default Play;
-
-
-
-
-
 
 // import React, {useRef, useState} from 'react';
 // import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
