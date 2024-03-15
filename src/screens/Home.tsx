@@ -58,6 +58,9 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
               system that syncs high-definition video with onboard sensor data.
             </Text>
           </View>
+          <View style={styles.device}>
+            <Text style={styles.device_text}> None Device</Text>
+          </View>
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>
             <View style={styles.video_box}>
@@ -131,6 +134,21 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     width: 320,
     alignItems: 'center',
+  },
+  device: {
+    width: 290,
+    height: 42,
+    backgroundColor: 'white',
+    marginTop: 20,
+    marginBottom: -8,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  device_text: {
+    color: 'black',
+    fontSize: 24,
+    fontWeight: '700',
   },
   portfolio: {
     position: 'relative',
