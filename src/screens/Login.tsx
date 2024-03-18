@@ -118,14 +118,28 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
             </Text>
           </View>
         </View>
-        <GoogleSigninButton
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Light}
-          style={styles.google}
-          // 点击触发事件 跳转or登录
-          onPress={() => navigation.navigate('Home')}
-          //onPress={signInWithGoogleAsync}
-        />
+        <View>
+          <GoogleSigninButton
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Light}
+            style={styles.google}
+            // 点击触发事件 跳转or登录
+            onPress={() => navigation.navigate('Home')}
+            //onPress={signInWithGoogleAsync}
+          />
+        </View>
+        <View style={styles.bottom}>
+          <View style={styles.front}>
+            <View style={styles.line}></View>
+            <View>
+              <Text style={styles.or}>or</Text>
+            </View>
+            <View style={styles.line}></View>
+          </View>
+          <View style={styles.way}>
+            <Text style={styles.way_text}>Want to use another way?</Text>
+          </View>
+        </View>
       </View>
     </>
   );
@@ -139,6 +153,7 @@ const styles = StyleSheet.create({
   },
   google: {
     width: 220,
+    marginTop: -15,
   },
   word: {
     width: 320,
@@ -202,6 +217,44 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     lineHeight: 17,
+  },
+  bottom: {
+    width: 320,
+    height: 60,
+    //backgroundColor: 'pink',
+    justifyContent: 'space-between',
+  },
+  front: {
+    width: 320,
+    height: 25,
+    //backgroundColor: '#9747FF',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  line: {
+    width: 80,
+    height: 1, // 线条的高度
+    backgroundColor: 'white', // 线条的颜色
+  },
+  or: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '400',
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  way: {
+    width: 320,
+    height: 35,
+    //backgroundColor: '#16D46B',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  way_text: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '400',
   },
 });
 
