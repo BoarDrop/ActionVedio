@@ -6,6 +6,7 @@ import HomeScreen from '../screens/Home'; // 导入HomeScreen
 import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
 import ShotScreen from '../screens/Shot'; // 导入ShotScreen
 import LoginScreen from '../screens/Login';
+import UploadScreen from '../screens/Upload';
 
 // 创建一个类型，用于定义StackNavigator的屏幕参数
 export type RootStackParamList = {
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   Home: undefined;
   Score: undefined;
   Shot: undefined;
+  Upload: undefined;
   PhotoCapture: undefined;
   VideoCapture: undefined;
 };
@@ -41,6 +43,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="Shot"
           component={ShotScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Upload"
+          component={UploadScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />

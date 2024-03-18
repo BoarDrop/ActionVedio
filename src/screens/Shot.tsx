@@ -2,13 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
-import {Animated} from 'react-native'; //平滑动画
 
-interface ScoreProps {
+interface ShotProps {
   navigation: NavigationProp<any>;
 }
 
-const Score: React.FC<ScoreProps> = ({navigation}) => {
+const Shot: React.FC<ShotProps> = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
@@ -126,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Score;
+export default Shot;

@@ -1,32 +1,83 @@
 // Shot界面button的三种状态
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 type RecordingState = 'start' | 'stop' | 'upload';
 
-const Button: React.FC = () => {
-  const [currentStatus, setCurrentStatus] = useState<RecordingState>('start');
+// 定义 Button 组件的 props 类型
+type ButtonProps = {
+  fixedStatus?: RecordingState; // 添加一个可选的props来固定状态
+};
 
+const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
+  const [currentStatus, setCurrentStatus] = useState<RecordingState>(
+    fixedStatus || 'start',
+  );
+  const navigation = useNavigation();
+
+  // 如果传入了 fixedStatus，忽略 currentStatus
+  const displayStatus = fixedStatus ?? currentStatus;
+
+  // useEffect(() => {
+  //   if (currentStatus === 'upload') {
+  //     navigation.navigate('Upload' as never);
+  //   }
+  // }, [currentStatus, navigation]);
+
+  // 点击button进行切换
+  // const handlePress = () => {
+  //   setCurrentStatus(prevStatus => {
+  //     switch (prevStatus) {
+  //       case 'start':
+  //         return 'stop';
+  //       case 'stop':
+  //         // 不再返回状态，我们将在 useEffect 中处理导航
+  //         return prevStatus;
+  //       //return 'upload';
+  //       case 'upload':
+  //         return 'start';
+  //       default:
+  //         return 'start';
+  //     }
+  //   });
+  // };
   const handlePress = () => {
-    setCurrentStatus(prevStatus => {
-      switch (prevStatus) {
-        case 'start':
-          return 'stop';
-        case 'stop':
-          return 'upload';
-        case 'upload':
-          return 'start';
-        default:
-          return 'start';
+    if (fixedStatus) {
+      // 如果有 fixedStatus，可能需要处理点击事件
+      // 例如，固定状态为 'upload' 时的特定行为
+      if (fixedStatus === 'upload') {
+        navigation.navigate('Home' as never);
       }
-    });
+    } else {
+      // 如果没有 fixedStatus，按照正常逻辑处理状态变化
+      setCurrentStatus(prevStatus => {
+        switch (prevStatus) {
+          case 'start':
+            return 'stop';
+          case 'stop':
+            navigation.navigate('Upload' as never);
+            return prevStatus; // 如果这里没有返回 prevStatus，状态不会改变
+          case 'upload':
+            navigation.navigate('Home' as never);
+            return prevStatus;
+          default:
+            return 'start';
+        }
+      });
+    }
   };
+
+  useEffect(() => {
+    // 如果有需要，根据状态变化进行导航或其他副作用
+  }, [currentStatus, navigation]);
 
   const renderButton = () => {
     let backgroundColor = 'white';
     let textColor = 'black';
     let text = '';
 
+    // button样式切换
     switch (currentStatus) {
       case 'start':
         backgroundColor = 'white';
@@ -55,18 +106,7 @@ const Button: React.FC = () => {
 
   return (
     <>
-      <View style={styles.container}>
-        {renderButton()}
-        {/* <View style={styles.startButton}>
-          <Text style={styles.startText}>Start Record</Text>
-        </View>
-        <View style={styles.stopButton}>
-          <Text style={styles.stopText}>Stop Record</Text>
-        </View>
-        <View style={styles.uploadButton}>
-          <Text style={styles.uploadText}>Upload</Text>
-        </View> */}
-      </View>
+      <View style={styles.container}>{renderButton()}</View>
     </>
   );
 };
@@ -88,45 +128,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
   },
-  // startButton: {
-  //   backgroundColor: 'white',
-  //   width: 330,
-  //   borderRadius: 10,
-  //   height: 48,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  // startText: {
-  //   color: 'black',
-  //   fontSize: 24,
-  //   fontWeight: '700',
-  // },
-  // stopButton: {
-  //   backgroundColor: 'red',
-  //   width: 330,
-  //   borderRadius: 10,
-  //   height: 48,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  // stopText: {
-  //   color: 'white',
-  //   fontSize: 24,
-  //   fontWeight: '700',
-  // },
-  // uploadButton: {
-  //   backgroundColor: '#5144C6',
-  //   width: 330,
-  //   borderRadius: 10,
-  //   height: 48,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  // uploadText: {
-  //   color: 'white',
-  //   fontSize: 24,
-  //   fontWeight: '700',
-  // },
 });
 
 export default Button;
