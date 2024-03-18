@@ -6,6 +6,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import {NavigationProp} from '@react-navigation/native';
+import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 
 interface LoginProps {
   navigation: NavigationProp<any>;
@@ -24,6 +25,32 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
       '324249181996-hte70tk62vquevj1gmnme9m2uv4joti5.apps.googleusercontent.com',
   });
 
+  // const signInWithGoogleAsync = async () => {
+  //   try {
+  //     // 调用GoogleSignin的signIn方法启动Google登录流程，并等待用户登录，获取idToken
+  //     const {idToken} = await GoogleSignin.signIn();
+
+  //     // 使用从Google登录获取的idToken创建一个认证凭据
+  //     const googleCredential = GoogleAuthProvider.credential(idToken);
+
+  //     // 使用上一步创建的认证凭据来通过Firebase的auth模块进行登录操作，并等待登录结果
+  //     const auth = getAuth();
+  //     const userSignInResult = await auth.signInWithCredential(
+  //       googleCredential,
+  //     );
+
+  //     // 如果登录成功，获取Firebase ID Token
+  //     const firebaseIdToken = await userSignInResult.user.getIdToken();
+  //     console.log('Firebase ID Token:', firebaseIdToken);
+
+  //     // 这里你可以将firebaseIdToken发送到你的服务器，用于验证用户身份
+  //     // 例如，通过API请求将Token发送到你的服务器端
+  //   } catch (error) {
+  //     // 如果在登录流程中发生错误，捕获错误并在控制台中打印
+  //     console.log(error);
+  //   }
+  // };
+
   // 定义一个异步函数signInWithGoogleAsync，用于处理Google登录流程
   const signInWithGoogleAsync = async () => {
     try {
@@ -40,6 +67,7 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
 
       // 如果登录成功，控制台将打印登录结果（用户信息）
       console.log(userSignInResult);
+      //console.log(idToken);
     } catch (error) {
       // 如果在登录流程中发生错误，捕获错误并在控制台中打印
       console.log(error);
@@ -90,7 +118,7 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
           style={styles.google}
           // 点击触发事件 跳转or登录
           onPress={() => navigation.navigate('Home')}
-          // onPress={signInWithGoogleAsync}
+          //onPress={signInWithGoogleAsync}
         />
       </View>
     </>
