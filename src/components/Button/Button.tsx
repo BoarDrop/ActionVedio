@@ -16,57 +16,59 @@ const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
   );
   const navigation = useNavigation();
 
-  // 如果传入了 fixedStatus，忽略 currentStatus
-  const displayStatus = fixedStatus ?? currentStatus;
-
-  // useEffect(() => {
-  //   if (currentStatus === 'upload') {
-  //     navigation.navigate('Upload' as never);
-  //   }
-  // }, [currentStatus, navigation]);
-
-  // 点击button进行切换
-  // const handlePress = () => {
-  //   setCurrentStatus(prevStatus => {
-  //     switch (prevStatus) {
-  //       case 'start':
-  //         return 'stop';
-  //       case 'stop':
-  //         // 不再返回状态，我们将在 useEffect 中处理导航
-  //         return prevStatus;
-  //       //return 'upload';
-  //       case 'upload':
-  //         return 'start';
-  //       default:
-  //         return 'start';
-  //     }
-  //   });
-  // };
   const handlePress = () => {
+    // 如果存在fixedStatus，执行相应的操作
     if (fixedStatus) {
-      // 如果有 fixedStatus，可能需要处理点击事件
-      // 例如，固定状态为 'upload' 时的特定行为
       if (fixedStatus === 'upload') {
         navigation.navigate('Home' as never);
       }
     } else {
-      // 如果没有 fixedStatus，按照正常逻辑处理状态变化
-      setCurrentStatus(prevStatus => {
-        switch (prevStatus) {
-          case 'start':
-            return 'stop';
-          case 'stop':
-            navigation.navigate('Upload' as never);
-            return prevStatus; // 如果这里没有返回 prevStatus，状态不会改变
-          case 'upload':
-            navigation.navigate('Home' as never);
-            return prevStatus;
-          default:
-            return 'start';
-        }
-      });
+      // 根据当前状态处理逻辑
+      switch (currentStatus) {
+        case 'start':
+          // 点击开始后，切换到停止状态
+          setCurrentStatus('stop');
+          break;
+        case 'stop':
+          // 当处于停止状态时，直接执行导航操作
+          navigation.navigate('Upload' as never);
+          // 注意：这里没有更改状态，因为导航后，当前组件可能会被卸载，或者你不需要再更改其状态
+          break;
+        case 'upload':
+          // 如果已经在upload状态，并且按钮被点击，根据需要执行操作，或者不做任何事
+          // 例如，重新上传或提示用户当前操作已完成
+          break;
+        default:
+          // 重置到开始状态，这可能用在某些特殊逻辑处理中
+          setCurrentStatus('start');
+      }
     }
   };
+
+  // const handlePress = () => {
+  //   if (fixedStatus) {
+  //     // 如果有 fixedStatus，可能需要处理点击事件
+  //     // 例如，固定状态为 'upload' 时的特定行为
+  //     if (fixedStatus === 'upload') {
+  //       navigation.navigate('Home' as never);
+  //     }
+  //   } else {
+  //     // 如果没有 fixedStatus，按照正常逻辑处理状态变化
+  //     setCurrentStatus(prevStatus => {
+  //       switch (prevStatus) {
+  //         case 'start':
+  //           return 'stop';
+  //         case 'stop':
+  //           navigation.navigate('Upload' as never);
+  //           return prevStatus; // 如果这里没有返回 prevStatus，状态不会改变
+  //         case 'upload':
+  //           return prevStatus;
+  //         default:
+  //           return 'start';
+  //       }
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     // 如果有需要，根据状态变化进行导航或其他副作用
