@@ -7,6 +7,9 @@ import ScoreScreen from '../screens/Score'; // 导入ScoreScreen
 import ShotScreen from '../screens/Shot'; // 导入ShotScreen
 import LoginScreen from '../screens/Login';
 import UploadScreen from '../screens/Upload';
+import SigninScreen from '../screens/Signin';
+import SignupScreen from '../screens/Signup';
+import VerifyScreen from '../screens/Verify';
 
 // 创建一个类型，用于定义StackNavigator的屏幕参数
 export type RootStackParamList = {
@@ -15,6 +18,9 @@ export type RootStackParamList = {
   Score: undefined;
   Shot: undefined;
   Upload: undefined;
+  Signin: undefined;
+  Signup: undefined;
+  Verify: undefined;
   PhotoCapture: undefined;
   VideoCapture: undefined;
 };
@@ -24,7 +30,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const AppNavigator: React.FC = () => {
   return (
     <>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Signin">
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -48,6 +54,21 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="Upload"
           component={UploadScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signin"
+          component={SigninScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Verify"
+          component={VerifyScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />

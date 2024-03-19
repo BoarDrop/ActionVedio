@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {
   GoogleSigninButton,
   GoogleSignin,
@@ -138,6 +138,9 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
           </View>
           <View style={styles.way}>
             <Text style={styles.way_text}>Want to use another way?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+              <Text style={styles.sign_text}>Sign In</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -231,6 +234,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 5,
   },
   line: {
     width: 80,
@@ -250,11 +254,21 @@ const styles = StyleSheet.create({
     //backgroundColor: '#16D46B',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: -5,
   },
   way_text: {
     color: '#FFFFFF',
     fontSize: 15,
     fontWeight: '400',
+    //backgroundColor: 'pink',
+  },
+  sign_text: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '400',
+    textDecorationLine: 'underline',
   },
 });
 
