@@ -45,7 +45,7 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Signin ')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Verify')}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Sign Up</Text>
             </View>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     height: 12,
     width: 12,
     borderRadius: 6,
-    backgroundColor: '#E5E9EF',
+    backgroundColor: '#8A9BA3',
   },
   label: {
     fontSize: 13,

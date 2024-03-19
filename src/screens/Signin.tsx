@@ -33,7 +33,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
               secureTextEntry={true} // 这会隐藏密码输入
             />
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Sign In</Text>
             </View>
@@ -57,7 +57,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
             />
           </View>
           <View style={styles.forgot}>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
               <Text style={styles.forgot_text}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>

@@ -124,8 +124,8 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
             color={GoogleSigninButton.Color.Light}
             style={styles.google}
             // 点击触发事件 跳转or登录
-            onPress={() => navigation.navigate('Home')}
-            //onPress={signInWithGoogleAsync}
+            //onPress={() => navigation.navigate('Home')}
+            onPress={signInWithGoogleAsync}
           />
         </View>
         <View style={styles.bottom}>
