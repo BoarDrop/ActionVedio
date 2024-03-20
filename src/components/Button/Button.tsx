@@ -45,31 +45,6 @@ const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
     }
   };
 
-  // const handlePress = () => {
-  //   if (fixedStatus) {
-  //     // 如果有 fixedStatus，可能需要处理点击事件
-  //     // 例如，固定状态为 'upload' 时的特定行为
-  //     if (fixedStatus === 'upload') {
-  //       navigation.navigate('Home' as never);
-  //     }
-  //   } else {
-  //     // 如果没有 fixedStatus，按照正常逻辑处理状态变化
-  //     setCurrentStatus(prevStatus => {
-  //       switch (prevStatus) {
-  //         case 'start':
-  //           return 'stop';
-  //         case 'stop':
-  //           navigation.navigate('Upload' as never);
-  //           return prevStatus; // 如果这里没有返回 prevStatus，状态不会改变
-  //         case 'upload':
-  //           return prevStatus;
-  //         default:
-  //           return 'start';
-  //       }
-  //     });
-  //   }
-  // };
-
   useEffect(() => {
     // 如果有需要，根据状态变化进行导航或其他副作用
   }, [currentStatus, navigation]);

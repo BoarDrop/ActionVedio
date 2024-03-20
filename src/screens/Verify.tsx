@@ -60,34 +60,36 @@ const CodeInput: React.FC<{
 
   // 渲染TextInput组件数组，每个组件对应验证码的一个数字输入框。
   return (
-    <View style={styles.codeInputContainer}>
-      {code.map(
-        (
-          digit,
-          index, // 为code数组中的每个元素渲染一个TextInput。
-        ) => (
-          <TextInput
-            key={index}
-            ref={ref => {
-              inputRefs.current[index] = ref; // 将输入框的引用存储在inputRefs中。
-            }}
-            style={styles.codeInput}
-            value={digit} // 将输入框的值设置为当前数字。
-            onChangeText={text => handleTextChange(text, index)} // 当文本改变时，调用handleTextChange。
-            onKeyPress={({nativeEvent}) => {
-              // 处理Backspace按键事件，当用户按下Backspace并且当前输入框不是第一个时，聚焦到前一个输入框。
-              if (nativeEvent.key === 'Backspace' && index > 0) {
-                inputRefs.current[index - 1]?.focus();
-              }
-            }}
-            onFocus={() => handleFocus(index)} // 当输入框获得焦点时，调用handleFocus。
-            keyboardType="number-pad" // 设置键盘类型为数字键盘。
-            maxLength={1} // 限制每个输入框的最大长度为1。
-            textContentType="oneTimeCode" // iOS特有属性，提示这是一次性验证码输入。
-          />
-        ),
-      )}
-    </View>
+    <>
+      <View style={styles.codeInputContainer}>
+        {code.map(
+          (
+            digit,
+            index, // 为code数组中的每个元素渲染一个TextInput。
+          ) => (
+            <TextInput
+              key={index}
+              ref={ref => {
+                inputRefs.current[index] = ref; // 将输入框的引用存储在inputRefs中。
+              }}
+              style={styles.codeInput}
+              value={digit} // 将输入框的值设置为当前数字。
+              onChangeText={text => handleTextChange(text, index)} // 当文本改变时，调用handleTextChange。
+              onKeyPress={({nativeEvent}) => {
+                // 处理Backspace按键事件，当用户按下Backspace并且当前输入框不是第一个时，聚焦到前一个输入框。
+                if (nativeEvent.key === 'Backspace' && index > 0) {
+                  inputRefs.current[index - 1]?.focus();
+                }
+              }}
+              onFocus={() => handleFocus(index)} // 当输入框获得焦点时，调用handleFocus。
+              keyboardType="number-pad" // 设置键盘类型为数字键盘。
+              maxLength={1} // 限制每个输入框的最大长度为1。
+              textContentType="oneTimeCode" // iOS特有属性，提示这是一次性验证码输入。
+            />
+          ),
+        )}
+      </View>
+    </>
   );
 };
 

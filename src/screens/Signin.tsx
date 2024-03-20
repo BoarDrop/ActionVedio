@@ -12,6 +12,7 @@ import {
   GoogleSigninButton,
   GoogleSignin,
 } from '@react-native-google-signin/google-signin';
+import Google from '../components/Google/Google';
 
 interface SigninProps {
   navigation: NavigationProp<any>;
@@ -47,14 +48,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
             <View style={styles.line}></View>
           </View>
           <View style={styles.google_button}>
-            <GoogleSigninButton
-              size={GoogleSigninButton.Size.Wide}
-              color={GoogleSigninButton.Color.Light}
-              style={styles.google}
-              // 点击触发事件 跳转or登录
-              onPress={() => navigation.navigate('Home')}
-              //onPress={signInWithGoogleAsync}
-            />
+            <Google />
           </View>
           <View style={styles.forgot}>
             <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
@@ -150,6 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
+    marginBottom: 10,
   },
   google: {
     width: 220,
