@@ -7,6 +7,7 @@ interface UploadProps {
   navigation: NavigationProp<any>;
 }
 
+// 提示详情信息
 const listItems = [
   'Analyze these videos and the data \n collected by the sensors on the skateboard. ',
   'Give your ratings and  recommendations \n based on this data.',
@@ -16,6 +17,7 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
+        {/* 返回上一级 */}
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={styles.dis}>Discard</Text>
@@ -23,6 +25,8 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
           <Text style={styles.obj}>Object</Text>
           <Text style={styles.black}>none</Text>
         </View>
+
+        {/* 照片 */}
         <View style={styles.middle}>
           <View>
             <Image
@@ -32,13 +36,18 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
             />
           </View>
         </View>
+
+        {/* 底部栏 */}
         <View style={styles.grey}>
+          {/* 可修改信息 */}
           <View style={styles.top}>
             <View style={styles.top_inner}>
               <Text style={styles.title}>Capture Title</Text>
               <Text style={styles.day}>Today, January 21</Text>
             </View>
           </View>
+
+          {/* 信息介绍 */}
           <View style={styles.center}>
             <View>
               <Text style={styles.click}>
@@ -56,6 +65,8 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
               ))}
             </View>
           </View>
+
+          {/* 固定状态的Button组件 */}
           <View style={styles.bottom}>
             <Button fixedStatus="upload" />
           </View>

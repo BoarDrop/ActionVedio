@@ -2,12 +2,12 @@
 import React, {useRef, useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Video from 'react-native-video';
-import Click from '../statics/images/click.svg';
-import Begin from '../statics/images/ico-play.svg';
-import Next from '../statics/images/ico-next.svg';
-import Sound from '../statics/images/ico-sound.svg';
-import Hd from '../statics/images/ico-hd.svg';
-import Full from '../statics/images/ico-fullscreen.svg';
+import Click from '../../statics/images/click.svg';
+import Begin from '../../statics/images/ico-play.svg';
+import Next from '../../statics/images/ico-next.svg';
+import Sound from '../../statics/images/ico-sound.svg';
+import Hd from '../../statics/images/ico-hd.svg';
+import Full from '../../statics/images/ico-fullscreen.svg';
 
 // 函数组件
 const Play: React.FC = () => {
@@ -20,7 +20,7 @@ const Play: React.FC = () => {
   return (
     <View style={styles.container}>
       <Video
-        source={require('../statics/video/sea.mp4')}
+        source={require('../../statics/video/sea.mp4')}
         style={styles.video}
         controls={true} // 是否显示控件（播放/暂停等）
         resizeMode="cover" // 视频铺满容器

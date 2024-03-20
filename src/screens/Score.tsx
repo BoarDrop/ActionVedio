@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import Skate from '../statics/images/skate.svg';
-import Play from '../components/Play';
+import Play from '../components/Play/Play';
 import Blue from '../statics/images/BluePoint.svg';
 import Green from '../statics/images/GreenPoint.svg';
 import X from '../statics/images/x.svg';

@@ -1,3 +1,4 @@
+// 视频介绍界面
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
@@ -7,6 +8,7 @@ interface LoginProps {
   navigation: NavigationProp<any>;
 }
 
+// 有序列表中的详情信息
 const listItems = [
   'Captures Your Moves: A camera records all your skateboarding tricks in high detail.',
   'Tracks Your Board Data: Sensors on the skateboard track speed, turns, and more, as you ride.',
@@ -18,12 +20,16 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
+        {/* 固定信息部分*/}
         <View style={styles.word}>
+          {/* 标题 */}
           <View style={styles.title}>
             <Text style={styles.title_inner}>
               REAL-TIME SHOOTING SYNCHRONIZED DATA
             </Text>
           </View>
+
+          {/* 图片 */}
           <View style={styles.img}>
             <Image
               source={require('../statics/images/first.png')}
@@ -33,6 +39,8 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
           <View style={styles.dear}>
             <Text style={styles.dear_inner}>Dear Skater:</Text>
           </View>
+
+          {/* 详情 */}
           <View style={styles.content}>
             <Text style={styles.content_inner}>
               Excited to share our latest tech: a system that captures your
@@ -53,10 +61,13 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
             </Text>
           </View>
         </View>
+
+        {/* 谷歌一键登录按钮 */}
         <View style={styles.google_btn}>
           <Google />
         </View>
         <View style={styles.bottom}>
+          {/* 分割线 */}
           <View style={styles.front}>
             <View style={styles.line}></View>
             <View>
@@ -66,7 +77,8 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
           </View>
           <View style={styles.way}>
             <Text style={styles.way_text}>Want to use another way?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            {/* 切换登录方式 */}
+            <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
               <Text style={styles.sign_text}>Sign In</Text>
             </TouchableOpacity>
           </View>

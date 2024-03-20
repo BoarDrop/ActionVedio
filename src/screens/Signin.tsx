@@ -1,17 +1,13 @@
+// 登录界面
 import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Image,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
-import {
-  GoogleSigninButton,
-  GoogleSignin,
-} from '@react-native-google-signin/google-signin';
 import Google from '../components/Google/Google';
 
 interface SigninProps {
@@ -26,6 +22,8 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
           <View style={styles.title}>
             <Text style={styles.title_text}>Sign In</Text>
           </View>
+
+          {/* 输入框 */}
           <View style={styles.input}>
             <TextInput style={styles.input_box} placeholder="Email" />
             <TextInput
@@ -34,12 +32,15 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
               secureTextEntry={true} // 这会隐藏密码输入
             />
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+
+          {/* 登录按钮 */}
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Sign In</Text>
             </View>
           </TouchableOpacity>
 
+          {/* 分割线 */}
           <View style={styles.front}>
             <View style={styles.line}></View>
             <View>
@@ -47,9 +48,13 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
             </View>
             <View style={styles.line}></View>
           </View>
+
+          {/* 谷歌一键登录按钮 */}
           <View style={styles.google_button}>
             <Google />
           </View>
+
+          {/* 忘记密码跳转注册 */}
           <View style={styles.forgot}>
             <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
               <Text style={styles.forgot_text}>Forgot Password?</Text>
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 20,
   },
   line: {
     width: 90,
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#6473B6',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 15,
     marginBottom: 10,
   },
   google: {

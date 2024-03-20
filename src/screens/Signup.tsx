@@ -1,17 +1,13 @@
+// 注册界面
 import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Image,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
-import {
-  GoogleSigninButton,
-  GoogleSignin,
-} from '@react-native-google-signin/google-signin';
 import Google from '../components/Google/Google';
 
 interface SignupProps {
@@ -27,7 +23,9 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
           <View style={styles.title}>
             <Text style={styles.title_text}>Sign Up</Text>
           </View>
+
           <View style={styles.input}>
+            {/* 输入框 */}
             <TextInput style={styles.input_box} placeholder="Full Name" />
             <TextInput style={styles.input_box} placeholder="Email" />
             <TextInput
@@ -35,6 +33,8 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
               placeholder="Password"
               secureTextEntry={true} // 这会隐藏密码输入
             />
+
+            {/* 圆形可选框 */}
             <TouchableOpacity
               style={styles.click}
               onPress={() => setSelection(!isSelected)}>
@@ -46,12 +46,15 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          {/* 点击注册跳转验证 */}
           <TouchableOpacity onPress={() => navigation.navigate('Verify')}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Sign Up</Text>
             </View>
           </TouchableOpacity>
 
+          {/* 分割线 */}
           <View style={styles.front}>
             <View style={styles.line}></View>
             <View>
@@ -59,12 +62,16 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
             </View>
             <View style={styles.line}></View>
           </View>
+
+          {/* 谷歌一键登录按钮 */}
           <View style={styles.google_button}>
             <Google />
           </View>
+
+          {/* 更改登录方式跳转登录界面 */}
           <View style={styles.way}>
             <Text style={styles.way_text}>Want to use another way?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
               <Text style={styles.sign_text}>Sign In</Text>
             </TouchableOpacity>
           </View>
@@ -122,6 +129,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#16D46B',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 3,
   },
   checkbox: {
     height: 18,
@@ -151,6 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: -8,
   },
   button_text: {
     color: '#FFFFFF',
@@ -164,7 +173,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 20,
   },
   line: {
     width: 90,
@@ -184,11 +193,8 @@ const styles = StyleSheet.create({
     //backgroundColor: '#6473B6',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 15,
     marginBottom: 10,
-  },
-  google: {
-    width: 220,
   },
   way: {
     width: 320,

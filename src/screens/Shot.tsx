@@ -11,6 +11,7 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
+        {/* 返回上一级 */}
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={styles.dis}>Discard</Text>
@@ -18,6 +19,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
           <Text style={styles.obj}>Object</Text>
           <Text style={styles.black}>none</Text>
         </View>
+
+        {/* 照片 */}
         <View style={styles.middle}>
           <Image
             source={require('../statics/images/cover.png')}
@@ -25,6 +28,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
             resizeMode="cover" // 或者 'stretch' 来填满容器
           />
         </View>
+
+        {/* 底部栏 */}
         <View style={styles.grey}>
           <View style={styles.top}>
             <View style={styles.left}>
@@ -33,10 +38,13 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
                 movement data in real time.
               </Text>
             </View>
+            {/* 倒计时 */}
             <View style={styles.right}>
               <Text style={styles.time}>00:00</Text>
             </View>
           </View>
+
+          {/* 调用Button组件 */}
           <View style={styles.bottom}>
             <Button />
           </View>

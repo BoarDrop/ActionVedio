@@ -1,9 +1,9 @@
+// 验证界面
 import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Image,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
@@ -100,6 +100,7 @@ const Verify: React.FC<VerifyProps> = ({navigation}) => {
     // 校验成功后，可能需要进行导航，如下：
     // navigation.navigate('Home');
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -107,23 +108,32 @@ const Verify: React.FC<VerifyProps> = ({navigation}) => {
           <View style={styles.title}>
             <Text style={styles.title_text}>Email verification</Text>
           </View>
+
+          {/* 消息发送提示 */}
           <View style={styles.sent}>
             <Text style={styles.sent_mes}>We sent a code to your email</Text>
             <View style={styles.gmail}>
               <Text style={styles.gmail_text}>zouyu1121@gmail.com</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+
+              {/* 切换接收邮件的邮箱 */}
+              <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
                 <Text style={styles.change_text}>Change</Text>
               </TouchableOpacity>
             </View>
           </View>
+
+          {/* 验证码框 */}
           <View style={styles.code}>
             <CodeInput length={4} onCodeComplete={verifyCode} />
           </View>
+
+          {/* 重新发送验证码 */}
           <View style={styles.no_receive}>
             <Text style={styles.left_text}>Don't receive your code? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}>
               <Text style={styles.right_text}>Resend</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Text style={styles.right_text}>Resend</Text>
           </View>
         </View>
       </View>

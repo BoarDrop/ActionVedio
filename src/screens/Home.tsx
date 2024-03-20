@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   View,
   StyleSheet,
   Image,
@@ -10,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Video from '../components/Video';
+import Video from '../components/Video/Video';
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import {NavigationProp} from '@react-navigation/native';
@@ -27,11 +26,14 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
     <>
       <ScrollView>
         <View style={styles.container}>
+          {/* 封面照片 */}
           <View style={styles.top_image}>
             <Image
               source={require('../statics/images/cover.png')}
               style={styles.jump}
             />
+
+            {/* 阴影部分 */}
             <LinearGradient
               colors={[
                 'rgba(0,0,0,0.0)',
@@ -43,6 +45,8 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
               ]}
               style={styles.gradientTop}
             />
+
+            {/* 信息介绍 */}
             <View style={styles.star_box}>
               <View style={{width: 240}}>
                 <Text style={styles.real_time}>
@@ -58,9 +62,13 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
               system that syncs high-definition video with onboard sensor data.
             </Text>
           </View>
+
+          {/* 设备状态 */}
           <View style={styles.device}>
             <Text style={styles.device_text}> None Device</Text>
           </View>
+
+          {/* 全部视频文件夹 */}
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>
             <View style={styles.video_box}>
@@ -77,6 +85,8 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+
+      {/* 跳转拍摄按钮 */}
       <View style={styles.button_box}>
         <TouchableOpacity
           style={styles.shot}
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   device: {
-    width: 290,
+    width: 310,
     height: 42,
     backgroundColor: 'white',
     marginTop: 20,
