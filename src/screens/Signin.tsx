@@ -1,11 +1,12 @@
 // 登录界面
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import Google from '../components/Google/Google';
@@ -15,6 +16,39 @@ interface SigninProps {
 }
 
 const Signin: React.FC<SigninProps> = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    const loginData = {
+      email: email,
+      password: password,
+    };
+
+    fetch('https://www.BoarDrop.com.cn/boardrop/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.code === 0) {
+          // 登录成功，可以将data.data（token）保存起来，用于之后的请求认证
+          // 跳转到Home页面
+          navigation.navigate('Home');
+        } else {
+          // 显示错误消息
+          Alert.alert('Login Failed', data.msg);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Alert.alert('Login Error', 'An error occurred. Please try again.');
+      });
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -25,16 +59,28 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
 
           {/* 输入框 */}
           <View style={styles.input}>
-            <TextInput style={styles.input_box} placeholder="Email" />
+            <TextInput
+              style={styles.input_box}
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+            />
             <TextInput
               style={styles.input_box}
               placeholder="Password"
               secureTextEntry={true} // 这会隐藏密码输入
+              value={password}
+              onChangeText={setPassword} // 当文本变化时，更新状态
             />
           </View>
 
           {/* 登录按钮 */}
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <View style={styles.button}>
+              <Text style={styles.button_text}>Sign In</Text>
+            </View>
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={handleLogin}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Sign In</Text>
             </View>

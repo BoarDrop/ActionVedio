@@ -6,9 +6,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import Google from '../components/Google/Google';
+import axios from 'axios';
 
 interface SignupProps {
   navigation: NavigationProp<any>;
@@ -16,6 +18,69 @@ interface SignupProps {
 
 const Signup: React.FC<SignupProps> = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const sendVerificationCode = async () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email.');
+      return;
+    }
+
+    try {
+      // 假设这是你的发送验证码API
+      const response = await axios.get(
+        `https://www.BoarDrop.com.cn/boardrop/users/emailCode/register?emailAddress=${email}`,
+      );
+      if (response.data.code === 0) {
+        Alert.alert('Success', 'Verification code sent to your email.');
+        console.log('Received data:', response.data); // 打印全部数据
+        console.log("Navigating to 'Verify' with data:", {
+          email,
+          username,
+          password,
+        });
+        // 成功后，带着必要信息跳转到验证码界面
+        navigation.navigate('Verify', {
+          email: email,
+          username: username,
+          password: password,
+        });
+      } else {
+        Alert.alert('Error', response.data.msg);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // 检查HTTP状态码
+        const statusCode = error.response?.status;
+        console.error('HTTP Status Code:', statusCode);
+
+        // 解析错误响应体
+        const errorData = error.response?.data;
+        console.error('Error Response:', errorData);
+
+        // 记录请求配置
+        const requestConfig = error.config;
+        console.error('Request Config:', requestConfig);
+
+        // 使用error.toJSON()获取错误概述
+        const errorDetails = error.toJSON();
+        console.error('Error Details:', errorDetails);
+
+        // 构建并显示错误消息
+        const errorMessage =
+          errorData?.message || errorData || 'Registration failed.';
+        Alert.alert('Error', `Status Code: ${statusCode}, ${errorMessage}`);
+      } else {
+        // 其他类型的错误（例如网络问题或者配置错误）
+        console.error('An unexpected error occurred:', error);
+        Alert.alert('Error', 'An unexpected error occurred.');
+      }
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -26,12 +91,24 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
 
           <View style={styles.input}>
             {/* 输入框 */}
-            <TextInput style={styles.input_box} placeholder="Full Name" />
-            <TextInput style={styles.input_box} placeholder="Email" />
+            <TextInput
+              style={styles.input_box}
+              placeholder="Full Name"
+              value={username}
+              onChangeText={setUsername}
+            />
+            <TextInput
+              style={styles.input_box}
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+            />
             <TextInput
               style={styles.input_box}
               placeholder="Password"
               secureTextEntry={true} // 这会隐藏密码输入
+              value={password}
+              onChangeText={setPassword}
             />
 
             {/* 圆形可选框 */}
@@ -48,9 +125,14 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
           </View>
 
           {/* 点击注册跳转验证 */}
-          <TouchableOpacity onPress={() => navigation.navigate('Verify')}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Verify')}>
             <View style={styles.button}>
-              <Text style={styles.button_text}>Sign Up</Text>
+              <Text style={styles.button_text}>Send the verification code</Text>
+            </View>
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={sendVerificationCode}>
+            <View style={styles.button}>
+              <Text style={styles.button_text}>Send the verification code</Text>
             </View>
           </TouchableOpacity>
 

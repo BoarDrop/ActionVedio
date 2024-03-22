@@ -6,12 +6,35 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
-import {NavigationProp} from '@react-navigation/native';
+import {
+  NavigationProp,
+  useRoute,
+  useNavigation,
+} from '@react-navigation/native';
+import axios from 'axios';
+import {RouteProp} from '@react-navigation/native';
+
+type VerifyScreenRouteProp = RouteProp<
+  {params: {email: string; username: string; password: string}},
+  'params'
+>;
 
 interface VerifyProps {
   navigation: NavigationProp<any>;
 }
+
+type RootStackParamList = {
+  Signup: undefined; // 定义其他路由及其参数类型
+  // ...其他路由
+};
+
+type VerifyRouteParams = {
+  email: string;
+  username: string;
+  password: string;
+};
 
 // 验证框逻辑
 // 定义CodeInput组件，它接收length和onCodeComplete两个属性。
@@ -41,14 +64,19 @@ const CodeInput: React.FC<{
     const newCode = [...code]; // 复制当前的code数组以进行修改。
     newCode[index] = text; // 更新当前索引处的文本。
     setCode(newCode); // 设置新的code状态。
+
     // 如果当前输入框有文本，并且不是最后一个输入框，自动聚焦到下一个输入框。
     if (text && index < length - 1) {
       inputRefs.current[index + 1]?.focus();
     }
-    // 如果文本长度等于验证码长度，调用onCodeComplete回调函数。
-    if (text.length === length) {
+    // 如果所有输入框都有了值，则视为完成输入
+    if (
+      newCode.every(digit => digit.trim() !== '') &&
+      newCode.length === length
+    ) {
       onCodeComplete(newCode.join(''));
     }
+    console.log('Code completed: ', newCode);
   };
 
   // handleFocus处理输入框聚焦事件，用于当用户尝试在空的输入框输入时，自动将焦点移至前一个输入框。
@@ -93,12 +121,70 @@ const CodeInput: React.FC<{
   );
 };
 
-const Verify: React.FC<VerifyProps> = ({navigation}) => {
-  const verifyCode = (code: string) => {
-    // 根据你的业务逻辑进行验证码校验
-    console.log(code);
-    // 校验成功后，可能需要进行导航，如下：
-    // navigation.navigate('Home');
+const Verify = () => {
+  // 在你的组件内部
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const route = useRoute<VerifyScreenRouteProp>();
+  const {email, username, password} = route.params;
+
+  // 用于存储用户输入的验证码
+  const [code, setCode] = useState('');
+
+  const handleCodeComplete = (inputCode: string) => {
+    setCode(inputCode);
+    console.log('Code entered:', inputCode); // 输出用户输入的验证码
+  };
+
+  useEffect(() => {
+    console.log('Code updated in Verify component:', code);
+  }, [code]);
+
+  const registerUser = async () => {
+    try {
+      const numericCode = parseInt(code, 10);
+      if (isNaN(numericCode)) {
+        Alert.alert('Error', 'The code must be a number.');
+        return;
+      }
+
+      // 这里构建请求体
+      const payload = {
+        email: email,
+        username: username,
+        password: password,
+        code: numericCode, // 这是用户输入的验证码
+      };
+
+      // 发送请求到验证API
+      const response = await axios.post(
+        'https://www.BoarDrop.com.cn/boardrop/users/register',
+        payload,
+      );
+
+      // 这里假设服务器返回一个字段来表示成功或失败
+      if (response.data.code === 0) {
+        // 验证成功
+        Alert.alert('Success', 'Your code is correct,registration success!', [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('Signin' as never),
+          },
+        ]);
+      } else {
+        // 验证失败
+        Alert.alert(
+          'Error',
+          'The entered code is incorrect, please try again.',
+        );
+      }
+    } catch (error) {
+      // 这里处理请求错误
+      console.error('Error when trying to verify code:', error);
+      Alert.alert(
+        'Error',
+        'An error occurred while trying to verify the code.',
+      );
+    }
   };
 
   return (
@@ -116,7 +202,8 @@ const Verify: React.FC<VerifyProps> = ({navigation}) => {
               <Text style={styles.gmail_text}>zouyu1121@gmail.com</Text>
 
               {/* 切换接收邮件的邮箱 */}
-              <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Signup' as never)}>
                 <Text style={styles.change_text}>Change</Text>
               </TouchableOpacity>
             </View>
@@ -124,7 +211,23 @@ const Verify: React.FC<VerifyProps> = ({navigation}) => {
 
           {/* 验证码框 */}
           <View style={styles.code}>
-            <CodeInput length={4} onCodeComplete={verifyCode} />
+            {/* <CodeInput length={4} onCodeComplete={verifyCode} /> */}
+            <CodeInput length={4} onCodeComplete={handleCodeComplete} />
+          </View>
+
+          {/* 确认登录 */}
+          <View style={styles.button_box}>
+            {/* <TouchableOpacity
+              onPress={() => navigation.navigate('Verify' as never)}>
+              <View style={styles.button}>
+                <Text style={styles.button_text}>Confirm registration</Text>
+              </View>
+            </TouchableOpacity> */}
+            <TouchableOpacity onPress={registerUser}>
+              <View style={styles.button}>
+                <Text style={styles.button_text}>Confirm registration</Text>
+              </View>
+            </TouchableOpacity>
           </View>
 
           {/* 重新发送验证码 */}
@@ -212,6 +315,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button_box: {
+    width: 320,
+    height: 53,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  button: {
+    width: 280,
+    height: 53,
+    backgroundColor: '#000000',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  button_text: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '500',
   },
   codeInput: {
     borderWidth: 1,
