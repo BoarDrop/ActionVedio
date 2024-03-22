@@ -146,10 +146,9 @@ function useBLE(): BluetoothLowEnergyApi {
             if (error) return console.error(error);
             // 打印设备名称
             // console.log("Scanning...");
-            // console.log(device);// 打印设备名称
-            if (device && device.name?.includes("im948")) {
-                console.log("Found a im948 device:", device.name);
-                // 如果设备不为空，且设备名称包含 im948
+            // 如果找到名字包含im的设备，就获取其Mac地址
+            if (device && device.name?.includes("im")) {
+                // 如果设备不为空，且设备名称包含“im”，则打印设备信息
                 setAllDevices((prevState: Device[]) => {
                     // 如果设备不在 allDevices 数组中，将设备添加到 allDevices 数组中
                     console.log("将设备", device.id, "添加到 allDevices 数组中");

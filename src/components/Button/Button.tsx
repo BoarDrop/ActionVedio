@@ -8,9 +8,10 @@ type RecordingState = 'start' | 'stop' | 'upload';
 // 定义 Button 组件的 props 类型
 type ButtonProps = {
   fixedStatus?: RecordingState; // 添加一个可选的props来固定状态
+  onPressCallback?: () => void; // 新增一个回调函数的props
 };
 
-const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
+const Button: React.FC<ButtonProps> = ({fixedStatus, onPressCallback}) => {
   const [currentStatus, setCurrentStatus] = useState<RecordingState>(
     fixedStatus || 'start',
   );
@@ -42,6 +43,10 @@ const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
           // 重置到开始状态，这可能用在某些特殊逻辑处理中
           setCurrentStatus('start');
       }
+    }
+    // 调用回调函数，如果提供了
+    if (onPressCallback) {
+      onPressCallback();
     }
   };
 
