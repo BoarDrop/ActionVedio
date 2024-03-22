@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import Google from '../components/Google/Google';
+import config from '../../config';
 
 interface SigninProps {
   navigation: NavigationProp<any>;
@@ -18,6 +19,7 @@ interface SigninProps {
 const Signin: React.FC<SigninProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const API_BASE_URL: string = config.API_BASE_URL;
 
   const handleLogin = () => {
     const loginData = {
@@ -25,7 +27,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
       password: password,
     };
 
-    fetch('https://www.BoarDrop.com.cn/boardrop/users/login', {
+    fetch(`${API_BASE_URL}users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

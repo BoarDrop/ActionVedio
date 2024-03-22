@@ -15,6 +15,7 @@ import {
 } from '@react-navigation/native';
 import axios from 'axios';
 import {RouteProp} from '@react-navigation/native';
+import config from '../../config';
 
 type VerifyScreenRouteProp = RouteProp<
   {params: {email: string; username: string; password: string}},
@@ -127,6 +128,8 @@ const Verify = () => {
   const route = useRoute<VerifyScreenRouteProp>();
   const {email, username, password} = route.params;
 
+  const API_BASE_URL: string = config.API_BASE_URL;
+
   // 用于存储用户输入的验证码
   const [code, setCode] = useState('');
 
@@ -157,7 +160,7 @@ const Verify = () => {
 
       // 发送请求到验证API
       const response = await axios.post(
-        'https://www.BoarDrop.com.cn/boardrop/users/register',
+        `${API_BASE_URL}users/register`,
         payload,
       );
 

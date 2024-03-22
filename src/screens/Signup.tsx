@@ -11,6 +11,7 @@ import {
 import {NavigationProp} from '@react-navigation/native';
 import Google from '../components/Google/Google';
 import axios from 'axios';
+import config from '../../config';
 
 interface SignupProps {
   navigation: NavigationProp<any>;
@@ -23,6 +24,8 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const API_BASE_URL: string = config.API_BASE_URL;
+
   const sendVerificationCode = async () => {
     if (!email) {
       Alert.alert('Error', 'Please enter your email.');
@@ -32,7 +35,7 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
     try {
       // 假设这是你的发送验证码API
       const response = await axios.get(
-        `https://www.BoarDrop.com.cn/boardrop/users/emailCode/register?emailAddress=${email}`,
+        `${API_BASE_URL}users/emailCode/register?emailAddress=${email}`,
       );
       if (response.data.code === 0) {
         Alert.alert('Success', 'Verification code sent to your email.');
