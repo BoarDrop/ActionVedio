@@ -29,6 +29,10 @@ end
 
 target 'BoarDropPro' do
   use_expo_modules!
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'FirebaseCoreInternal', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+
   post_integrate do |installer|
     begin
       expo_patch_react_imports!(installer)

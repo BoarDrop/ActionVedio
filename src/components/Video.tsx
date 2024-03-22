@@ -1,9 +1,9 @@
 // Home界面的视频组件
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Address from '../statics/images/address.svg';
-import { useNavigation } from '@react-navigation/native';
-import { NavigationProp } from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/core';
 
 const Video: React.FC = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -17,7 +17,8 @@ const Video: React.FC = () => {
             onPress={() => navigation.navigate('Score')}>
             <Image
               source={require('../statics/images/people.png')}
-              style={styles.people}></Image>
+              style={styles.people}
+            />
           </TouchableOpacity>
 
           <View style={styles.address}>
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
 });
 
 export default Video;
-
 
 // import React from 'react';
 // import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';

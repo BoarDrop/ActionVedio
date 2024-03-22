@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { LineChart } from 'react-native-chart-kit';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {LineChart} from 'react-native-chart-kit';
 import Skate from '../statics/images/skate.svg';
 import Play from '../components/Play';
 import Blue from '../statics/images/BluePoint.svg';
@@ -9,13 +9,11 @@ import X from '../statics/images/x.svg';
 import Y from '../statics/images/y.svg';
 import Z from '../statics/images/z.svg';
 
-
 // SVG组件的类型定义
 type SVGComponentProps = {
   width: number;
   height: number;
 };
-
 
 // 图表数据
 const data = {
@@ -100,7 +98,7 @@ const Score = () => {
               </View>
               <View style={styles.max}>
                 <View style={styles.max_one}>
-                  <View style={{ top: 4 }}>
+                  <View style={{top: 4}}>
                     <Blue width={10} height={10} />
                   </View>
 
@@ -110,7 +108,7 @@ const Score = () => {
                   </View>
                 </View>
                 <View style={styles.max_two}>
-                  <View style={{ top: 4 }}>
+                  <View style={{top: 4}}>
                     <Green width={10} height={10} />
                   </View>
 

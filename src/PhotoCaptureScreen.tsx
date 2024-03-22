@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useEffect, useState, useRef } from 'react'; // 正确的导入方式
+import React, {useEffect, useState, useRef} from 'react'; // 正确的导入方式
 import {
   View,
   StyleSheet,
@@ -15,37 +15,38 @@ import {
   Image,
 } from 'react-native';
 
-import { Camera, useCameraDevice } from 'react-native-vision-camera';
-import { Linking } from 'react-native';
+import {Camera, useCameraDevice} from 'react-native-vision-camera';
+import {Linking} from 'react-native';
 
 function PhotoCaptureScreen(): React.JSX.Element {
-
   // 使用useRef创建一个引用来持有Camera组件
   const camera = useRef<Camera | null>(null);
   // 使用useCameraDevices钩子获取设备上的相机设备列表，这里主要关注后置相机
-  const device = useCameraDevice('back')
+  const device = useCameraDevice('back');
 
   // 使用useState管理相机视图的显示状态和照片的源路径
-  const [showCamera, setShowCamera] = useState(false);                // 是否显示相机视图
-  const [imageSource, setImageSource] = useState('');                 // 照片源路径
+  const [showCamera, setShowCamera] = useState(false); // 是否显示相机视图
+  const [imageSource, setImageSource] = useState(''); // 照片源路径
 
   // 使用useEffect钩子在组件加载时请求相机📷权限
   useEffect(() => {
     async function getPermission() {
-      console.log("获取用户权限");
-      const permission = await Camera.requestCameraPermission();    // 请求相机许可
-      console.log(`Camera permission status: ${permission}`);       // 打印相机许可状态
-      if (permission === 'denied') await Linking.openSettings();    // 如果用户拒绝了相机许可，打开设置页面
+      console.log('获取用户权限');
+      const permission = await Camera.requestCameraPermission(); // 请求相机许可
+      console.log(`Camera permission status: ${permission}`); // 打印相机许可状态
+      if (permission === 'denied') {
+        await Linking.openSettings();
+      } // 如果用户拒绝了相机许可，打开设置页面
     }
-    getPermission();                                                // 调用获取权限函数
+    getPermission(); // 调用获取权限函数
   }, []);
 
   // 定义一个异步函数capturePhoto来拍照，并更新照片源路径和相机视图的显示状态
   const capturePhoto = async () => {
-    console.log("拍照");
+    console.log('拍照');
     try {
       // 尝试拍照并使用提供的选项
-      console.log("尝试拍照并使用提供的选项");
+      console.log('尝试拍照并使用提供的选项');
       const photo = await (camera.current as Camera).takePhoto({});
       // 如果拍照成功，更新照片源路径并关闭相机视图
       setImageSource(photo.path);
@@ -65,7 +66,9 @@ function PhotoCaptureScreen(): React.JSX.Element {
   };
 
   // 如果设备上没有可用的相机，则显示一条消息
-  if (device == null) return <Text>No back camera device found</Text>;
+  if (device == null) {
+    return <Text>No back camera device found</Text>;
+  }
 
   // 根据showCamera的状态显示相机界面或照片预览界面
   return (
@@ -113,7 +116,7 @@ function PhotoCaptureScreen(): React.JSX.Element {
                 width: 100,
               }}
               onPress={() => setShowCamera(true)}>
-              <Text style={{ color: 'red', fontWeight: '500' }}>Back</Text>
+              <Text style={{color: 'red', fontWeight: '500'}}>Back</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer}>
@@ -129,7 +132,7 @@ function PhotoCaptureScreen(): React.JSX.Element {
                   borderColor: '#77c3ec',
                 }}
                 onPress={() => setShowCamera(true)}>
-                <Text style={{ color: '#77c3ec', fontWeight: '500' }}>
+                <Text style={{color: '#77c3ec', fontWeight: '500'}}>
                   Retake
                 </Text>
               </TouchableOpacity>
@@ -144,7 +147,7 @@ function PhotoCaptureScreen(): React.JSX.Element {
                   borderColor: 'white',
                 }}
                 onPress={() => setShowCamera(true)}>
-                <Text style={{ color: 'white', fontWeight: '500' }}>
+                <Text style={{color: 'white', fontWeight: '500'}}>
                   Use Photo
                 </Text>
               </TouchableOpacity>

@@ -1,11 +1,21 @@
 // Score界面下的播放组件
-import React, { useRef, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Video from 'react-native-video';
-import Details from '../statics/images/details.svg';
+import Click from '../statics/images/click.svg';
+import Begin from '../statics/images/ico-play.svg';
+import Next from '../statics/images/ico-next.svg';
+import Sound from '../statics/images/ico-sound.svg';
+import Hd from '../statics/images/ico-hd.svg';
+import Full from '../statics/images/ico-fullscreen.svg';
 
 // 函数组件
 const Play: React.FC = () => {
+  // const [isMaskVisible, setIsMaskVisible] = useState(false);
+
+  // const toggleMask = () => {
+  //   setIsMaskVisible(!isMaskVisible);
+  // };
 
   return (
     <View style={styles.container}>
@@ -16,9 +26,42 @@ const Play: React.FC = () => {
         resizeMode="cover" // 视频铺满容器
         repeat={true} // 是否重复播放
       />
-      <View style={styles.top}>
-        <View style={styles.word}><Text style={styles.made}>Made at Theorem with love</Text></View>
-      </View>
+      {/* 遮罩层 */}
+      {/* <View style={styles.mask}>
+        <View style={styles.top}>
+          <View style={styles.word}><Text style={styles.made}>Made at Theorem with love</Text></View>
+        </View>
+        <View style={styles.center}>
+          <Click />
+        </View>
+        <View style={styles.bottom}>
+          <View style={styles.bottom_one}></View>
+          <View style={styles.bottom_two}>
+            <View style={styles.bottom_left}>
+              <View style={styles.bottom_play}>
+                <Begin />
+              </View>
+              <View style={styles.bottom_next}>
+                <Next />
+              </View>
+              <View style={styles.bottom_sound}>
+                <Sound />
+              </View>
+              <View style={styles.bottom_time}>
+                <Text style={styles.time}>5:07 / 15:28</Text>
+              </View>
+            </View>
+            <View style={styles.bottom_right}>
+              <View style={styles.bottom_hd}>
+                <Hd />
+              </View>
+              <View style={styles.bottom_full}>
+                <Full />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View> */}
     </View>
   );
 };
@@ -28,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink',
+    //backgroundColor: 'pink',
     width: '100%',
     borderRadius: 5,
   },
@@ -38,12 +81,21 @@ const styles = StyleSheet.create({
     resizeMode: 'cover', // 覆盖整个容器
     borderRadius: 5,
   },
+  mask: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
   top: {
     width: '100%',
     height: 50,
     //backgroundColor: 'pink',
     alignItems: 'center',
-    position: 'absolute',
     top: 0,
     bottom: 0,
     flexDirection: 'row',
@@ -56,14 +108,62 @@ const styles = StyleSheet.create({
   word: {
     left: 25,
   },
+  center: {
+    width: '100%',
+    height: 50,
+    //backgroundColor: 'pink',
+    alignItems: 'center',
+  },
+  bottom: {
+    width: '100%',
+    height: 50,
+    //backgroundColor: 'pink',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  bottom_one: {
+    width: '100%',
+    height: 5,
+    //backgroundColor: 'blue',
+    top: 10,
+  },
+  bottom_two: {
+    width: '100%',
+    height: 40,
+    //backgroundColor: 'green',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  bottom_left: {
+    width: 200,
+    height: 40,
+    //backgroundColor: 'red',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottom_right: {
+    width: 80,
+    height: 40,
+    //backgroundColor: 'yellow',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottom_play: {},
+  bottom_next: {},
+  bottom_sound: {},
+  bottom_time: {},
+  bottom_hd: {},
+  bottom_full: {},
+  time: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '400',
+  },
 });
 
 export default Play;
-
-
-
-
-
 
 // import React, {useRef, useState} from 'react';
 // import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';

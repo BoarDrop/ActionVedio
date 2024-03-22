@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "324249181996",
+    "project_id": "rn-boardrop",
+    "storage_bucket": "rn-boardrop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324249181996:android:fddd852cbd23eeabfb9689",
+        "android_client_info": {
+          "package_name": "com.boardroppro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324249181996-fujemrvnsd74kod9tf9eo9qm4fabj9g5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardroppro",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "324249181996-nab5clq2th6fq5jlsstmu6oi4eants2d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardroppro",
+            "certificate_hash": "809b79ad3367dbf71998834d1b4901e95112a2b8"
+          }
+        },
+        {
+          "client_id": "324249181996-hte70tk62vquevj1gmnme9m2uv4joti5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdvVdOvidIllZA4Ug-1NsClg809y0w8p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324249181996-hte70tk62vquevj1gmnme9m2uv4joti5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
