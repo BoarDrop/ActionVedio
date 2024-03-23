@@ -7,8 +7,7 @@ import {useEffect, useState, useRef} from 'react';
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import RNFS from 'react-native-fs';
 import CameraRoll from '@react-native-community/cameraroll';
-import Red from '../statics/images/RedButton.svg';
-import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreenModal from '../components/LoadingScreen';
 import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
 import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
 import BLEDataDisplay from '../components/BLEDataDisplay/BLEDataDisplay';
@@ -41,6 +40,14 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
     getCameraPermission();                                        // 获取相机权限
     getPhotoLibraryAddOnlyPermission();                           // 获取PhotoLibraryAddOnly权限
   },[]);
+
+  useEffect(() => {
+    // 如果有需要，根据状态变化进行导航或其他副作用
+    console.log('videoId changed:', videoId);
+    if(videoId !== 0) { // 如果有实际的 videoId，执行相关操作
+      handleBLEData();
+    }
+  }, [videoId]);
 
   // 定义一个异步函数startRecording来开始录制视频，并更新视频源路径和录制状态
   const startRecording = async () => {
@@ -91,15 +98,14 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       console.log(`Video saved to ${destinationPath}`);
       // 这里更新你的应用状态或UI，如必要
       setVideoSource(destinationPath);
-      saveVideoToCameraRoll(destinationPath);  // 保存视频到相册
+      await saveVideoToCameraRoll(destinationPath);  // 保存视频到相册
       const uploadCredentials = await getUploadCredentials();  // 获取上传凭证
       if (uploadCredentials) {
         console.log('上传凭证', uploadCredentials);
         // 上传视频到OSS
         const video_id =  await uploadFile(destinationPath, fileName, uploadCredentials);
+        console.log('上传视频到OSS成功，视频id:', video_id);
         setVideoId(video_id);  // 更新视频id
-        console.log('上传视频到OSS成功，视频id:', videoId);
-        await handleBLEData();  // 获取蓝牙数据
       }
     } catch (error) {
       console.error('Failed to save video', error);
@@ -133,6 +139,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       // 调用API发送蓝牙数据
       const response = await addAnalysis(bleData);
       console.log('发送蓝牙数据结果:', response);
+      setLoading(false);  // 更新加载状态
+      navigation.navigate('Upload');
     }
   };
 
@@ -145,7 +153,7 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
     <>
       <View style={styles.container}>
         {/* 加载视图*/}
-        {loading && <LoadingScreen />}
+        <LoadingScreenModal visible={loading} />
 
         {/* 蓝牙数据展示 */}
         {/* <BLEDataDisplay onBLEDataUpdate={handleBLEData}/> */}
@@ -186,8 +194,7 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
           </View>
           <View style={styles.bottom}>
             {/* 获取用户是否点击Button组件的回调 */}
-
-            <Button onPressCallback={() => console.log('Button was pressed!')}  />
+            <Button onPressCallback={isRecording ? stopRecording : startRecording} />
           </View>
         </View>
       </View>

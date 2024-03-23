@@ -6,6 +6,7 @@ const useServices = () => {
     // 定义一个添加视频分析数据接口，video/addAnalysis
     const addAnalysis = async (data: any) => {
         try {
+            console.log('【视频分析数据接口】data:', data);
             // 发送http请求添加视频分析数据
             const response = await axios.post(`${config.API_URL}/video/addAnalysis`, data, {
                 headers: {
