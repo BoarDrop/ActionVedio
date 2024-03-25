@@ -2,6 +2,13 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 interface UploadProps {
   navigation: NavigationProp<any>;
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
   },
   head: {
     width: '100%',
-    height: 50,
+    height: heightPercent(50),
     backgroundColor: 'black',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -93,17 +100,17 @@ const styles = StyleSheet.create({
   },
   dis: {
     color: 'red',
-    fontSize: 15,
+    fontSize: fontSizePercent(15),
     fontWeight: '500',
   },
   obj: {
     color: 'white',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   black: {
     color: 'black',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   middle: {
@@ -116,13 +123,13 @@ const styles = StyleSheet.create({
     marginTop: -15,
   },
   skate_image: {
-    width: 320,
-    height: 400, // 确保图片高度铺满容器高度
+    width: widthPercent(320),
+    height: heightPercent(390), // 确保图片高度铺满容器高度
     borderRadius: 20,
   },
   grey: {
     width: '100%',
-    height: 290,
+    height: heightPercent(288),
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#272726',
@@ -131,9 +138,8 @@ const styles = StyleSheet.create({
   },
   top: {
     flexDirection: 'row',
-    width: 330,
-    height: 50,
-    //backgroundColor: 'pink',
+    width: widthPercent(330),
+    height: heightPercent(50),
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -15,
@@ -143,32 +149,31 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#848484',
-    fontSize: 24,
+    fontSize: fontSizePercent(24),
     fontWeight: '700',
   },
   day: {
     color: '#B3B3B3',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
   bottom: {
     width: '100%',
-    height: 48,
+    height: heightPercent(48),
     justifyContent: 'center',
     alignItems: 'center',
   },
   center: {
     flexDirection: 'row',
-    width: 330,
-    height: 130,
-    //backgroundColor: 'pink',
+    width: widthPercent(330),
+    height: heightPercent(130),
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -10,
   },
   click: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     marginLeft: 8,
     marginBottom: 5,
@@ -179,13 +184,13 @@ const styles = StyleSheet.create({
   },
   number: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     marginRight: 8,
   },
   word: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     lineHeight: 22,
   },

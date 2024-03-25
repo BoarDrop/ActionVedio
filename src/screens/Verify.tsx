@@ -16,6 +16,13 @@ import {
 import axios from 'axios';
 import {RouteProp} from '@react-navigation/native';
 import config from '../../config';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 type VerifyScreenRouteProp = RouteProp<
   {params: {email: string; username: string; password: string}},
@@ -254,40 +261,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   content: {
-    width: 320,
-    height: 280,
-    //backgroundColor: 'pink',
+    width: widthPercent(320),
+    height: heightPercent(280),
     marginTop: 170,
   },
   title: {
-    width: 320,
-    height: 40,
-    //backgroundColor: '#DCFFDE',
+    width: widthPercent(320),
+    height: heightPercent(40),
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 5,
   },
   title_text: {
     color: '#0A0615',
-    fontSize: 26,
+    fontSize: fontSizePercent(26),
     fontWeight: '600',
   },
   sent: {
-    width: 320,
-    height: 50,
-    //backgroundColor: '#DCFFDE',
+    width: widthPercent(320),
+    height: heightPercent(50),
     alignItems: 'center',
     justifyContent: 'center',
   },
   sent_mes: {
     color: '#0B0616',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '400',
   },
   gmail: {
-    width: 320,
-    height: 35,
-    //backgroundColor: '#16D46B',
+    width: widthPercent(320),
+    height: heightPercent(35),
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -296,20 +299,18 @@ const styles = StyleSheet.create({
   },
   gmail_text: {
     color: '#0B0616',
-    fontSize: 15,
+    fontSize: fontSizePercent(15),
     fontWeight: '400',
-    //backgroundColor: 'pink',
   },
   change_text: {
     color: '#0B0616',
-    fontSize: 15,
+    fontSize: fontSizePercent(15),
     fontWeight: '500',
     textDecorationLine: 'underline',
   },
   code: {
-    width: 320,
-    height: 80,
-    //backgroundColor: '#DCFFDE',
+    width: widthPercent(320),
+    height: heightPercent(80),
     marginTop: 20,
     alignItems: 'center',
     justifyContent: 'center',
@@ -320,14 +321,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button_box: {
-    width: 320,
-    height: 53,
+    width: widthPercent(320),
+    height: heightPercent(53),
     marginBottom: 10,
     alignItems: 'center',
   },
   button: {
-    width: 280,
-    height: 53,
+    width: widthPercent(280),
+    height: heightPercent(53),
     backgroundColor: '#000000',
     borderRadius: 8,
     alignItems: 'center',
@@ -350,8 +351,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   no_receive: {
-    width: 320,
-    height: 35,
+    width: widthPercent(320),
+    height: heightPercent(35),
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -360,12 +361,12 @@ const styles = StyleSheet.create({
   },
   left_text: {
     color: '#000000',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '400',
   },
   right_text: {
     color: '#3D37F1',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
   },
 });

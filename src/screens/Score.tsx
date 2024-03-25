@@ -1,3 +1,4 @@
+// 详情视频界面，echarts图表（样式先放着）
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
