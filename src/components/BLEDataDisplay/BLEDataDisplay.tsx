@@ -9,46 +9,57 @@ import useInterval from '../../hooks/useInterval';    // 导入useInterval自定
 
 import VideoData from '../../interfaces/bleData/VideoData';    // 导入VideoData接口
 import DataItem from '../../interfaces/bleData/DataItem';    // 导入DataItem接口
-
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useEffect } from 'react';
+import { set } from 'firebase/database';
 
 // 定义一个名为BLEDataDisplay的函数组件
 const BLEDataDisplay = forwardRef((props, ref) => {
     const bleData = useContext(bleContext); // 从bleContext中获取bleManager和connectedPeripheral
     const [bleDataArray, setBLEDataArray] = useState<DataItem[]>([]); // 用于存储蓝牙数据的数组
     const [show, setShow] = useState(true); // 是否显示组件
-    const [realHigh, setRealHigh] = useState<number | null>(null); // 允许null和number类型
+    const [realOriginData, setOriginData] =  useState<String[]>([]);  // 用于存储原始数据的数组
+    const [OriginBLEDataArray, setOriginBLEDataArray] = useState<String[][]>([]);
+    const [realHigh, setrealHigh] = useState<number | null>(null);
 
-    // 使用useInterval钩子，每隔1秒获取一次蓝牙数据,将其存入数组中
-    useInterval(() => {
-      if (bleData && bleData.height !== null) {
-        // 假设每次接收到的蓝牙数据都是一个新的视频数据的data中的一部分
-        const Distance = 0; // 假设滑行距离为0
-        // console.log(bleData);
-        const newDataItem: DataItem = {
-          node: bleDataArray.length + 1,
-          high: bleData.height,
-          distance: Distance,
-        };
-        // 将转换后的视频数据添加到数组中
-        setBLEDataArray([...bleDataArray, newDataItem]);
-        // 获取实时高度
-        setRealHigh(bleData.height);
-      };
-    }, 1000);
+
+    // 定义一个用于开始数据收集的函数
+    const startCollectingData = () => {
+      // 使用setInterval或自定义的useInterval逻辑开始收集数据
+      // 使用useInterval钩子，每隔10ms获取一次蓝牙数据,将其存入数组中
+      useInterval(() => {
+        if (bleData && bleData.originalData !== null) {
+          setOriginData([...realOriginData, bleData.originalData]);
+        }
+      }, 10);
+
+      // 每秒在控制台输出收集到的数据量，每s回传一次原始数据数组
+      useInterval(() => {
+        console.log(`每秒数据量: ${realOriginData.length}`);
+        // console.log(`每秒原始数据数组如下: ${realOriginData}`);
+        // 将这个数组存入OriginBLEDataArray
+        setOriginBLEDataArray([...OriginBLEDataArray, realOriginData]);
+        // console.log(`每秒原始数据数组数组如下: ${OriginBLEDataArray}`);
+        console.log(`每秒原始数据数组数组长度如下: ${OriginBLEDataArray.length}`);
+        setOriginData([]); // 每秒清空数组，重新计数
+      }, 1000);
+    };
+
+    // 定义一个停止数据收集的函数，清空数据数组
+    const stopCollectingData = () => {
+      setOriginData([]);
+      setOriginBLEDataArray([]);
+    };
 
     // 使用useImperativeHandle钩子，暴露一个名为getBLEDataAsync的方法
     useImperativeHandle(ref, () => ({
+      // 返回获取到的数据数组
       getBLEDataAsync: async () => {
-        // 组合成VideoData对象
-        const videoData: VideoData = {
-          videoId: 0,
-          airTime: 0,
-          sk8Flipping: false,
-          data: bleDataArray,
-        };
-        return videoData; // 返回获取到的数据
-      }
+        return OriginBLEDataArray; 
+      },
+      // 开始获取蓝牙数据
+      startCollectingData,
+      // 停止获取蓝牙数据
+      stopCollectingData,
     }));
 
     return (
@@ -56,6 +67,7 @@ const BLEDataDisplay = forwardRef((props, ref) => {
         {show && (
             <View style={styles.dataContainer}>
                 {/* 暂时只展示每s的高度即可 */}
+                {/* <Text style={styles.dataText}>原始数据: {bleData?.originalData}</Text> */}
                 <Text style={styles.dataText}>高度: {bleData?.height}</Text>
             </View>
         )}

@@ -15,6 +15,8 @@ type IMUData = {
     RotationQuat_W: number;
     Height: number;
     // 如果有其他属性，请在此处添加
+    // 原始数据
+    OriginalData: string | null;
 };
 // 禁用 ESLint 的 no-bitwise 规则（这段代码中并没有用到位操作，可能是为了其他地方的代码）
 /* eslint-disable no-bitwise */
@@ -41,6 +43,8 @@ function useBLE(): BluetoothLowEnergyApi {
     const [quaternion, setQuaternion] = useState<{ Quaternion_X: number, Quaternion_Y: number, Quaternion_Z: number, Quaternion_W: number }>({ Quaternion_X: 0, Quaternion_Y: 0, Quaternion_Z: 0, Quaternion_W: 0 });
     // const [RA, setRA] = useState<{ RotationAngle_X: number, RotationAngle_Y: number, RotationAngle_Z: number }>({ RotationAngle_X: 0, RotationAngle_Y: 0, RotationAngle_Z: 0 });
     const [height, setHeight] = useState<number | null>(null);
+    // 原始数据
+    const [originalData, setOriginalData] = useState<string | null>(null);
     // 定义 requestAndroid31Permissions 函数，用于请求 Android 31及其以上平台的权限
     const requestAndroid31Permissions = async () => {
         // 请求 BLUETOOTH_SCAN 权限
@@ -183,6 +187,11 @@ function useBLE(): BluetoothLowEnergyApi {
         })
     };
 
+    // 设置蓝牙帧率
+    const setSensorate = async (rote: Number) => {
+        console.log("设置蓝牙传感器的帧率为：", rote);
+    }
+
 
     // 获取蓝牙设备的服务和特征
     const getServicesAndCharacteristicsForDevice = async (device: Device | null) => {
@@ -244,6 +253,8 @@ function useBLE(): BluetoothLowEnergyApi {
                         return;
                     }
 
+                    // console.log("Received characteristic:", characteristic);
+
                     // // 使用IMUParser原生模块解析数据
                     // if (characteristic?.value) {
                     //     // console.log("开始使用IMUParser原生模块解析数据")
@@ -278,7 +289,8 @@ function useBLE(): BluetoothLowEnergyApi {
                     //         setHeight(parsedData.Height);
                     //     });
                     // }
-
+                    // 将 originalData 的状态设置为 characteristic?.value 的值，如果它是 undefined，则设置为 null
+                    setOriginalData(characteristic?.value || null);
                     const parse_imu_data = parse_imu(characteristic?.value);
 
                     // 定义一个函数，四舍五入到指定的小数位数
@@ -321,7 +333,6 @@ function useBLE(): BluetoothLowEnergyApi {
                 // 保持蓝牙连接指令(即0x29指令)
                 // 保持蓝牙连接指令(即0x29指令)
                 const keepAliveCommandArray = Array.from(new Uint8Array([0x29]));
-
                 // Convert the keepAliveCommandArray to Base64 encoded string
                 const base64EncodedCommand = base64.encode(String.fromCharCode.apply(null, keepAliveCommandArray));
                 console.log("base64编码的保持连接的命令：", base64EncodedCommand);
@@ -333,8 +344,8 @@ function useBLE(): BluetoothLowEnergyApi {
                     serviceUUID,
                     characteristicUUID,
                     base64EncodedCommand
-                ).then(() => {
-                    console.log("保持连接的命令发送成功");
+                ).then((res) => {
+                    console.log("保持连接的命令发送成功,结果如下：",res);
                 }).catch((error) => {
                     console.log("error", error);
                 });
@@ -347,8 +358,8 @@ function useBLE(): BluetoothLowEnergyApi {
                     serviceUUID,
                     characteristicUUID,
                     RequestDatabase64EncodedCommandArray
-                ).then(() => {
-                    console.log("请求主动上报数据的命令发送成功");
+                ).then((res) => {
+                    console.log("请求主动上报数据的命令发送成功", res);
                 }).catch((error) => {
                     console.log("error", error);
                 })
@@ -426,7 +437,8 @@ function useBLE(): BluetoothLowEnergyApi {
         disconnectDevice,   // 断开蓝牙
         allDevices,         // 所有设备
         quaternion,        // 旋转四元数
-        height             // 高度
+        height,             // 高度
+        originalData        // 原始数据
     }
 }
 

@@ -63,6 +63,10 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
 
   // 定义一个异步函数startRecording来开始录制视频，并更新视频源路径和录制状态
   const startRecording = async () => {
+    // // 给子组件发送开始收集数据的信号
+    // if (bleDataDisplayRef.current) {
+    //   bleDataDisplayRef.current.startCollectingData();
+    // }
     // console.log(camera.current);
     if (camera.current && !isRecording) {
         console.log("开始录制视频");
@@ -85,6 +89,10 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
 
   // 定义一个stopRecording函数来停止录制视频
   const stopRecording = () => {
+    // 给子组件发送停止收集数据的信号
+    if (bleDataDisplayRef.current) {
+      bleDataDisplayRef.current.stopCollectingData();
+    }
     // 停止计时⌛️
     setTime(0);
     if (camera.current && isRecording) {

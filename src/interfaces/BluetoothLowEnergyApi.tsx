@@ -17,6 +17,8 @@ interface BluetoothLowEnergyApi {
     quaternion: { Quaternion_X: number, Quaternion_Y: number, Quaternion_Z: number, Quaternion_W: number };
     // 高度
     height: number | null;
+    // 原始数据
+    originalData: string | null;
 }
 
 export default BluetoothLowEnergyApi;
