@@ -74,10 +74,11 @@ const BLEDataDisplay = forwardRef((props, ref) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 0,
+    top: 200,
     right: 0,
     width: 150,
     height: 100,
+    zIndex: 100,
   },
   dataContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

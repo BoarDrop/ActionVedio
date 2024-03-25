@@ -18,16 +18,61 @@ import ScanAndConnect from '../components/ScanAndConnect/ScanAndConnect';
 import { useContext } from 'react';
 import { ParamListBase } from '@react-navigation/routers';    // 导入ParamListBase类型，用于定义路由参数
 import bleContext from '../contexts/BLEContext';    // 导入bleContext上下文
-
+import { useState,useEffect } from 'react';
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
   navigation: NavigationProp<any>;
 }
 
+interface VideoData {
+  videoId: number;
+  address: string;
+  name: string;
+  jumpNum: number;
+  score: number;
+  olleeNum: number;
+  time: number;
+}
+
+
 const {width} = Dimensions.get('window');
 
 const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigation }) => {
   const bleData = useContext(bleContext);
+
+  // 明确指定 videos 状态的类型为 VideoData 数组
+  const [videos, setVideos] = useState<VideoData[]>([]);
+
+  // 模拟从API获取数据
+  useEffect(() => {
+    // 假设这是你调用API并获取数据的函数
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    // 模拟API调用
+    const apiResponse = {
+      erroCode: 0,
+      message: "success",
+      data: [
+        {
+          videoId: 1,
+          address: "https://static.tgt8.xyz/video/43cb772f87aaf9491f40149324fa60f7.mp4",
+          name: "测试", // 假设这是你想要作为标题的属性
+          jumpNum: 0,
+          score: 0,
+          olleeNum: 0,
+          time: 24
+        },
+        // 添加更多视频数据以模拟多个视频
+      ]
+    };
+
+    if(apiResponse.erroCode === 0) {
+      setVideos(apiResponse.data);
+    }
+  };
+
   return (
     <>    
       <ScrollView>
@@ -83,14 +128,11 @@ const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigat
           <View style={styles.portfolio}>
             <Text style={styles.port_text}>Portfolio</Text>
             <View style={styles.video_box}>
-              <View style={styles.row_box}>
-                <Video />
-                <Video />
-              </View>
-              <View style={styles.row_box}>
-                <Video />
-                <Video />
-              </View>
+              {videos.map((video, index) => (
+                <View key={video.videoId} style={styles.row_box}>
+                  <Video imageSource={{uri: video.address}} title={video.name} />
+                </View>
+              ))}
             </View>
           </View>
         </View>

@@ -5,7 +5,8 @@ import Address from '../statics/images/address.svg';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProp} from '@react-navigation/core';
 
-const Video: React.FC = () => {
+// 修改 Video 组件以接受 imageSource 和 title 作为 props
+const Video: React.FC<{imageSource: any; title: string}> = ({imageSource, title}) => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   return (
@@ -16,14 +17,14 @@ const Video: React.FC = () => {
             activeOpacity={1}
             onPress={() => navigation.navigate('Score')}>
             <Image
-              source={require('../statics/images/people.png')}
+              source={imageSource} // 使用传入的 imageSource
               style={styles.people}
             />
           </TouchableOpacity>
 
           <View style={styles.address}>
             <Address width={20} height={20} />
-            <Text style={styles.phnom}>phnom penh</Text>
+            <Text style={styles.phnom}>{title || '默认标题'}</Text>
           </View>
         </View>
       </View>
