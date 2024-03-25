@@ -2,7 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
-
+import InputDialog from '../components/Modals/InputDialog';
+import {useEffect, useState} from 'react';
 interface UploadProps {
   navigation: NavigationProp<any>;
 }
@@ -13,8 +14,24 @@ const listItems = [
 ];
 
 const Upload: React.FC<UploadProps> = ({navigation}) => {
+  // 页面加载的时候，弹窗inputDialog
+  const [isDialogVisible, setDialogVisible] = useState(false);
+
+  // 使用useEffect钩子来在组件加载完成后更改弹窗状态
+  useEffect(() => {
+    setDialogVisible(true); // 页面加载完成时显示弹窗
+  }, []); // 空数组[]意味着这个effect只在组件首次渲染时运行
+
   return (
     <>
+      <InputDialog
+        visible={isDialogVisible}
+        onClose={() => setDialogVisible(false)}
+        onSubmit={(input) => {
+          console.log(input); // 或者其他处理输入内容的逻辑
+          setDialogVisible(false);
+        }}
+      />
       <View style={styles.container}>
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>

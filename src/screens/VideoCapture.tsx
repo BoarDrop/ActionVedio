@@ -4,7 +4,7 @@ import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import RNFS from 'react-native-fs';
 import CameraRoll from '@react-native-community/cameraroll';
 import Red from '../statics/images/RedButton.svg';
-import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreen from '../components/Modals/LoadingScreenModal';
 import usePermission from '../hooks/usePermission';         // 引入usePermission钩子
 import useFileUpload from '../hooks/useFileUpload';         // 引入useFileUpload钩子
 import BLEDataDisplay from '../components/BLEDataDisplay/BLEDataDisplay';
