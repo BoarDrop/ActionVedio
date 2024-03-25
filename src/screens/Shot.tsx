@@ -31,6 +31,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
   const [loading, setLoading] = useState(false);                     // 是否正在加载
   // 当前视频id
   const [videoId, setVideoId] = useState(0);
+  // 计时⌛️
+  const [time, setTime] = useState(0);
 
   const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
   const { getUploadCredentials, uploadFile } = useFileUpload();                     // 使用useFileUpload钩子
@@ -48,6 +50,16 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       handleBLEData();
     }
   }, [videoId]);
+
+  // 如果是正在录制状态，每秒更新一次时间
+  useEffect(() => {
+    if(isRecording) {
+      const interval = setInterval(() => {
+        setTime(time => time + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isRecording]);
 
   // 定义一个异步函数startRecording来开始录制视频，并更新视频源路径和录制状态
   const startRecording = async () => {
@@ -73,6 +85,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
 
   // 定义一个stopRecording函数来停止录制视频
   const stopRecording = () => {
+    // 停止计时⌛️
+    setTime(0);
     if (camera.current && isRecording) {
         (camera.current as Camera).stopRecording();
         setIsRecording(false);
@@ -148,6 +162,12 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
     return <Text>No camera device found</Text>;
   }
 
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    // 使用模板字符串和三元运算符确保时间总是以两位数字格式显示
+    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
 
   return (
     <>
@@ -189,7 +209,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.right}>
-              <Text style={styles.time}>00:00</Text>
+              {/* 使用formatTime函数来格式化显示时间 */}
+              <Text style={styles.time}>{formatTime(time)}</Text>
             </View>
           </View>
           <View style={styles.bottom}>
