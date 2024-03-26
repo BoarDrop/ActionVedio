@@ -20,7 +20,7 @@ interface SigninProps {
   navigation: NavigationProp<any>;
 }
 
-const Signin: React.FC<SigninProps> = ({navigation}) => {
+const Forgot: React.FC<SigninProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const API_BASE_URL: string = config.API_BASE_URL;
@@ -60,7 +60,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.title}>
-            <Text style={styles.title_text}>Sign In</Text>
+            <Text style={styles.title_text}>Password</Text>
           </View>
 
           {/* 输入框 */}
@@ -113,7 +113,7 @@ const Signin: React.FC<SigninProps> = ({navigation}) => {
                 <Text style={styles.forgot_text}>Signup</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+            <TouchableOpacity>
               <View style={styles.password}>
                 <Text style={styles.forgot_text}>Forgot Password?</Text>
               </View>
@@ -264,4 +264,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signin;
+export default Forgot;

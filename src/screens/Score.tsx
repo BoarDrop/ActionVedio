@@ -9,6 +9,13 @@ import Green from '../statics/images/GreenPoint.svg';
 import X from '../statics/images/x.svg';
 import Y from '../statics/images/y.svg';
 import Z from '../statics/images/z.svg';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 // SVG组件的类型定义
 type SVGComponentProps = {
@@ -179,160 +186,155 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'black',
-    height: 900,
+    height: heightPercent(900),
   },
   one: {
-    width: 320,
-    height: 100,
+    width: widthPercent(320),
+    height: heightPercent(100),
   },
   skateboard: {
     color: 'white',
-    fontSize: 32,
+    fontSize: fontSizePercent(32),
     fontWeight: '700',
     marginTop: 10,
   },
   aenean: {
     color: '#B3B3B3',
-    fontSize: 18,
+    fontSize: fontSizePercent(18),
     fontWeight: '400',
   },
   two: {
-    width: 320,
-    height: 190,
+    width: widthPercent(320),
+    height: heightPercent(190),
     backgroundColor: '#B3B3B3',
     marginTop: 20,
     alignItems: 'center',
     borderRadius: 5,
   },
   three: {
-    width: 320,
-    height: 320,
-    //backgroundColor: '#1D4549',
+    width: widthPercent(320),
+    height: heightPercent(310),
     marginTop: 20,
   },
   three_top: {
-    width: 320,
-    height: 70,
+    width: widthPercent(320),
+    height: heightPercent(70),
   },
   today: {
     color: '#B3B3B3',
-    fontSize: 14,
+    fontSize: fontSizePercent(14),
     fontWeight: '700',
   },
   fraction: {
     color: 'white',
-    fontSize: 24,
+    fontSize: fontSizePercent(24),
     fontWeight: '700',
   },
   chart: {
-    width: 320,
-    height: 250,
-    //backgroundColor: '#B3B3B3',
+    width: widthPercent(320),
+    height: heightPercent(250),
     justifyContent: 'space-between',
   },
   activity: {
     color: 'white',
-    fontSize: 14,
+    fontSize: fontSizePercent(14),
     fontWeight: '700',
   },
   curve: {
-    width: 320,
-    height: 160,
-    //backgroundColor: 'pink',
+    width: widthPercent(320),
+    height: heightPercent(160),
   },
   max: {
-    width: 320,
-    height: 60,
-    //backgroundColor: 'white',
+    width: widthPercent(320),
+    height: heightPercent(60),
     top: -3,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
   max_one: {
-    width: 110,
-    height: 40,
-    //backgroundColor: '#8641F4',
+    width: widthPercent(110),
+    height: heightPercent(40),
     justifyContent: 'space-around',
     flexDirection: 'row',
   },
   point_max: {
     color: '#B3B3B3',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
   point_cm: {
     color: 'white',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
   max_two: {
-    width: 120,
-    height: 40,
+    width: widthPercent(120),
+    height: heightPercent(40),
     //backgroundColor: '#429D3C',
     justifyContent: 'space-around',
     flexDirection: 'row',
   },
   max_three: {
-    width: 50,
-    height: 40,
+    width: widthPercent(50),
+    height: heightPercent(40),
     //backgroundColor: '#2E6F74',
   },
   four: {
-    width: 320,
-    height: 190,
+    width: widthPercent(320),
+    height: heightPercent(190),
     marginTop: 25,
     justifyContent: 'space-between',
   },
   action_box: {
-    width: 320,
-    height: 25,
+    width: widthPercent(320),
+    height: heightPercent(25),
     borderBottomWidth: 1,
     borderBottomColor: '#3A3A3A',
   },
   action: {
     color: '#B3B3B3',
-    fontSize: 14,
+    fontSize: fontSizePercent(14),
     fontWeight: '700',
   },
   trick_box: {
-    width: 320,
-    height: 150,
+    width: widthPercent(320),
+    height: heightPercent(150),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   left: {
-    width: 55,
-    height: 150,
+    width: widthPercent(55),
+    height: heightPercent(150),
   },
   yellow: {
-    width: 50,
-    height: 50,
+    width: widthPercent(50),
+    height: heightPercent(50),
     backgroundColor: '#FB9820',
     borderRadius: 10,
     justifyContent: 'center', // 垂直居中
     alignItems: 'center', // 水平居中
   },
   right: {
-    width: 245,
-    height: 150,
+    width: widthPercent(245),
+    height: heightPercent(150),
     justifyContent: 'space-between',
     flexDirection: 'column',
   },
   right_top: {
-    width: 245,
-    height: 45,
+    width: widthPercent(245),
+    height: heightPercent(45),
   },
   right_down: {
-    width: 245,
-    height: 105,
+    width: widthPercent(245),
+    height: heightPercent(105),
     justifyContent: 'space-around',
     alignItems: 'center', // 水平居中
     flexDirection: 'row',
   },
   tricks: {
     color: 'white',
-    fontSize: 18,
+    fontSize: fontSizePercent(18),
     fontWeight: '700',
   },
   longest: {
@@ -341,30 +343,30 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   right_center: {
-    width: 70,
-    height: 85,
+    width: widthPercent(70),
+    height: heightPercent(85),
     //backgroundColor: 'white',
     alignItems: 'center', // 水平居中
   },
   right_one: {
-    width: 55,
-    height: 55,
+    width: widthPercent(55),
+    height: heightPercent(55),
     backgroundColor: '#5144C6',
     borderRadius: 10,
     justifyContent: 'center', // 垂直居中
     alignItems: 'center', // 水平居中
   },
   right_two: {
-    width: 55,
-    height: 55,
+    width: widthPercent(55),
+    height: heightPercent(55),
     backgroundColor: '#429D3C',
     borderRadius: 10,
     justifyContent: 'center', // 垂直居中
     alignItems: 'center', // 水平居中
   },
   right_three: {
-    width: 55,
-    height: 55,
+    width: widthPercent(55),
+    height: heightPercent(55),
     backgroundColor: '#2E6F74',
     borderRadius: 10,
     justifyContent: 'center', // 垂直居中
@@ -372,12 +374,12 @@ const styles = StyleSheet.create({
   },
   number: {
     color: 'white',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
   regular: {
     color: 'white',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
 });

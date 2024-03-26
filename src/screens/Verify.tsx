@@ -209,7 +209,7 @@ const Verify = () => {
           <View style={styles.sent}>
             <Text style={styles.sent_mes}>We sent a code to your email</Text>
             <View style={styles.gmail}>
-              <Text style={styles.gmail_text}>zouyu1121@gmail.com</Text>
+              <Text style={styles.gmail_text}>{email}</Text>
 
               {/* 切换接收邮件的邮箱 */}
               <TouchableOpacity

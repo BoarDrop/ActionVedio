@@ -10,6 +10,7 @@ import UploadScreen from '../screens/Upload';
 import SigninScreen from '../screens/Signin';
 import SignupScreen from '../screens/Signup';
 import VerifyScreen from '../screens/Verify';
+import ForgotScreen from '../screens/Forgot';
 
 // 创建一个类型，用于定义StackNavigator的屏幕参数
 export type RootStackParamList = {
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   Signin: undefined;
   Signup: undefined;
   Verify: undefined;
+  Forgot: undefined;
   PhotoCapture: undefined;
   VideoCapture: undefined;
 };
@@ -69,6 +71,11 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen
           name="Verify"
           component={VerifyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Forgot"
+          component={ForgotScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen name="PhotoCapture" component={PhotoCaptureScreen} />
