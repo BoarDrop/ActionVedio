@@ -19,6 +19,8 @@ interface BluetoothLowEnergyApi {
     height: number | null;
     // 原始数据
     originalData: string | null;
+    // 订阅数据
+    subscribe(callback: (data: string) => void) : void
 }
 
 export default BluetoothLowEnergyApi;

@@ -221,11 +221,11 @@ function useBLE(): BluetoothLowEnergyApi {
             // );
 
             // 订阅设备的双向数据传输服务
-            await subscribeToNotificationsForDevice(
-                device,
-                "0000ae30-0000-1000-8000-00805f9b34fb",
-                "0000ae02-0000-1000-8000-00805f9b34fb"
-            );
+            // await subscribeToNotificationsForDevice(
+            //     device,
+            //     "0000ae30-0000-1000-8000-00805f9b34fb",
+            //     "0000ae02-0000-1000-8000-00805f9b34fb"
+            // );
 
         } catch (error) {
             console.error("Error fetching services:", error);
@@ -253,7 +253,7 @@ function useBLE(): BluetoothLowEnergyApi {
                         return;
                     }
 
-                    // console.log("Received characteristic:", characteristic);
+                    // console.log("Received characteristic:", characteristic?.value);
 
                     // // 使用IMUParser原生模块解析数据
                     // if (characteristic?.value) {
@@ -350,22 +350,69 @@ function useBLE(): BluetoothLowEnergyApi {
                     console.log("error", error);
                 });
 
-                // 请求主动上报数据，向设备写入特征：发送指令0x19
-                const RequestDataCommandArray = Array.from(new Uint8Array([0x19]));
-                const RequestDatabase64EncodedCommandArray = base64.encode(String.fromCharCode.apply(null, RequestDataCommandArray));
-                console.log("base64编码的请求主动上报数据的命令：", RequestDatabase64EncodedCommandArray);
+                // // 发送0x46指令，采用蓝牙高速通信特性 0x46
+                // const RequestDataCommandArray = Array.from(new Uint8Array([0x46]));
+                // const RequestDatabase64EncodedCommandArray = base64.encode(String.fromCharCode.apply(null, RequestDataCommandArray));
+                // console.log("base64编码的采用蓝牙高速通信特性的命令：", RequestDatabase64EncodedCommandArray);
+                // await deviceConnection.writeCharacteristicWithoutResponseForService(
+                //     serviceUUID,
+                //     characteristicUUID,
+                //     RequestDatabase64EncodedCommandArray
+                // ).then((res) => {
+                //     console.log("采用蓝牙高速通信特性的命令发送成功", res);
+                // }).catch((error) => {
+                //     console.log("error", error);
+                // });
+
+                // 定义参数
+                const isCompassOn = 0; // 使用磁场融合姿态，0表示不使用，1表示使用
+                const barometerFilter = 2; // 气压计滤波设置
+                const Cmd_ReportTag = 0x0070; // 功能订阅标识
+                // 参数设置
+                const params = new Uint8Array(11); // 创建一个11字节的数组
+                params[0] = 0x12;
+                params[1] = 5;       // 静止状态加速度阀值
+                params[2] = 255;     // 静止归零速度
+                params[3] = 0;       // 动态归零速度
+                params[4] = ((barometerFilter & 3) << 1) | (isCompassOn & 1);
+                params[5] = 30;     // 数据主动上报的传输帧率
+                params[6] = 1;       // 陀螺仪滤波系数
+                params[7] = 3;       // 加速计滤波系数
+                params[8] = 5;       // 磁力计滤波系数
+                params[9] = Cmd_ReportTag & 0xff;
+                params[10] = (Cmd_ReportTag >> 8) & 0xff;
+
+                // 对参数进行Base64编码，将Uint8Array转换为number[]再进行编码
+                const paramsArray = Array.from(params); // 将Uint8Array转换为number[]
+                const base64EncodedParams = base64.encode(String.fromCharCode.apply(null, paramsArray));
+
+                // 发送参数设置
                 await deviceConnection.writeCharacteristicWithoutResponseForService(
                     serviceUUID,
                     characteristicUUID,
-                    RequestDatabase64EncodedCommandArray
+                    base64EncodedParams
                 ).then((res) => {
-                    console.log("请求主动上报数据的命令发送成功", res);
+                    console.log("参数设置命令发送成功", res);
                 }).catch((error) => {
                     console.log("error", error);
-                })
+                });
+
+                // 请求主动上报数据，向设备写入特征：发送指令0x19
+                const RequestData19CommandArray = Array.from(new Uint8Array([0x19]));
+                const RequestData19base64EncodedCommandArray = base64.encode(String.fromCharCode.apply(null, RequestData19CommandArray));
+                console.log("base64编码的请求主动上报数据的命令：", RequestData19base64EncodedCommandArray);
+                await deviceConnection.writeCharacteristicWithoutResponseForService(
+                    serviceUUID,
+                    characteristicUUID,
+                    RequestData19base64EncodedCommandArray
+                ).then((res) => {
+                    // console.log("请求主动上报数据的命令发送成功", res);
+                }).catch((error) => {
+                    console.log("error", error);
+                });
                 
                 const isConnected = await device.isConnected(); // 检查设备是否已连接
-
+                
                 if (isConnected) {
                     console.log("Device is connected");
                     // 监听设备的断开连接事件
@@ -427,6 +474,53 @@ function useBLE(): BluetoothLowEnergyApi {
         }
     };
 
+    // subscribe,提供了一个方法来订阅数据，这个方法接受一个回调函数
+    const subscribe = (callback: (data: string) => void) => {
+        // 订阅设备的通知
+        console.log("Subscribing to notifications");
+
+        // 假设connectedDevice是你已经连接的设备的实例
+        const subscription = connectedDevice?.monitorCharacteristicForService(
+            "0000ae30-0000-1000-8000-00805f9b34fb",
+            "0000ae02-0000-1000-8000-00805f9b34fb",
+            (error, characteristic) => {
+                if (error) {
+                    console.error("Error monitoring:", error);
+                    return;
+                }
+                // 将originalData的状态设置为characteristic?.value的值，如果它是undefined，则设置为null
+                setOriginalData(characteristic?.value || null);
+                // 调用回调函数，并传入characteristic?.value的值
+                callback(characteristic?.value || "");
+            }
+        );
+
+        return () => {
+            console.log("Unsubscribing from notifications");
+            subscription?.remove();
+        };
+    }
+
+    // unsubscribe,提供了一个方法来取消订阅，这个方法接受一个回调函数
+    const unsubscribe = (callback: (data: string) => void) => {
+        // 取消订阅设备的通知
+        console.log("Unsubscribing from notifications");
+        connectedDevice?.monitorCharacteristicForService(
+            "0000ae30-0000-1000-8000-00805f9b34fb",
+            "0000ae02-0000-1000-8000-00805f9b34fb",
+            (error, characteristic) => {
+                if (error) {
+                    console.error("Error monitoring:", error);
+                    return;
+                }
+                // 将 originalData 的状态设置为 characteristic?.value 的值，如果它是 undefined，则设置为 null
+                setOriginalData(characteristic?.value || null);
+                // 调用回调函数，并传入 characteristic?.value 的值
+                callback(characteristic?.value || "");
+            }
+        ).remove();
+    }
+
     // 返回一个对象，这个对象实现了 BluetoothLowEnergyApi 接口
     return {
         scanForPeripherals,  // 扫描外围设备
@@ -438,7 +532,8 @@ function useBLE(): BluetoothLowEnergyApi {
         allDevices,         // 所有设备
         quaternion,        // 旋转四元数
         height,             // 高度
-        originalData        // 原始数据
+        originalData,        // 原始数据
+        subscribe,          // 订阅
     }
 }
 

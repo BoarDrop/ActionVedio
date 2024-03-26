@@ -21,31 +21,60 @@ const BLEDataDisplay = forwardRef((props, ref) => {
     const [OriginBLEDataArray, setOriginBLEDataArray] = useState<String[][]>([]);
     const [realHigh, setrealHigh] = useState<number | null>(null);
 
+    const [dataQueue, setDataQueue] = useState<String[]>([]); // 用作队列的状态，存储蓝牙数据
+    const [processedData, setProcessedData] = useState<String[][]>([]); // 存储每秒处理的队列数据
+
+    // 新增一个状态来控制是否收集数据
+    const [isCollectingData, setIsCollectingData] = useState(false);
+
+    // 处理接收到的蓝牙数据
+    const handleNewBLEData = (newData: String) => {
+      if (isCollectingData) {
+        setDataQueue(prevQueue => [...prevQueue, newData]);
+      }
+    };
+
+    useEffect(() => {
+      // 注册事件监听器以接收蓝牙数据
+      if (bleData) {
+        if (isCollectingData) {
+          // subscribeToBLEData();
+          // 订阅并获取取消订阅的方法
+          const unsubscribe = bleData.subscribe((data) => {
+            console.log("Received data:", data);
+            handleNewBLEData(data);
+          });
+          return unsubscribe;   // 组件卸载时取消订阅
+        }
+      }
+    }, [isCollectingData]);
+
+    useEffect(() => {
+      let processDataInterval: string | number | NodeJS.Timeout | undefined;
+      if (isCollectingData) {
+        processDataInterval = setInterval(() => {
+          setDataQueue(prevQueue => {
+            console.log('执行加入数组操作前：【数据队列】长度:', prevQueue.length);
+            setProcessedData(prevData => {
+              console.log('执行加入数组操作后：【回传数据】长度:', [...prevData, prevQueue].length);
+              return [...prevData, prevQueue];
+            });
+            return [];
+          });
+        }, 1000);
+        return () => clearInterval(processDataInterval);
+      }
+    }, [isCollectingData]);
 
     // 定义一个用于开始数据收集的函数
     const startCollectingData = () => {
-      // 使用setInterval或自定义的useInterval逻辑开始收集数据
-      // 使用useInterval钩子，每隔10ms获取一次蓝牙数据,将其存入数组中
-      useInterval(() => {
-        if (bleData && bleData.originalData !== null) {
-          setOriginData([...realOriginData, bleData.originalData]);
-        }
-      }, 10);
-
-      // 每秒在控制台输出收集到的数据量，每s回传一次原始数据数组
-      useInterval(() => {
-        console.log(`每秒数据量: ${realOriginData.length}`);
-        // console.log(`每秒原始数据数组如下: ${realOriginData}`);
-        // 将这个数组存入OriginBLEDataArray
-        setOriginBLEDataArray([...OriginBLEDataArray, realOriginData]);
-        // console.log(`每秒原始数据数组数组如下: ${OriginBLEDataArray}`);
-        console.log(`每秒原始数据数组数组长度如下: ${OriginBLEDataArray.length}`);
-        setOriginData([]); // 每秒清空数组，重新计数
-      }, 1000);
+      console.log('开始收集传感器数据');
+      setIsCollectingData(true);
     };
 
     // 定义一个停止数据收集的函数，清空数据数组
     const stopCollectingData = () => {
+      setIsCollectingData(false);   // 停止收集数据
       setOriginData([]);
       setOriginBLEDataArray([]);
     };
@@ -54,7 +83,8 @@ const BLEDataDisplay = forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
       // 返回获取到的数据数组
       getBLEDataAsync: async () => {
-        return OriginBLEDataArray; 
+        console.log('触发【回传数据】长度:', processedData.length);
+        return processedData; 
       },
       // 开始获取蓝牙数据
       startCollectingData,
@@ -68,7 +98,7 @@ const BLEDataDisplay = forwardRef((props, ref) => {
             <View style={styles.dataContainer}>
                 {/* 暂时只展示每s的高度即可 */}
                 {/* <Text style={styles.dataText}>原始数据: {bleData?.originalData}</Text> */}
-                <Text style={styles.dataText}>高度: {bleData?.height}</Text>
+                <Text style={styles.dataText}>四元数: {bleData?.quaternion.Quaternion_Y}</Text>
             </View>
         )}
         <TouchableOpacity

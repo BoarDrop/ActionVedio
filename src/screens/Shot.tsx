@@ -64,9 +64,9 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
   // 定义一个异步函数startRecording来开始录制视频，并更新视频源路径和录制状态
   const startRecording = async () => {
     // // 给子组件发送开始收集数据的信号
-    // if (bleDataDisplayRef.current) {
-    //   bleDataDisplayRef.current.startCollectingData();
-    // }
+    if (bleDataDisplayRef.current) {
+      bleDataDisplayRef.current.startCollectingData();
+    }
     // console.log(camera.current);
     if (camera.current && !isRecording) {
         console.log("开始录制视频");
@@ -86,6 +86,11 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       setIsRecording(true);                                      // 更新录制状态
     }
   };
+
+  // 判断isRecording状态，如果是正在录制状态
+  useEffect(() => {
+    console.log('isRecording changed:', isRecording);
+  }, [isRecording]);
 
   // 定义一个stopRecording函数来停止录制视频
   const stopRecording = () => {
@@ -156,7 +161,7 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       const bleData = await bleDataDisplayRef.current.getBLEDataAsync();
       // 修改bleData中的videoId: videoId,
       bleData.videoId = videoId;
-      console.log('从子组件获取的蓝牙数据:', bleData);
+      // console.log('从子组件获取的蓝牙数据:', bleData);
       // 在这里处理获取到的蓝牙数据
       // 调用API发送蓝牙数据
       const response = await addAnalysis(bleData);
