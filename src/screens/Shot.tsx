@@ -6,6 +6,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 interface ShotProps {
   navigation: NavigationProp<any>;

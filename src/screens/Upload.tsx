@@ -9,6 +9,7 @@ import {
   marginTopPercent,
   marginBottomPercent,
 } from '../utils/responsiveUtils';
+import InputDialog from '../components/Modals/InputDialog';
 
 interface UploadProps {
   navigation: NavigationProp<any>;
@@ -35,12 +36,23 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
 
         {/* 照片 */}
         <View style={styles.middle}>
-          <View>
+          <View style={styles.img_box}>
             <Image
               source={require('../statics/images/cover.png')}
               style={styles.skate_image}
               //resizeMode="cover" // 或者 'stretch' 来填满容器
             />
+            <View style={styles.img_inner}>
+              <InputDialog
+                visible={true} // 或根据实际情况来设置
+                onClose={() => {
+                  // 处理关闭逻辑
+                }}
+                onSubmit={text => {
+                  // 处理提交逻辑，text 是提交的字符串
+                }}
+              />
+            </View>
           </View>
         </View>
 
@@ -114,13 +126,22 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   middle: {
-    //flex: 1, // 这里的flex: 1是关键，它会使得图片容器填充所有剩余空间
-    //width: '100%', // 确保图片宽度铺满屏幕宽度
-    // 如果不需要Image的边距或填充，这些可以不设置或设置为0
-    //justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: 'pink',
     marginTop: -15,
+    justifyContent: 'center',
+  },
+  img_box: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img_inner: {
+    //backgroundColor: 'pink',
+    width: widthPercent(250),
+    height: heightPercent(190),
+    position: 'absolute', // 设置为绝对定位
+    transform: [{translateX: widthPercent(0)}, {translateY: heightPercent(0)}], // 根据盒子大小调整偏移，使其居中
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   skate_image: {
     width: widthPercent(320),

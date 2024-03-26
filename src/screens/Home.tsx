@@ -17,6 +17,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
@@ -52,7 +59,7 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
 
             {/* 信息介绍 */}
             <View style={styles.star_box}>
-              <View style={{width: 240}}>
+              <View style={{width: widthPercent(240)}}>
                 <Text style={styles.real_time}>
                   REAL-TIME SHOOTING SYNCHRONIZED DATA
                 </Text>
