@@ -180,7 +180,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
       const response = await addAnalysis(bleData, videoId);
       console.log('发送蓝牙数据结果:', response);
       setLoading(false);  // 更新加载状态
-      navigation.navigate('Upload');
+      // 跳转的时候传入videoId
+      navigation.navigate('Upload', {videoId: videoId});
     }
   };
 

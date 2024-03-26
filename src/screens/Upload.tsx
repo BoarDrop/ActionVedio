@@ -4,6 +4,9 @@ import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
 import InputDialog from '../components/Modals/InputDialog';
 import {useEffect, useState} from 'react';
+import {widthPercent, heightPercent} from '../utils/responsiveUtils';
+// 导入useServices接口
+import useServices from '../hooks/useServices';             // 引入useServices钩子
 interface UploadProps {
   navigation: NavigationProp<any>;
 }
@@ -13,9 +16,24 @@ const listItems = [
   'Give your ratings and  recommendations \n based on this data.',
 ];
 
-const Upload: React.FC<UploadProps> = ({navigation}) => {
+// 引入必要的类型，如果你使用的是TypeScript
+import { RouteProp } from '@react-navigation/native';
+
+// 定义Props的类型，如果你使用的是TypeScript
+type UploadScreenRouteProp = RouteProp<{ Upload: { videoId: string } }, 'Upload'>;
+
+interface UploadProps {
+  route: UploadScreenRouteProp;
+}
+
+const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
+  // 使用route.params.videoId来获取传递的videoId参数
+  const { videoId } = route.params;
+  // 将videoId转为number类型
+  const NumbervideoId = Number(videoId);
   // 页面加载的时候，弹窗inputDialog
-  const [isDialogVisible, setDialogVisible] = useState(false);
+  const [isDialogVisible, setDialogVisible] = useState(true);
+  const { addAnalysisResultTest } = useServices(); // 使用useServices钩子来在组件加载完成后更改弹窗状态
 
   // 使用useEffect钩子来在组件加载完成后更改弹窗状态
   useEffect(() => {
@@ -24,14 +42,18 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
 
   return (
     <>
-      <InputDialog
+    <View style={styles.img_inner}>
+    <InputDialog   
         visible={isDialogVisible}
         onClose={() => setDialogVisible(false)}
         onSubmit={(input) => {
           console.log(input); // 或者其他处理输入内容的逻辑
+          addAnalysisResultTest(NumbervideoId, input); // 调用useServices钩子中的addAnalysisResultTest方法
           setDialogVisible(false);
         }}
       />
+    </View>
+      
       <View style={styles.container}>
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -83,6 +105,16 @@ const Upload: React.FC<UploadProps> = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+
+img_inner: {
+  //backgroundColor: 'pink',
+  width: widthPercent(250),
+  height: heightPercent(190),
+  position: 'absolute', // 设置为绝对定位
+  transform: [{translateX: widthPercent(0)}, {translateY: heightPercent(0)}], // 根据盒子大小调整偏移，使其居中
+  alignItems: 'center',
+  justifyContent: 'center',
+},
   container: {
     flex: 1,
     backgroundColor: 'black',
