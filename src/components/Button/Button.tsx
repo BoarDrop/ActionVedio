@@ -8,9 +8,12 @@ type RecordingState = 'start' | 'stop' | 'upload';
 // 定义 Button 组件的 props 类型
 type ButtonProps = {
   fixedStatus?: RecordingState; // 添加一个可选的props来固定状态
+  onStatusChange?: (status: 'start' | 'stop') => void; // 修正类型定义
 };
 
-const Button: React.FC<ButtonProps> = ({fixedStatus}) => {
+const Button: React.FC<
+  ButtonProps & {onStatusChange?: (status: RecordingState) => void}
+> = ({fixedStatus, onStatusChange}) => {
   const [currentStatus, setCurrentStatus] = useState<RecordingState>(
     fixedStatus || 'start',
   );

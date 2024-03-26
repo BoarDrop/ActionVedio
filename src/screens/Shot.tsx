@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
+import Allow from '../components/Allow/Allow';
 import {NavigationProp} from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
@@ -38,6 +39,9 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
             style={styles.skate_image}
             resizeMode="cover" // 或者 'stretch' 来填满容器
           />
+          <View style={styles.allow}>
+            <Allow />
+          </View>
         </View>
 
         {/* 底部栏 */}
@@ -72,39 +76,44 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   head: {
-    //width: '100%',
-    //height: 50,
-    width: wp('100%'),
-    height: hp('6.67%'),
+    width: '100%',
+    height: heightPercent(50),
     backgroundColor: 'black',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
-    //gap: 35,
-    gap: wp('10.5%'),
+    gap: 35,
+    //gap: wp('10.5%'),
   },
   dis: {
     color: 'red',
-    //fontSize: 15,
-    fontSize: wp('4.2%'),
+    fontSize: fontSizePercent(15),
     fontWeight: '500',
   },
   obj: {
     color: 'white',
-    //fontSize: 18,
-    fontSize: wp('5%'),
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   black: {
     color: 'black',
-    //fontSize: 18,
-    fontSize: wp('5%'),
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   middle: {
     flex: 1, // 这里的flex: 1是关键，它会使得图片容器填充所有剩余空间
     width: wp('100%'), // 确保图片宽度铺满屏幕宽度
-    // 如果不需要Image的边距或填充，这些可以不设置或设置为0
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  allow: {
+    //backgroundColor: 'pink',
+    width: widthPercent(280),
+    height: heightPercent(135),
+    position: 'absolute', // 设置为绝对定位
+    transform: [{translateX: widthPercent(0)}, {translateY: heightPercent(0)}], // 根据盒子大小调整偏移，使其居中
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   skate_image: {
     width: '100%',
@@ -112,29 +121,23 @@ const styles = StyleSheet.create({
   },
   grey: {
     width: '100%',
-    //height: 190,
-    height: hp('25%'),
+    height: heightPercent(190),
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'black',
   },
   top: {
     flexDirection: 'row',
-    //width: 330,
-    width: wp('91%'),
-    //height: 68,
-    height: hp('9%'),
+    width: widthPercent(325),
+    height: heightPercent(68),
   },
   left: {
-    //width: 265,
-    width: wp('73.5%'),
-    //height: 68,
-    height: hp('9%'),
+    width: widthPercent(264),
+    height: heightPercent(68),
   },
   word: {
     color: 'white',
-    //fontSize: 18,
-    fontSize: wp('5%'),
+    fontSize: fontSizePercent(18),
     fontWeight: '400',
   },
   right: {
@@ -142,15 +145,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   time: {
-    //fontSize: 24,
-    fontSize: wp('6.7%'),
+    fontSize: fontSizePercent(24),
     fontWeight: '700',
     color: '#848484',
   },
   bottom: {
     width: '100%',
-    //height: 48,
-    height: hp('6.4%'),
+    height: heightPercent(48),
     justifyContent: 'center',
     alignItems: 'center',
   },
