@@ -17,12 +17,6 @@ import {
   marginBottomPercent,
 } from '../utils/responsiveUtils';
 
-// SVG组件的类型定义
-type SVGComponentProps = {
-  width: number;
-  height: number;
-};
-
 // 图表数据
 const data = {
   // X轴标签

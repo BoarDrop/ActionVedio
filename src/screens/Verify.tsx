@@ -210,7 +210,6 @@ const Verify = () => {
             <Text style={styles.sent_mes}>We sent a code to your email</Text>
             <View style={styles.gmail}>
               <Text style={styles.gmail_text}>{email}</Text>
-
               {/* 切换接收邮件的邮箱 */}
               <TouchableOpacity
                 onPress={() => navigation.navigate('Signup' as never)}>
@@ -243,10 +242,14 @@ const Verify = () => {
           {/* 重新发送验证码 */}
           <View style={styles.no_receive}>
             <Text style={styles.left_text}>Don't receive your code? </Text>
-            {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <Text style={styles.right_text}>Resend</Text>
-            </TouchableOpacity> */}
             <Text style={styles.right_text}>Resend</Text>
+          </View>
+
+          <View style={styles.hint}>
+            <Text style={styles.hint_text}>
+              The verification code is valid for five minutes and can be resent
+              after one minute.
+            </Text>
           </View>
         </View>
       </View>
@@ -311,7 +314,7 @@ const styles = StyleSheet.create({
   code: {
     width: widthPercent(320),
     height: heightPercent(80),
-    marginTop: 20,
+    marginTop: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -368,6 +371,20 @@ const styles = StyleSheet.create({
     color: '#3D37F1',
     fontSize: fontSizePercent(16),
     fontWeight: '500',
+  },
+  hint: {
+    width: widthPercent(330),
+    height: heightPercent(80),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 5,
+    marginTop: 10,
+  },
+  hint_text: {
+    color: '#000000',
+    fontSize: fontSizePercent(16),
+    fontWeight: '400',
   },
 });
 

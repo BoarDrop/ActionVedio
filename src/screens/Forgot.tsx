@@ -9,7 +9,6 @@ import {
   Alert,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
-import Google from '../components/Google/Google';
 import config from '../../config';
 import {
   widthPercentageToDP as wp,
@@ -60,7 +59,7 @@ const Forgot: React.FC<SigninProps> = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.title}>
-            <Text style={styles.title_text}>Password</Text>
+            <Text style={styles.title_text}>Reset Password</Text>
           </View>
 
           {/* 输入框 */}
@@ -73,7 +72,7 @@ const Forgot: React.FC<SigninProps> = ({navigation}) => {
             />
             <TextInput
               style={styles.input_box}
-              placeholder="Password"
+              placeholder="New Password"
               secureTextEntry={true} // 这会隐藏密码输入
               value={password}
               onChangeText={setPassword} // 当文本变化时，更新状态
@@ -81,44 +80,11 @@ const Forgot: React.FC<SigninProps> = ({navigation}) => {
           </View>
 
           {/* 登录按钮 */}
-          {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <View style={styles.button}>
-              <Text style={styles.button_text}>Sign In</Text>
-            </View>
-          </TouchableOpacity> */}
           <TouchableOpacity onPress={handleLogin}>
             <View style={styles.button}>
-              <Text style={styles.button_text}>Sign In</Text>
+              <Text style={styles.button_text}>Confirm</Text>
             </View>
           </TouchableOpacity>
-
-          {/* 分割线 */}
-          <View style={styles.front}>
-            <View style={styles.line}></View>
-            <View>
-              <Text style={styles.or}>or sign in with</Text>
-            </View>
-            <View style={styles.line}></View>
-          </View>
-
-          {/* 谷歌一键登录按钮 */}
-          <View style={styles.google_button}>
-            <Google />
-          </View>
-
-          {/* 忘记密码跳转注册 */}
-          <View style={styles.forgot}>
-            <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-              <View style={styles.signup}>
-                <Text style={styles.forgot_text}>Signup</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.password}>
-                <Text style={styles.forgot_text}>Forgot Password?</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </>
@@ -188,79 +154,6 @@ const styles = StyleSheet.create({
     //fontSize: 18,
     fontSize: wp('5%'),
     fontWeight: '500',
-  },
-  front: {
-    //width: 320,
-    //height: 25,
-    width: wp('89%'),
-    height: hp('3.3%'),
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    //marginTop: 20,
-    marginTop: hp('2.6%'),
-  },
-  line: {
-    //width: 90,
-    //height: 1, // 线条的高度
-    width: wp('25%'),
-    height: hp('0.13%'),
-    backgroundColor: '#A8A6A7', // 线条的颜色
-  },
-  or: {
-    color: '#000000',
-    //fontSize: 16,
-    fontSize: wp('4.4%'),
-    fontWeight: '400',
-    marginLeft: 20,
-    marginRight: 20,
-  },
-  google_button: {
-    //width: 320,
-    //height: 60,
-    width: wp('89%'),
-    height: hp('8%'),
-    alignItems: 'center',
-    justifyContent: 'center',
-    //marginTop: 15,
-    marginTop: hp('1.95%'),
-    //marginBottom: 10,
-    marginBottom: hp('1.3%'),
-  },
-  google: {
-    //width: 220,
-    width: wp('61%'),
-  },
-  forgot: {
-    //backgroundColor: 'pink',
-    //width: 320,
-    //height: 30,
-    width: wp('89%'),
-    height: hp('4%'),
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    //marginTop: 5,
-    marginTop: hp('0.65%'),
-    flexDirection: 'row',
-  },
-  signup: {
-    //backgroundColor: 'white',
-    width: 80,
-    height: 25,
-    alignItems: 'center',
-  },
-  password: {
-    //backgroundColor: 'yellow',
-    width: 150,
-    height: 25,
-    alignItems: 'center',
-  },
-  forgot_text: {
-    color: '#000000',
-    //fontSize: 16,
-    fontSize: wp('4.4%'),
-    fontWeight: '500',
-    textDecorationLine: 'underline',
   },
 });
 
