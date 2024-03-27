@@ -34,15 +34,22 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
   const API_BASE_URL: string = config.API_BASE_URL;
 
   const sendVerificationCode = async () => {
-    if (!email) {
+    if (!email || !username || !password) {
       Alert.alert('Error', 'Please enter your email.');
       return;
     }
 
+    // 检查是否选中了隐私政策
+    if (!isSelected) {
+      Alert.alert('Error', 'Please accept the Privacy Policy to continue.');
+      return;
+    }
+
     try {
+      const type = 'register'; //选择需要发送验证码的类型，此处是注册
       // 假设这是你的发送验证码API
       const response = await axios.get(
-        `${API_BASE_URL}users/emailCode/register?emailAddress=${email}`,
+        `${API_BASE_URL}users/emailCode/register?emailAddress=${email}&type=${type}`,
       );
       if (response.data.code === 0) {
         Alert.alert('Success', 'Verification code sent to your email.');
@@ -135,11 +142,6 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
           </View>
 
           {/* 点击注册跳转验证 */}
-          {/* <TouchableOpacity onPress={() => navigation.navigate('Verify')}>
-            <View style={styles.button}>
-              <Text style={styles.button_text}>Send the verification code</Text>
-            </View>
-          </TouchableOpacity> */}
           <TouchableOpacity onPress={sendVerificationCode}>
             <View style={styles.button}>
               <Text style={styles.button_text}>Send the verification code</Text>
