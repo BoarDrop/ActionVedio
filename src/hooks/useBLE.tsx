@@ -1,12 +1,13 @@
 // 导入 React 的 useMemo 和 useState 钩子函数，以及 react-native-ble-plx 中的 BleManager
 import { useEffect, useMemo, useState } from "react";
 import { PermissionsAndroid, Platform } from "react-native";
-import { BleManager, Device } from "react-native-ble-plx";
+import { BleManager, Device, BleErrorCode } from "react-native-ble-plx";
 import base64 from 'react-native-base64';
 import useParseImu from "./useParse_imu";
 import BluetoothLowEnergyApi from "../interfaces/BluetoothLowEnergyApi";
 // 导入 NativeModules，它是一个 JavaScript 对象，它的属性是原生模块的名称，它的值是原生模块的实例
 import { NativeModules } from 'react-native';
+import { lessThan } from "three/examples/jsm/nodes/Nodes.js";
 const { IMUParser } = NativeModules;
 type IMUData = {
     RotationQuat_X: number;
@@ -147,7 +148,15 @@ function useBLE(): BluetoothLowEnergyApi {
         console.log("Scanning for peripherals");
         // 调用 BleManager 的 startDeviceScan 方法，开始扫描外围设备
         bleManager.startDeviceScan(null, null, async (error, device) => {
-            if (error) return console.error(error);
+            if (error) {
+                console.log(error);
+                if (error?.errorCode === BleErrorCode.OperationCancelled) {
+                    // 操作被取消了，可以在这里进行处理，不需要抛出错误
+                    console.log('扫描操作已取消，不抛出错误');
+                } else {
+                    return console.error(error);
+                }
+            }
             // 打印设备名称
             // console.log("Scanning...");
             // 如果找到名字包含im的设备，就获取其Mac地址
@@ -249,8 +258,14 @@ function useBLE(): BluetoothLowEnergyApi {
                 characteristicUUID,
                 (error, characteristic) => {
                     if (error) {
-                        console.error("Error monitoring:", error);
-                        return;
+                        console.log(error);
+                        if (error?.errorCode === BleErrorCode.OperationCancelled) {
+                            // 操作被取消了，可以在这里进行处理，不需要抛出错误
+                            console.log('扫描操作已取消，不抛出错误');
+                            return;
+                        } else {
+                            return console.error(error);
+                        }
                     }
 
                     // console.log("Received characteristic:", characteristic?.value);
@@ -485,8 +500,14 @@ function useBLE(): BluetoothLowEnergyApi {
             "0000ae02-0000-1000-8000-00805f9b34fb",
             (error, characteristic) => {
                 if (error) {
-                    console.error("Error monitoring:", error);
-                    return;
+                    console.log(error);
+                    if (error?.errorCode === BleErrorCode.OperationCancelled) {
+                        // 操作被取消了，可以在这里进行处理，不需要抛出错误
+                        console.log('扫描操作已取消，不抛出错误');
+                        return;
+                    } else {
+                        return console.error(error);
+                    }
                 }
                 // 将originalData的状态设置为characteristic?.value的值，如果它是undefined，则设置为null
                 setOriginalData(characteristic?.value || null);
