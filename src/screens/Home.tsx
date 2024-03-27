@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   View,
   StyleSheet,
   Image,
@@ -10,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Video from '../components/Video';
+import Video from '../components/Video/Video';
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import { NavigationProp } from '@react-navigation/native';
@@ -19,6 +18,18 @@ import { useContext } from 'react';
 import { ParamListBase } from '@react-navigation/routers';    // 导入ParamListBase类型，用于定义路由参数
 import bleContext from '../contexts/BLEContext';    // 导入bleContext上下文
 import { useState,useEffect } from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
+
 // 如果您的 navigation prop 有具体的类型定义，可以替换 `any`
 interface HomeProps {
   navigation: NavigationProp<any>;
@@ -77,11 +88,14 @@ const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigat
     <>    
       <ScrollView>
         <View style={styles.container}>
+          {/* 封面照片 */}
           <View style={styles.top_image}>
             <Image
               source={require('../statics/images/cover.png')}
               style={styles.jump}
             />
+
+            {/* 阴影部分 */}
             <LinearGradient
               colors={[
                 'rgba(0,0,0,0.0)',
@@ -93,8 +107,10 @@ const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigat
               ]}
               style={styles.gradientTop}
             />
+
+            {/* 信息介绍 */}
             <View style={styles.star_box}>
-              <View style={{width: 240}}>
+              <View style={{width: widthPercent(240)}}>
                 <Text style={styles.real_time}>
                   REAL-TIME SHOOTING SYNCHRONIZED DATA
                 </Text>
@@ -137,6 +153,8 @@ const Home: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigat
           </View>
         </View>
       </ScrollView>
+
+      {/* 跳转拍摄按钮 */}
       <View style={styles.button_box}>
         <TouchableOpacity
           style={styles.shot}
@@ -178,97 +196,105 @@ const styles = StyleSheet.create({
   },
   top_image: {
     position: 'relative',
-    width: width,
-    height: 360,
+    width: '100%', // 全屏宽度
+    height: heightPercent(360),
   },
   jump: {
-    width: 360,
-    height: 360,
+    width: widthPercent(360),
+    height: heightPercent(360),
   },
   gradientTop: {
     position: 'absolute',
-    height: 90,
-    width: width,
+    height: heightPercent(90),
+    width: '100%',
     bottom: 0,
   },
   star_box: {
     display: 'flex',
-    height: 60,
-    width: width,
+    height: heightPercent(60),
+    width: '100%',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 20,
+    bottom: marginBottomPercent(20),
     gap: 35,
   },
   real_time: {
     position: 'absolute',
-    left: 20,
+    //left: 20,
+    left: wp('5.5%'),
     color: 'white',
-    fontSize: 22,
+    fontSize: fontSizePercent(21.3),
     fontWeight: '700',
   },
   capture: {
     position: 'absolute',
     bottom: 0,
-    left: 20,
+    //left: 20,
+    left: wp('5.5%'),
     color: 'white',
-    fontSize: 10,
+    fontSize: fontSizePercent(10),
     fontWeight: '700',
-    width: 320,
+    width: widthPercent(320),
     alignItems: 'center',
   },
   device: {
-    width: 290,
-    height: 42,
+    width: widthPercent(310),
+    height: heightPercent(42),
     backgroundColor: 'white',
-    marginTop: 20,
-    marginBottom: -8,
+    marginTop: marginTopPercent(20),
+    marginBottom: marginBottomPercent(-8),
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   device_text: {
     color: 'black',
-    fontSize: 24,
+    //fontSize: 24,
+    fontSize: wp('6.7%'),
     fontWeight: '700',
   },
   portfolio: {
     position: 'relative',
-    width: width,
-    height: 600,
+    width: wp('100%'),
+    //height: 600,
+    height: hp('80%'),
   },
   port_text: {
-    fontSize: 24,
+    fontSize: fontSizePercent(24),
     color: 'white',
     fontWeight: '700',
-    left: 20,
-    marginTop: 20,
+    //left: 20,
+    left: wp('5.5%'),
+    marginTop: marginTopPercent(28),
   },
   video_box: {
     width: width - 40,
-    height: 550,
+    height: heightPercent(550),
     position: 'relative',
-    left: 20,
+    //left: 20,
+    left: wp('5.5%'),
     flexDirection: 'column',
-    //backgroundColor: 'white',
+    marginTop: marginTopPercent(-15),
   },
   row_box: {
-    width: 320,
+    width: widthPercent(320),
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: marginTopPercent(30),
     position: 'relative',
-    gap: 20,
+    //gap: 20,
+    gap: wp('5.6%'),
   },
   button_box: {
-    width: 60,
-    height: 60,
+    width: widthPercent(60),
+    height: heightPercent(60),
     position: 'absolute',
-    right: 30,
-    bottom: 40,
+    // right: 30,
+    bottom: marginBottomPercent(40),
+    right: wp('6.5%'),
   },
   shot: {
-    width: 60,
-    height: 60,
+    width: widthPercent(60),
+    height: heightPercent(60),
     position: 'absolute',
     backgroundColor: '#4527A0',
     borderRadius: 50,

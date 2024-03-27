@@ -4,13 +4,21 @@ import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
 import InputDialog from '../components/Modals/InputDialog';
 import {useEffect, useState} from 'react';
-import {widthPercent, heightPercent} from '../utils/responsiveUtils';
 // 导入useServices接口
 import useServices from '../hooks/useServices';             // 引入useServices钩子
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
+
 interface UploadProps {
   navigation: NavigationProp<any>;
 }
 
+// 提示详情信息
 const listItems = [
   'Analyze these videos and the data \n collected by the sensors on the skateboard. ',
   'Give your ratings and  recommendations \n based on this data.',
@@ -55,6 +63,7 @@ const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
     </View>
       
       <View style={styles.container}>
+        {/* 返回上一级 */}
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={styles.dis}>Discard</Text>
@@ -62,22 +71,40 @@ const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
           <Text style={styles.obj}>Object</Text>
           <Text style={styles.black}>none</Text>
         </View>
+
+        {/* 照片 */}
         <View style={styles.middle}>
-          <View>
+          <View style={styles.img_box}>
             <Image
               source={require('../statics/images/cover.png')}
               style={styles.skate_image}
               //resizeMode="cover" // 或者 'stretch' 来填满容器
             />
+            <View style={styles.img_inner}>
+              <InputDialog
+                visible={true} // 或根据实际情况来设置
+                onClose={() => {
+                  // 处理关闭逻辑
+                }}
+                onSubmit={text => {
+                  // 处理提交逻辑，text 是提交的字符串
+                }}
+              />
+            </View>
           </View>
         </View>
+
+        {/* 底部栏 */}
         <View style={styles.grey}>
+          {/* 可修改信息 */}
           <View style={styles.top}>
             <View style={styles.top_inner}>
               <Text style={styles.title}>Capture Title</Text>
               <Text style={styles.day}>Today, January 21</Text>
             </View>
           </View>
+
+          {/* 信息介绍 */}
           <View style={styles.center}>
             <View>
               <Text style={styles.click}>
@@ -95,6 +122,8 @@ const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
               ))}
             </View>
           </View>
+
+          {/* 固定状态的Button组件 */}
           <View style={styles.bottom}>
             <Button fixedStatus="upload" />
           </View>
@@ -122,7 +151,7 @@ img_inner: {
   },
   head: {
     width: '100%',
-    height: 50,
+    height: heightPercent(50),
     backgroundColor: 'black',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -131,36 +160,36 @@ img_inner: {
   },
   dis: {
     color: 'red',
-    fontSize: 15,
+    fontSize: fontSizePercent(15),
     fontWeight: '500',
   },
   obj: {
     color: 'white',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   black: {
     color: 'black',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   middle: {
-    //flex: 1, // 这里的flex: 1是关键，它会使得图片容器填充所有剩余空间
-    //width: '100%', // 确保图片宽度铺满屏幕宽度
-    // 如果不需要Image的边距或填充，这些可以不设置或设置为0
-    //justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: 'pink',
     marginTop: -15,
+    justifyContent: 'center',
+  },
+  img_box: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   skate_image: {
-    width: 320,
-    height: 400, // 确保图片高度铺满容器高度
+    width: widthPercent(320),
+    height: heightPercent(390), // 确保图片高度铺满容器高度
     borderRadius: 20,
   },
   grey: {
     width: '100%',
-    height: 290,
+    height: heightPercent(288),
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#272726',
@@ -169,9 +198,8 @@ img_inner: {
   },
   top: {
     flexDirection: 'row',
-    width: 330,
-    height: 50,
-    //backgroundColor: 'pink',
+    width: widthPercent(330),
+    height: heightPercent(50),
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -15,
@@ -181,32 +209,31 @@ img_inner: {
   },
   title: {
     color: '#848484',
-    fontSize: 24,
+    fontSize: fontSizePercent(24),
     fontWeight: '700',
   },
   day: {
     color: '#B3B3B3',
-    fontSize: 12,
+    fontSize: fontSizePercent(12),
     fontWeight: '700',
   },
   bottom: {
     width: '100%',
-    height: 48,
+    height: heightPercent(48),
     justifyContent: 'center',
     alignItems: 'center',
   },
   center: {
     flexDirection: 'row',
-    width: 330,
-    height: 130,
-    //backgroundColor: 'pink',
+    width: widthPercent(330),
+    height: heightPercent(130),
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -10,
   },
   click: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     marginLeft: 8,
     marginBottom: 5,
@@ -217,13 +244,13 @@ img_inner: {
   },
   number: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     marginRight: 8,
   },
   word: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSizePercent(16),
     fontWeight: '500',
     lineHeight: 22,
   },

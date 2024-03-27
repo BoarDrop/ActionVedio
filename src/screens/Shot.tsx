@@ -1,7 +1,19 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
+import Allow from '../components/Allow/Allow';
 import {NavigationProp} from '@react-navigation/native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import {
+  widthPercent,
+  heightPercent,
+  fontSizePercent,
+  marginTopPercent,
+  marginBottomPercent,
+} from '../utils/responsiveUtils';
 
 import {useEffect, useState, useRef} from 'react';
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
@@ -206,6 +218,7 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
         {/* <BLEDataDisplay onBLEDataUpdate={handleBLEData}/> */}
         <BLEDataDisplay ref={bleDataDisplayRef}/>
 
+        {/* 返回上一级 */}
         <View style={styles.head}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={styles.dis}>Discard</Text>
@@ -213,6 +226,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
           <Text style={styles.obj}>Object</Text>
           <Text style={styles.black}>none</Text>
         </View>
+
+        {/* 照片 */}
         <View style={styles.middle}>
           {/* 相机视图 */}
           <Camera
@@ -226,7 +241,12 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
             video={true}              // 开启视频录制
           />
 
+          <View style={styles.allow}>
+            <Allow />
+          </View>
         </View>
+
+        {/* 底部栏 */}
         <View style={styles.grey}>
           <View style={styles.top}>
             <View style={styles.left}>
@@ -235,11 +255,14 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
                 movement data in real time.
               </Text>
             </View>
+            {/* 倒计时 */}
             <View style={styles.right}>
               {/* 使用formatTime函数来格式化显示时间 */}
               <Text style={styles.time}>{formatTime(time)}</Text>
             </View>
           </View>
+
+          {/* 调用Button组件 */}
           <View style={styles.bottom}>
             {/* 获取用户是否点击Button组件的回调 */}
             <Button onPressCallback={isRecording ? stopRecording : startRecording} />
@@ -258,32 +281,43 @@ const styles = StyleSheet.create({
   },
   head: {
     width: '100%',
-    height: 50,
+    height: heightPercent(50),
     backgroundColor: 'black',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
     gap: 35,
+    //gap: wp('10.5%'),
   },
   dis: {
     color: 'red',
-    fontSize: 15,
+    fontSize: fontSizePercent(15),
     fontWeight: '500',
   },
   obj: {
     color: 'white',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   black: {
     color: 'black',
-    fontSize: 18,
+    fontSize: fontSizePercent(18.5),
     fontWeight: '500',
   },
   middle: {
     flex: 1, // 这里的flex: 1是关键，它会使得图片容器填充所有剩余空间
-    width: '100%', // 确保图片宽度铺满屏幕宽度
-    // 如果不需要Image的边距或填充，这些可以不设置或设置为0
+    width: wp('100%'), // 确保图片宽度铺满屏幕宽度
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  allow: {
+    //backgroundColor: 'pink',
+    width: widthPercent(280),
+    height: heightPercent(135),
+    position: 'absolute', // 设置为绝对定位
+    transform: [{translateX: widthPercent(0)}, {translateY: heightPercent(0)}], // 根据盒子大小调整偏移，使其居中
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   skate_image: {
     width: '100%',
@@ -291,25 +325,23 @@ const styles = StyleSheet.create({
   },
   grey: {
     width: '100%',
-    height: 190,
+    height: heightPercent(190),
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'black',
   },
   top: {
     flexDirection: 'row',
-    width: 330,
-    height: 68,
-    //backgroundColor: 'pink',
+    width: widthPercent(325),
+    height: heightPercent(68),
   },
   left: {
-    width: 265,
-    height: 68,
-    //backgroundColor: '#FFBEB1',
+    width: widthPercent(264),
+    height: heightPercent(68),
   },
   word: {
     color: 'white',
-    fontSize: 18,
+    fontSize: fontSizePercent(18),
     fontWeight: '400',
   },
   right: {
@@ -317,13 +349,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   time: {
-    fontSize: 24,
+    fontSize: fontSizePercent(24),
     fontWeight: '700',
     color: '#848484',
   },
   bottom: {
     width: '100%',
-    height: 48,
+    height: heightPercent(48),
     justifyContent: 'center',
     alignItems: 'center',
   },

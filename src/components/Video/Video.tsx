@@ -17,11 +17,7 @@ const Video: React.FC<{imageSource: any; title: string}> = ({imageSource, title}
             activeOpacity={1}
             onPress={() => navigation.navigate('Score')}>
             <Image
-<<<<<<< HEAD:src/components/Video.tsx
               source={imageSource} // 使用传入的 imageSource
-=======
-              source={require('../../statics/images/people.png')}
->>>>>>> origin/front:src/components/Video/Video.tsx
               style={styles.people}
             />
           </TouchableOpacity>
