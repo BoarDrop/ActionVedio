@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Video from '../components/Video/Video';
@@ -34,6 +35,7 @@ interface HomeProps {
 const {width} = Dimensions.get('window');
 
 const Home: React.FC<HomeProps> = ({navigation}) => {
+  const [isVisible, setIsVisible] = useState(true);
   return (
     <>
       <ScrollView>
@@ -108,9 +110,23 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
       </View>
 
       {/* 蓝牙连接遮罩部分 */}
-      <View style={styles.mask}>
+      {/* <View style={styles.mask}>
         <Sensor />
-      </View>
+      </View> */}
+      {isVisible && (
+        <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
+          <View style={styles.fullScreen}>
+            {isVisible && (
+              <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>
+                <View style={styles.mask}>
+                  {/* 你的 Sensor 组件 */}
+                  <Sensor />
+                </View>
+              </TouchableWithoutFeedback>
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+      )}
     </>
   );
 };
@@ -227,6 +243,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  fullScreen: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    justifyContent: 'flex-end',
   },
   mask: {
     width: '100%', // 全屏宽度
