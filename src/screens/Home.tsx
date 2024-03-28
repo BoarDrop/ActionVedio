@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Video from '../components/Video/Video';
+import Sensor from '../components/Sensor/Sensor';
 import Stars from '../statics/images/three-stars.svg';
 import Camera from '../statics/images/camera.svg';
 import {NavigationProp} from '@react-navigation/native';
@@ -104,6 +105,11 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
           onPress={() => navigation.navigate('Shot')}>
           <Camera width={30} height={30} />
         </TouchableOpacity>
+      </View>
+
+      {/* 蓝牙连接遮罩部分 */}
+      <View style={styles.mask}>
+        <Sensor />
       </View>
     </>
   );
@@ -221,6 +227,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  mask: {
+    width: '100%', // 全屏宽度
+    height: heightPercent(375),
+    //backgroundColor: 'pink',
+    position: 'absolute',
+    bottom: 0,
   },
 });
 
