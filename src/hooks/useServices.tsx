@@ -8,11 +8,11 @@ const useServices = () => {
     const addAnalysis = async (originalData: string[][], videoId: number) => {
         try {
            // 转换数据格式
-           let transformedData: { time: number; data: string }[] = [];
+           let transformedData: { time: number; value: string }[] = [];
            originalData.forEach((innerArray, index) => {
                const groupData = innerArray.map(dataString => ({
                    time: index + 1, // 外层数组的索引作为time
-                   data: dataString // 内层数组的每个字符串作为data
+                   value: dataString // 内层数组的每个字符串作为data
                }));
                transformedData = [...transformedData, ...groupData];
            });

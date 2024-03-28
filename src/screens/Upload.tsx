@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
 import {NavigationProp} from '@react-navigation/native';
-import InputDialog from '../components/Modals/InputDialog';
+import Dialog from 'react-native-dialog';
 import {useEffect, useState} from 'react';
 // 导入useServices接口
 import useServices from '../hooks/useServices';             // 引入useServices钩子
@@ -42,26 +42,23 @@ const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
   // 页面加载的时候，弹窗inputDialog
   const [isDialogVisible, setDialogVisible] = useState(true);
   const { addAnalysisResultTest } = useServices(); // 使用useServices钩子来在组件加载完成后更改弹窗状态
+  
+  const [inputValue, setInputValue] = useState('');
 
-  // 使用useEffect钩子来在组件加载完成后更改弹窗状态
-  useEffect(() => {
-    setDialogVisible(true); // 页面加载完成时显示弹窗
-  }, []); // 空数组[]意味着这个effect只在组件首次渲染时运行
+  const handleCancel = () => {
+    setDialogVisible(false);
+  };
+
+  const handleSubmit = () => {
+    console.log("Input Value: ", inputValue);
+    // 处理输入值...
+    addAnalysisResultTest(NumbervideoId, inputValue); // 调用useServices钩子中的addAnalysisResultTest方法
+    setDialogVisible(false);
+  };
+
 
   return (
     <>
-    <View style={styles.img_inner}>
-    <InputDialog   
-        visible={isDialogVisible}
-        onClose={() => setDialogVisible(false)}
-        onSubmit={(input) => {
-          console.log(input); // 或者其他处理输入内容的逻辑
-          addAnalysisResultTest(NumbervideoId, input); // 调用useServices钩子中的addAnalysisResultTest方法
-          setDialogVisible(false);
-        }}
-      />
-    </View>
-      
       <View style={styles.container}>
         {/* 返回上一级 */}
         <View style={styles.head}>
@@ -81,15 +78,20 @@ const Upload: React.FC<UploadProps> = ({ route, navigation }) => {
               //resizeMode="cover" // 或者 'stretch' 来填满容器
             />
             <View style={styles.img_inner}>
-              <InputDialog
-                visible={true} // 或根据实际情况来设置
-                onClose={() => {
-                  // 处理关闭逻辑
-                }}
-                onSubmit={text => {
-                  // 处理提交逻辑，text 是提交的字符串
-                }}
-              />
+
+              <Dialog.Container visible={isDialogVisible}>
+                <Dialog.Title>Enter your action ID</Dialog.Title>
+                <Dialog.Description>
+                  Please refer to the action ID table for details.
+                </Dialog.Description>
+                <Dialog.Input 
+                  onChangeText={(text) => setInputValue(text)}
+                  value={inputValue}
+                />
+                <Dialog.Button label="Cancel" onPress={handleCancel} />
+                <Dialog.Button label="Upload" onPress={handleSubmit} />
+              </Dialog.Container>
+              
             </View>
           </View>
         </View>

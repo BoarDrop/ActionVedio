@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Button from '../components/Button/Button';
 import Allow from '../components/Allow/Allow';
+import Dialog from 'react-native-dialog';
 import {NavigationProp} from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
@@ -45,6 +46,8 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
   const [videoId, setVideoId] = useState(0);
   // 计时⌛️
   const [time, setTime] = useState(0);
+  const [visible, setVisible] = useState(true);              // 是否显示弹窗
+
 
   const { getCameraPermission, getPhotoLibraryAddOnlyPermission } = usePermission();                     // 使用useVideoRecorder钩子
   const { getUploadCredentials, uploadFile, uploadVideoTest } = useFileUpload();                     // 使用useFileUpload钩子
@@ -234,16 +237,27 @@ const Shot: React.FC<ShotProps> = ({navigation}) => {
             ref={camera}
             // style={StyleSheet.absoluteFill}
             style={styles.skate_image}
-            resizeMode="cover" // 或者 'stretch' 来填满容器
+            resizeMode="cover"        // 或者 'stretch' 来填满容器
             device={device}
             isActive={showCamera}     // 是否激活相机
             audio={true}              // 开启音频录制
             video={true}              // 开启视频录制
           />
 
-          <View style={styles.allow}>
+          {/* <View style={styles.allow}>
             <Allow />
-          </View>
+          </View> */}
+
+        <Dialog.Container visible={visible}>
+          <Dialog.Description>
+          During the recording process, when you complete a skill, you can double-tap the screen to place a time stamp.
+          </Dialog.Description>
+          <Dialog.Button label="OK" onPress={() => {
+            console.log('OK Pressed');
+            setVisible(false);
+          }} />
+        </Dialog.Container>
+
         </View>
 
         {/* 底部栏 */}

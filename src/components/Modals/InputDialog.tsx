@@ -18,16 +18,16 @@ import {
 } from '../../utils/responsiveUtils';
 
 const InputDialog = ({
-  visible,
   onClose,
   onSubmit,
 }: {
-  visible: boolean;
   onClose: () => void;
   onSubmit: (text: string) => void;
 }) => {
+  console.log('onClose', onClose);
   const [inputText, setInputText] = useState('');
   const handleInputSubmit = () => {
+    console.log('提交输入内容:', inputText);
     onSubmit(inputText);
     setInputText(''); // 清空输入框
     onClose(); // 关闭弹窗
@@ -45,18 +45,24 @@ const InputDialog = ({
             </Text>
           </View>
           <View style={styles.input}>
-            <TextInput style={styles.input_box} />
+            <TextInput 
+              style={styles.input_box} 
+              value={inputText} 
+              onChangeText={(text) => setInputText(text)} // 添加这行代码
+            />
           </View>
         </View>
         <View style={styles.bottom}>
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={() => {
+            onClose();
+          }}>
             <View style={styles.cancel}>
               <Text style={styles.cancel_text}>Cancel</Text>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
-            <View style={styles.upload}>
+          <TouchableOpacity onPress={handleInputSubmit}>
+            <View style={styles.upload} >
               <Text style={styles.upload_text}>Upload</Text>
             </View>
           </TouchableOpacity>
