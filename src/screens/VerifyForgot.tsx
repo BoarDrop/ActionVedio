@@ -25,13 +25,12 @@ import {
 } from '../utils/responsiveUtils';
 
 type VerifyScreenRouteProp = RouteProp<
-  {params: {email: string; username: string; password: string}},
+  {params: {emailAddress: string; newPassword: string}},
   'params'
 >;
 
 type RootStackParamList = {
   Signup: undefined; // 定义其他路由及其参数类型
-  // ...其他路由
 };
 
 // 验证框逻辑
@@ -119,11 +118,11 @@ const CodeInput: React.FC<{
   );
 };
 
-const Verify = () => {
+const VerifyForgot = () => {
   // 在你的组件内部
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<VerifyScreenRouteProp>();
-  const {email, username, password} = route.params;
+  const {emailAddress, newPassword} = route.params;
 
   const API_BASE_URL: string = config.API_BASE_URL;
 
@@ -149,17 +148,13 @@ const Verify = () => {
 
       // 这里构建请求体
       const payload = {
-        email: email,
-        username: username,
-        password: password,
+        emailAddress: emailAddress,
+        newPassword: newPassword,
         code: numericCode, // 这是用户输入的验证码
       };
 
       // 发送请求到验证API
-      const response = await axios.post(
-        `${API_BASE_URL}users/register`,
-        payload,
-      );
+      const response = await axios.post(`${API_BASE_URL}users/forget`, payload);
 
       // 这里假设服务器返回一个字段来表示成功或失败
       if (response.data.code === 0) {
@@ -192,14 +187,14 @@ const Verify = () => {
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.title}>
-            <Text style={styles.title_text}>Email verification</Text>
+            <Text style={styles.title_text}>Email verification forget</Text>
           </View>
 
           {/* 消息发送提示 */}
           <View style={styles.sent}>
             <Text style={styles.sent_mes}>We sent a code to your email</Text>
             <View style={styles.gmail}>
-              <Text style={styles.gmail_text}>{email}</Text>
+              <Text style={styles.gmail_text}>{emailAddress}</Text>
               {/* 切换接收邮件的邮箱 */}
               <TouchableOpacity
                 onPress={() => navigation.navigate('Signup' as never)}>
@@ -378,4 +373,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Verify;
+export default VerifyForgot;
